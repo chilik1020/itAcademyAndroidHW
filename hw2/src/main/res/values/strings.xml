@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ActivityResult</string>
+    <string name="btn_start_text">Start</string>
+</resources>
