@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ActivityResult</string>
-    <string name="btn_start_text">Start</string>
+    <string name="btn_data_intent_text">Send by Intent extras</string>
+    <string name="btn_data_observable_text">Send Observable data</string>
 </resources>

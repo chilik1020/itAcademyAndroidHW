@@ -5,8 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.chilik1020.hw2.model.IntSubject
 import com.chilik1020.hw2.util.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,13 +21,22 @@ class MainActivity : AppCompatActivity() {
 
     private var dataSet: HashSet<Int> = hashSetOf()
 
+    private val subject = IntSubject()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btnStartSecondActivity.setOnClickListener {
+        btnSendDataAsIntent.setOnClickListener {
             dataSet = generateRandomSet()
             startSecondActivity()
+        }
+
+        btnSendDataAsObservable.setOnClickListener {
+            lifecycleScope.launch {
+                subject.startDataTrans()
+            }
+            startObserverActivity()
         }
     }
 
@@ -44,6 +58,14 @@ class MainActivity : AppCompatActivity() {
     private fun startSecondActivity() {
         val intent = Intent(this, SecondActivity::class.java).apply {
             putExtra(DATASET, dataSet)
+        }
+
+        startActivityForResult(intent, REQUEST_COMPUTATION_CODE)
+    }
+
+    private fun startObserverActivity() {
+        val intent = Intent(this, ObserverActivity::class.java).apply {
+            putExtra(SUBJECT, subject)
         }
 
         startActivityForResult(intent, REQUEST_COMPUTATION_CODE)
