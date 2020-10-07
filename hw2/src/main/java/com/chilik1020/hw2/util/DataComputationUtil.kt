@@ -24,7 +24,7 @@ fun getAverageOfSet(data : HashSet<Int>) : Double {
     return sum/size
 }
 
-fun getDevisionOfSum1HalfAndSubtraction2half(data : HashSet<Int>) : Double {
+fun getDivisionOfSum1HalfAndSubtraction2half(data : HashSet<Int>) : Double {
     if (data.size < 2)
         return 0.0
 

@@ -5,16 +5,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.chilik1020.hw2.model.entity.Result
 import com.chilik1020.hw2.util.*
 
 class SecondActivity : AppCompatActivity() {
 
     private val LOG_TAG = "AppTag:SecondActivity"
-
     private lateinit var dataSet: HashSet<Int>
     private var averageValue: Double = 0.0
     private var sum: Double = 0.0
-    private var devision: Double = 0.0
+    private var division: Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,22 +26,20 @@ class SecondActivity : AppCompatActivity() {
             Log.d(LOG_TAG, "Размер : ${dataSet.size}")
             Log.d(LOG_TAG, "Множество : $dataSet")
 
-            dataSetComputation()
+            processDataSet()
             returnResultOfComputations()
         }
     }
 
-    private fun dataSetComputation() {
+    private fun processDataSet() {
         averageValue = getAverageOfSet(dataSet)
         sum = getSumOfSet(dataSet)
-        devision = getDevisionOfSum1HalfAndSubtraction2half(dataSet)
+        division = getDivisionOfSum1HalfAndSubtraction2half(dataSet)
     }
 
     private fun returnResultOfComputations() {
         val intent = Intent().apply {
-            putExtra(AVERAGE, averageValue)
-            putExtra(SUM, sum)
-            putExtra(DEVISION, devision)
+            putExtra(RESULT, Result(averageValue, sum, division))
         }
         setResult(Activity.RESULT_OK, intent)
         finish()
