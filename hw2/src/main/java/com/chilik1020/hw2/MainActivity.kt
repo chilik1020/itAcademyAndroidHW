@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.chilik1020.hw2.model.DataSubject
 import com.chilik1020.hw2.model.ResultSubject
@@ -90,5 +91,6 @@ class MainActivity : AppCompatActivity() {
         Log.d(LOG_TAG, "Среднее арифметическое множества : ${result.average}")
         Log.d(LOG_TAG, "Сумма элементов множества : ${result.sum}")
         Log.d(LOG_TAG, "Результат деления суммы первой половины на разность второй : ${result.division}")
+        runOnUiThread { Toast.makeText(this, "$result", Toast.LENGTH_SHORT).show() }
     }
 }

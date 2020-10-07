@@ -44,7 +44,7 @@ class ObserverActivity : AppCompatActivity() {
 
     private fun processDataSet() {
         runOnUiThread {
-            tvNextValue.text = "Done"
+            tvNextValue.text = "Completed"
             pbDataReceiving.visibility = View.GONE
         }
         Log.d(LOG_TAG, "Размер : ${dataSet.size}")
