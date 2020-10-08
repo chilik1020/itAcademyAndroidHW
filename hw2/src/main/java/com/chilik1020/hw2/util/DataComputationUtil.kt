@@ -1,36 +1,36 @@
 package com.chilik1020.hw2.util
 
-fun getSumOfSet(data : HashSet<Int>) : Double {
-    var sum = 0.0
+fun getSumOfSet(data : List<Int>) : Int {
+    var sum = 0
     data.forEach { sum += it }
     return sum
 }
 
-fun getSubtraction(data: HashSet<Int>) : Double {
-    val list = data.toList()
-    var result : Double  = list[0].toDouble()
-    list.subList(1, list.size - 1).forEach {
+fun getSubtraction(data: List<Int>) : Int {
+    if (data.isEmpty()) {
+        return 0
+    }
+    var result  = data[0]
+    data.subList(1, data.size).forEach {
         result -= it
     }
     return result
 }
 
-fun getAverageOfSet(data : HashSet<Int>) : Double {
-    if (data.isEmpty())
+fun getAverageOfSet(data : List<Int>) : Double {
+    if (data.isEmpty()) {
         return 0.0
-
+    }
     val sum = getSumOfSet(data)
-    val size = data.size
-    return sum/size
+    return sum.toDouble()/data.size
 }
 
-fun getDivisionOfSum1HalfAndSubtraction2half(data : HashSet<Int>) : Double {
-    if (data.size < 2)
+fun getDivisionOfSum1HalfAndSubtraction2half(data : List<Int>) : Double {
+    if (data.size < 2) {
         return 0.0
-
-    val list = data.toList()
-    val firstHalfSum =  getSumOfSet(list.subList(0, list.size/2 - 1).toHashSet())
-    val secondHalfSubtraction = getSubtraction(list.subList(list.size/2, list.size - 1).toHashSet())
-
-    return firstHalfSum/secondHalfSubtraction
+    }
+    val size = data.size
+    val firstHalfSum =  getSumOfSet(data.subList(0, size/2))
+    val secondHalfSubtraction = getSubtraction(data.subList(size/2, size))
+    return firstHalfSum.toDouble()/secondHalfSubtraction.toDouble()
 }

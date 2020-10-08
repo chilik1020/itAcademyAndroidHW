@@ -11,9 +11,9 @@ import com.chilik1020.hw2.util.*
 class SecondActivity : AppCompatActivity() {
 
     private val LOG_TAG = "AppTag:SecondActivity"
-    private lateinit var dataSet: HashSet<Int>
+    private lateinit var dataSet: ArrayList<Int>
     private var averageValue: Double = 0.0
-    private var sum: Double = 0.0
+    private var sum: Int = 0
     private var division: Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +21,7 @@ class SecondActivity : AppCompatActivity() {
         setContentView(R.layout.activity_second)
 
         intent.extras?.let {
-            dataSet = it.getSerializable(DATASET) as HashSet<Int>
+            dataSet = it.getSerializable(DATASET) as ArrayList<Int>
 
             Log.d(LOG_TAG, "Размер : ${dataSet.size}")
             Log.d(LOG_TAG, "Множество : $dataSet")

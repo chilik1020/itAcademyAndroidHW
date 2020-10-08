@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private val LOG_TAG = "AppTag:MainActivity"
     private val REQUEST_COMPUTATION_CODE = 4201
-    private var dataSet: HashSet<Int> = hashSetOf()
+    private var dataSet = arrayListOf<Int>()
     private val executor: ExecutorService = Executors.newSingleThreadExecutor()
     private val resultObserver: Observer<Result> = object : Observer<Result> {
         override fun update(msg: Result) {
@@ -35,11 +35,11 @@ class MainActivity : AppCompatActivity() {
         ResultSubject.subscribe(resultObserver)
 
         btnSendDataAsIntent.setOnClickListener {
-            dataSet = generateRandomSet()
+            dataSet = generateRandomData()
             startSecondActivity()
         }
         btnSendDataAsObservable.setOnClickListener {
-            dataSet = generateRandomSet()
+            dataSet = generateRandomData()
             startDataTransmit()
             startObserverActivity()
         }

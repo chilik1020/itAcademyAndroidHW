@@ -17,9 +17,9 @@ import kotlinx.android.synthetic.main.activity_observer.*
 class ObserverActivity : AppCompatActivity() {
 
     private val LOG_TAG = "AppTag:ObserverActivity"
-    private val dataSet: HashSet<Int> = hashSetOf()
+    private val dataSet: ArrayList<Int> = arrayListOf()
     private var averageValue: Double = 0.0
-    private var sum: Double = 0.0
+    private var sum: Int = 0
     private var division: Double = 0.0
 
     private val dataObserver: Observer<Message> = object :Observer<Message> {
@@ -34,6 +34,7 @@ class ObserverActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_observer)
+        dataSet.clear()
         DataSubject.subscribe(dataObserver)
     }
 
