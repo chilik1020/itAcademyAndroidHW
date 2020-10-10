@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="dm_task1_text_size">24sp</dimen>
+    <dimen name="dm_task1_margin">16dp</dimen>
+    <dimen name="dm_task1_padding">16dp</dimen>
+
+    <dimen name="dm_task2_text_size">24sp</dimen>
+    <dimen name="dm_task2_padding">16dp</dimen>
+    <dimen name="dm_task2_h_margin">16dp</dimen>
+    <dimen name="dm_task2_v_margin">20dp</dimen>
+</resources>

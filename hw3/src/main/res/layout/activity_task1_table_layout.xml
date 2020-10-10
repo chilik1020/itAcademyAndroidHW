@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TableRow>
+
+        <ImageView
+            style="@style/Task1ImageView"
+            android:src="@drawable/ic_task1_folder" />
+
+        <TextView
+            style="@style/Widget.AppCompat.TextView.Task1TextView"
+            android:text="@string/task1_attractions" />
+    </TableRow>
+
+    <TableRow>
+
+        <ImageView
+            style="@style/Task1ImageView"
+            android:src="@drawable/ic_task1_dining" />
+
+        <TextView
+            style="@style/Widget.AppCompat.TextView.Task1TextView"
+            android:text="@string/task1_dining" />
+    </TableRow>
+
+    <TableRow>
+
+        <ImageView
+            style="@style/Task1ImageView"
+            android:src="@drawable/ic_task1_education" />
+
+        <TextView
+            style="@style/Widget.AppCompat.TextView.Task1TextView"
+            android:text="@string/task1_education" />
+    </TableRow>
+
+    <TableRow>
+
+        <ImageView
+            style="@style/Task1ImageView"
+            android:src="@drawable/ic_task1_family" />
+
+        <TextView
+            style="@style/Widget.AppCompat.TextView.Task1TextView"
+            android:text="@string/task1_family" />
+    </TableRow>
+
+    <TableRow>
+
+        <ImageView
+            style="@style/Task1ImageView"
+            android:src="@drawable/ic_task1_health" />
+
+        <TextView
+            style="@style/Widget.AppCompat.TextView.Task1TextView"
+            android:text="@string/task1_health" />
+    </TableRow>
+
+    <TableRow>
+
+        <ImageView
+            style="@style/Task1ImageView"
+            android:src="@drawable/ic_task1_office" />
+
+        <TextView
+            style="@style/Widget.AppCompat.TextView.Task1TextView"
+            android:text="@string/task1_office" />
+    </TableRow>
+
+    <TableRow>
+
+        <ImageView
+            style="@style/Task1ImageView"
+            android:src="@drawable/ic_task1_promotions" />
+
+        <TextView
+            style="@style/Widget.AppCompat.TextView.Task1TextView"
+            android:text="@string/task1_promotions" />
+    </TableRow>
+
+    <TableRow>
+
+        <ImageView
+            style="@style/Task1ImageView"
+            android:src="@drawable/ic_task1_radio" />
+
+        <TextView
+            style="@style/Widget.AppCompat.TextView.Task1TextView"
+            android:text="@string/task1_radio" />
+    </TableRow>
+
+    <TableRow>
+
+        <ImageView
+            style="@style/Task1ImageView"
+            android:src="@drawable/ic_task1_recipes" />
+
+        <TextView
+            style="@style/Widget.AppCompat.TextView.Task1TextView"
+            android:text="@string/task1_recipes" />
+    </TableRow>
+
+    <TableRow>
+
+        <ImageView
+            style="@style/Task1ImageView"
+            android:src="@drawable/ic_task1_sports" />
+
+        <TextView
+            style="@style/Widget.AppCompat.TextView.Task1TextView"
+            android:text="@string/task1_sports" />
+    </TableRow>
+
+</TableLayout>
