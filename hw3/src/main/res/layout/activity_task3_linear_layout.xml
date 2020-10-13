@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginHorizontal="@dimen/dm_task3_h_margin"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dm_task3_v_double_margin"
+        android:text="@string/task3_sign_in"
+        android:textSize="@dimen/dm_task3_text_size_h1"
+        android:textStyle="bold" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dm_task3_v_double_margin"
+        android:background="@drawable/dr_rounded_rectangle"
+        android:hint="@string/task3_email"
+        android:padding="@dimen/dm_task3_padding"
+        android:textSize="@dimen/dm_task3_text_size_h1" />
+
+    <EditText
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dm_task3_v_margin"
+        android:background="@drawable/dr_rounded_rectangle"
+        android:hint="@string/task3_password"
+        android:padding="@dimen/dm_task3_padding"
+        android:textSize="@dimen/dm_task3_text_size_h1" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/task3_just_sign_in"
+        android:textSize="@dimen/dm_task3_text_size_h1" />
+
+</LinearLayout>

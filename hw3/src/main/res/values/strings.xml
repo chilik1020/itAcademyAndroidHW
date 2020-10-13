@@ -19,5 +19,12 @@
     <string name="task2_description">Description</string>
     <string name="task2_inventory">Inventory</string>
     <string name="task2_weight">Weight</string>
+    
+    <string name="task3_sign_in">Sign in</string>
+    <string name="task3_email">Email</string>
+    <string name="task3_password">Password</string>
+    <string name="task3_remember">Remember</string>
+    <string name="task3_forgot_password">Forgot password?</string>
+    <string name="task3_just_sign_in">* Just sign in</string>
 
 </resources>
