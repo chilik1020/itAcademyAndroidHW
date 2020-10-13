@@ -11,6 +11,7 @@
     <dimen name="dm_task2_v_margin">20dp</dimen>
 
     <dimen name="dm_task3_text_size_h1">24sp</dimen>
+    <dimen name="dm_task3_text_size_h2">18sp</dimen>
     <dimen name="dm_task3_h_margin">16dp</dimen>
     <dimen name="dm_task3_v_margin">20dp</dimen>
     <dimen name="dm_task3_v_double_margin">40dp</dimen>

@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginHorizontal="@dimen/dm_task3_h_margin"
+    android:baselineAligned="false"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -26,26 +27,65 @@
         android:textSize="@dimen/dm_task3_text_size_h1" />
 
     <EditText
-        android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dm_task3_v_margin"
         android:background="@drawable/dr_rounded_rectangle"
         android:hint="@string/task3_password"
+        android:inputType="textPassword"
         android:padding="@dimen/dm_task3_padding"
         android:textSize="@dimen/dm_task3_text_size_h1" />
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dm_task3_v_double_margin"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/task3_remember"
+            android:textSize="@dimen/dm_task3_text_size_h2"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="@string/task3_forgot_password"
+            android:textSize="@dimen/dm_task3_text_size_h2"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/task3_just_sign_in"
-        android:textSize="@dimen/dm_task3_text_size_h1" />
+        android:layout_height="200dp"
+        android:layout_marginBottom="@dimen/dm_task3_v_margin"
+        android:gravity="bottom|center_horizontal">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:background="@drawable/dr_rounded_black_rectangle"
+            android:text="@string/task3_sign_in"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/dm_task3_text_size_h1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/dm_task3_v_margin"
+        android:gravity="bottom|center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/task3_just_sign_in"
+            android:textSize="@dimen/dm_task3_text_size_h1" />
+    </LinearLayout>
 
 </LinearLayout>
