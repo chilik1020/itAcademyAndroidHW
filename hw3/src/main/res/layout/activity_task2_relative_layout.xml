@@ -6,106 +6,105 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <FrameLayout
-        android:id="@+id/flPhoto"
+
+    <ImageView
+        android:id="@+id/ivTopPhoto"
+        android:src="@drawable/ic_cat"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/color_task2_gray"
-        android:padding="@dimen/dm_task2_padding">
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/task2_photo"
-            android:textSize="60dp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:src="@drawable/ic_task2_photo_camera" />
-    </FrameLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="@dimen/dm_task2_h_margin"
+        android:layout_marginBottom="@dimen/dm_task2_v_margin"
+        android:src="@drawable/ic_task2_photo_camera"
+        android:layout_alignEnd="@id/ivTopPhoto"
+        android:layout_alignBottom="@id/ivTopPhoto"/>
 
     <EditText
         android:id="@+id/etTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/ivTopPhoto"
         android:layout_marginHorizontal="@dimen/dm_task2_h_margin"
         android:layout_marginVertical="@dimen/dm_task2_v_margin"
         android:layout_marginBottom="20dp"
         android:hint="@string/task2_title"
-        android:textSize="@dimen/dm_task2_text_size"
-        android:layout_below="@id/flPhoto"/>
+        android:textSize="@dimen/dm_task2_text_size" />
 
 
     <EditText
         android:id="@+id/etPrice"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/etTitle"
         android:layout_marginVertical="@dimen/dm_task2_v_margin"
         android:layout_marginStart="@dimen/dm_task2_h_margin"
         android:layout_marginBottom="20dp"
         android:layout_weight="1"
         android:hint="@string/task2_price"
-        android:textSize="@dimen/dm_task2_text_size"
-        android:layout_below="@id/etTitle"/>
+        android:textSize="@dimen/dm_task2_text_size" />
 
 
     <EditText
         android:id="@+id/etLocation"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/etTitle"
+        android:layout_alignEnd="@id/etPrice"
+        android:layout_alignParentEnd="true"
         android:layout_marginHorizontal="@dimen/dm_task2_h_margin"
         android:layout_marginVertical="@dimen/dm_task2_v_margin"
         android:layout_marginBottom="40dp"
         android:hint="@string/task2_location"
-        android:textSize="@dimen/dm_task2_text_size"
-        android:layout_below="@id/etTitle"
-        android:layout_alignEnd="@id/etPrice"
-        android:layout_alignParentEnd="true"/>
+        android:textSize="@dimen/dm_task2_text_size" />
 
     <ImageView
         android:id="@+id/ivLocationIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/etTitle"
+        android:layout_alignBottom="@id/etLocation"
+        android:layout_alignParentEnd="true"
         android:layout_gravity="end"
         android:layout_marginEnd="@dimen/dm_task2_h_margin"
-        android:src="@drawable/ic_task2_location"
-        android:layout_below="@id/etTitle"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@id/etLocation"/>
+        android:src="@drawable/ic_task2_location" />
 
     <EditText
         android:id="@+id/etDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/etPrice"
         android:layout_marginHorizontal="@dimen/dm_task2_h_margin"
         android:layout_marginVertical="@dimen/dm_task2_v_margin"
         android:hint="@string/task2_description"
-        android:textSize="@dimen/dm_task2_text_size"
-        android:layout_below="@id/etPrice"/>
+        android:textSize="@dimen/dm_task2_text_size" />
 
 
     <EditText
         android:id="@+id/etInventory"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/etDescription"
         android:layout_marginVertical="@dimen/dm_task2_v_margin"
         android:layout_marginStart="@dimen/dm_task2_h_margin"
         android:hint="@string/task2_inventory"
-        android:textSize="@dimen/dm_task2_text_size"
-        android:layout_below="@id/etDescription"/>
+        android:textSize="@dimen/dm_task2_text_size" />
 
 
     <EditText
         android:id="@+id/etWeight"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/etDescription"
+        android:layout_alignParentEnd="true"
         android:layout_marginVertical="@dimen/dm_task2_v_margin"
         android:layout_marginEnd="@dimen/dm_task2_h_margin"
         android:hint="@string/task2_weight"
-        android:textSize="@dimen/dm_task2_text_size"
-        android:layout_below="@id/etDescription"
-        android:layout_alignParentEnd="true"/>
+        android:textSize="@dimen/dm_task2_text_size" />
 </RelativeLayout>
