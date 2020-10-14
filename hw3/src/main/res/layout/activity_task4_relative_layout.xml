@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tvTopAndroid"
+        android:layout_width="379dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/dm_task4_v_margin"
+        android:text="@string/task4_android"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/dm_task4_text_size_h1"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/ivTopImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/dr_gray_rectangle" />
+
+    <TextView
+        android:id="@+id/tvPosts"
+        android:layout_width="77dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/task4_posts"
+        android:textSize="@dimen/dm_task4_text_size_h3" />
+
+    <TextView
+        android:id="@+id/tvFollowers"
+        android:layout_width="77dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:maxLines="2"
+        android:text="@string/task4_followers"
+        android:textSize="@dimen/dm_task4_text_size_h3" />
+
+    <TextView
+        android:id="@+id/tvFollowing"
+        android:layout_width="77dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/task4_following"
+        android:textSize="@dimen/dm_task4_text_size_h3" />
+
+    <TextView
+        android:id="@+id/tvUsername"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="@string/task4_username"
+        android:textSize="@dimen/dm_task3_text_size_h2"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvAddress"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="@string/task4_address"
+        android:textSize="@dimen/dm_task3_text_size_h2"
+        android:textStyle="bold" />
+
+
+    <ImageView
+        android:id="@+id/ivMiddle1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:src="@drawable/dr_gray_rectangle" />
+
+    <ImageView
+        android:id="@+id/ivMiddle2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:src="@drawable/dr_gray_rectangle" />
+
+    <ImageView
+        android:id="@+id/ivMiddle3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:src="@drawable/dr_gray_rectangle" />
+
+    <ImageView
+        android:id="@+id/ivMiddle4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:src="@drawable/dr_gray_rectangle" />
+
+    <ImageView
+        android:id="@+id/ivMiddle5"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:src="@drawable/dr_gray_rectangle" />
+
+    <ImageView
+        android:id="@+id/ivMiddle6"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:src="@drawable/dr_gray_rectangle" />
+
+    <TextView
+        android:id="@+id/tvDirections"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5"
+        android:gravity="center"
+        android:text="@string/task4_directions"
+        android:textColor="@color/task4_blue"
+        android:textSize="@dimen/dm_task4_text_size_h3"
+        app:drawableTopCompat="@drawable/ic_directions" />
+
+
+    <TextView
+        android:id="@+id/tvCall"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/task4_call"
+        android:textColor="@color/task4_blue"
+        android:textSize="@dimen/dm_task4_text_size_h3"
+        app:drawableTopCompat="@drawable/ic_call" />
+
+
+    <TextView
+        android:id="@+id/tvSave"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/task4_save"
+        android:textColor="@color/task4_blue"
+        android:textSize="@dimen/dm_task4_text_size_h3"
+        app:drawableTopCompat="@drawable/ic_save"
+       />
+
+
+    <TextView
+        android:id="@+id/tvWebsite"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/task4_website"
+        android:textColor="@color/task4_blue"
+        android:textSize="@dimen/dm_task4_text_size_h3"
+        app:drawableTopCompat="@drawable/ic_link" />
+
+    <ImageView
+        android:id="@+id/ivSeparator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="@dimen/dm_task4_v_margin"
+        android:src="@drawable/dr_gray_rectangle" />
+
+
+    <ImageView
+        android:id="@+id/ivBottom1"
+        android:layout_width="115dp"
+        android:layout_height="100dp"
+        android:layout_marginVertical="@dimen/dm_task4_v_double_margin"
+        android:layout_weight="1"
+        android:src="@drawable/dr_gray_rectangle" />
+
+    <ImageView
+        android:id="@+id/ivBottom2"
+        android:layout_width="116dp"
+        android:layout_height="100dp"
+        android:layout_marginVertical="@dimen/dm_task4_v_double_margin"
+        android:layout_weight="1"
+        android:src="@drawable/dr_gray_rectangle" />
+
+    <ImageView
+        android:id="@+id/ivBottom3"
+        android:layout_width="115dp"
+        android:layout_height="100dp"
+        android:layout_marginVertical="@dimen/dm_task4_v_double_margin"
+        android:layout_weight="1"
+        android:src="@drawable/dr_gray_rectangle" />
+
+</RelativeLayout>
