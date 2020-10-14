@@ -16,4 +16,12 @@
     <dimen name="dm_task3_v_margin">20dp</dimen>
     <dimen name="dm_task3_v_double_margin">40dp</dimen>
     <dimen name="dm_task3_padding">8dp</dimen>
+    <dimen name="dm_task3_btn_sign_in_height">75dp</dimen>
+
+    <dimen name="dm_task4_text_size_h1">30sp</dimen>
+    <dimen name="dm_task4_text_size_h2">24sp</dimen>
+    <dimen name="dm_task4_text_size_h3">18sp</dimen>
+    <dimen name="dm_task4_h_margin">16dp</dimen>
+    <dimen name="dm_task4_v_margin">16dp</dimen>
+    <dimen name="dm_task4_padding">8dp</dimen>
 </resources>

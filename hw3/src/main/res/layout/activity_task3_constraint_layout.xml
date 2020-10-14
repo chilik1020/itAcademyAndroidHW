@@ -80,7 +80,7 @@
     <Button
         android:id="@+id/btnSignIn"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="@dimen/dm_task3_btn_sign_in_height"
         android:layout_marginBottom="@dimen/dm_task3_v_double_margin"
         android:background="@drawable/dr_rounded_black_rectangle"
         android:text="@string/task3_sign_in"
