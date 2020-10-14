@@ -46,6 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
+            android:padding="@dimen/dm_task3_padding"
             android:text="@string/task3_remember"
             android:textSize="@dimen/dm_task3_text_size_h2"
             android:textStyle="bold" />
@@ -54,6 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
+            android:padding="@dimen/dm_task3_padding"
             android:text="@string/task3_forgot_password"
             android:textSize="@dimen/dm_task3_text_size_h2"
             android:textStyle="bold" />

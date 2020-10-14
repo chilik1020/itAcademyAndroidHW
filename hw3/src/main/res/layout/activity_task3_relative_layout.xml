@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,101 +8,100 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-
     <TextView
         android:id="@+id/tvSignIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
         android:layout_marginTop="@dimen/dm_task3_v_double_margin"
         android:text="@string/task3_sign_in"
         android:textSize="@dimen/dm_task3_text_size_h1"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tvSignIn"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="@dimen/dm_task3_v_double_margin"
         android:background="@drawable/dr_rounded_rectangle"
         android:hint="@string/task3_email"
         android:padding="@dimen/dm_task3_padding"
-        android:textSize="@dimen/dm_task3_text_size_h1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvSignIn" />
+        android:textSize="@dimen/dm_task3_text_size_h1" />
 
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/etEmail"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="@dimen/dm_task3_v_margin"
         android:background="@drawable/dr_rounded_rectangle"
         android:hint="@string/task3_password"
         android:inputType="textPassword"
         android:padding="@dimen/dm_task3_padding"
-        android:textSize="@dimen/dm_task3_text_size_h1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etEmail" />
+        android:textSize="@dimen/dm_task3_text_size_h1" />
 
     <CheckBox
         android:id="@+id/cbRemember"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/etPassword"
+        android:layout_alignParentStart="true"
         android:layout_marginTop="@dimen/dm_task3_v_double_margin"
         android:checked="true"
         android:padding="@dimen/dm_task3_padding"
         android:text="@string/task3_remember"
         android:textSize="@dimen/dm_task3_text_size_h2"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etPassword"
-        app:layout_constraintVertical_chainStyle="spread_inside" />
+        android:textStyle="bold" />
 
 
     <TextView
         android:id="@+id/tvForgotPassword"
-        android:layout_width="0dp"
+        android:layout_width="243dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/etPassword"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="@dimen/dm_task3_v_double_margin"
         android:gravity="end"
         android:padding="@dimen/dm_task3_padding"
         android:text="@string/task3_forgot_password"
         android:textSize="@dimen/dm_task3_text_size_h2"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cbRemember"
-        app:layout_constraintTop_toBottomOf="@id/etPassword" />
+        tools:layout_editor_absoluteX="137dp"
+        tools:layout_editor_absoluteY="268dp" />
+
+    <Space
+        android:id="@+id/emptySpace"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:layout_below="@id/cbRemember" />
 
     <Button
         android:id="@+id/btnSignIn"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:layout_marginBottom="@dimen/dm_task3_v_double_margin"
+        android:layout_below="@id/emptySpace"
+        android:layout_alignParentStart="true"
         android:background="@drawable/dr_rounded_black_rectangle"
         android:text="@string/task3_sign_in"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/dm_task3_text_size_h1"
-        app:layout_constraintBottom_toTopOf="@+id/tvJustSignIn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cbRemember"
-        app:layout_constraintVertical_chainStyle="spread" />
-
+        android:textSize="@dimen/dm_task3_text_size_h1" />
 
     <TextView
         android:id="@+id/tvJustSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dm_task3_v_margin"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:text="@string/task3_just_sign_in"
-        android:textSize="@dimen/dm_task3_text_size_h1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnSignIn" />
+        android:textSize="@dimen/dm_task3_text_size_h1" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
