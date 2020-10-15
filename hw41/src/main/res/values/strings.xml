@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ContactsApp</string>
+
+    <string name="no_contacts">No contacts. Please add</string>
 </resources>
