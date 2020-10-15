@@ -37,5 +37,9 @@
     <string name="task4_call">CALL</string>
     <string name="task4_save">SAVE</string>
     <string name="task4_website">WEBSITE</string>
+    
+    <string name="task5_certificated">Certificated</string>
+    <string name="task5_layouts">Layouts</string>
+    <string name="task5_views">Views</string>
 
 </resources>

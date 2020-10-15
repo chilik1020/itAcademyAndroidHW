@@ -26,4 +26,11 @@
     <dimen name="dm_task4_v_margin">20dp</dimen>
     <dimen name="dm_task4_v_double_margin">40dp</dimen>
     <dimen name="dm_task4_padding">8dp</dimen>
+
+    <dimen name="dm_task5_h_margin">16dp</dimen>
+    <dimen name="dm_task5_v_margin">16dp</dimen>
+    <dimen name="dm_task5_v_double_margin">32dp</dimen>
+    <dimen name="dm_task5_padding">16dp</dimen>
+    <dimen name="dm_task5_text_size_h3">18sp</dimen>
+
 </resources>
