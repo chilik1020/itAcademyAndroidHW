@@ -145,6 +145,4 @@
             style="@style/Widget.AppCompat.TextView.Task1TextView"
             android:text="@string/task1_sports" />
     </LinearLayout>
-
-
 </LinearLayout>

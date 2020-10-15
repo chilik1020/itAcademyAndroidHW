@@ -22,8 +22,8 @@
         android:layout_marginEnd="@dimen/dm_task2_h_margin"
         android:layout_marginBottom="@dimen/dm_task2_v_margin"
         android:src="@drawable/ic_task2_photo_camera"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/ivTopPhoto"/>
+        app:layout_constraintBottom_toBottomOf="@+id/ivTopPhoto"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/etTitle"

@@ -9,7 +9,6 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-
     <TextView
         android:id="@+id/tvSignIn"
         android:layout_width="match_parent"
@@ -62,7 +61,6 @@
         app:layout_constraintTop_toBottomOf="@id/etPassword"
         app:layout_constraintVertical_chainStyle="spread_inside" />
 
-
     <TextView
         android:id="@+id/tvForgotPassword"
         android:layout_width="0dp"
@@ -92,7 +90,6 @@
         app:layout_constraintTop_toBottomOf="@id/cbRemember"
         app:layout_constraintVertical_chainStyle="spread" />
 
-
     <TextView
         android:id="@+id/tvJustSignIn"
         android:layout_width="wrap_content"
@@ -104,6 +101,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnSignIn" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

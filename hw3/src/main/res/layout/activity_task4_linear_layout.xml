@@ -8,7 +8,6 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-
     <TextView
         android:id="@+id/tvTopAndroid"
         android:layout_width="wrap_content"
@@ -92,42 +91,42 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginEnd="@dimen/dm_task4_h_margin"
             android:layout_weight="1"
             android:src="@drawable/dr_gray_rectangle" />
 
         <ImageView
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginEnd="@dimen/dm_task4_h_margin"
             android:layout_weight="1"
             android:src="@drawable/dr_gray_rectangle" />
 
         <ImageView
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginEnd="@dimen/dm_task4_h_margin"
             android:layout_weight="1"
             android:src="@drawable/dr_gray_rectangle" />
 
         <ImageView
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginEnd="@dimen/dm_task4_h_margin"
             android:layout_weight="1"
             android:src="@drawable/dr_gray_rectangle" />
 
         <ImageView
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginEnd="@dimen/dm_task4_h_margin"
             android:layout_weight="1"
             android:src="@drawable/dr_gray_rectangle" />
 
         <ImageView
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:src="@drawable/dr_gray_rectangle" />
@@ -152,7 +151,6 @@
             android:textSize="@dimen/dm_task4_text_size_h3"
             app:drawableTopCompat="@drawable/ic_directions" />
 
-
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -164,7 +162,6 @@
             android:textSize="@dimen/dm_task4_text_size_h3"
             app:drawableTopCompat="@drawable/ic_call" />
 
-
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -175,7 +172,6 @@
             android:textColor="@color/task4_blue"
             android:textSize="@dimen/dm_task4_text_size_h3"
             app:drawableTopCompat="@drawable/ic_save" />
-
 
         <TextView
             android:layout_width="0dp"
@@ -203,24 +199,23 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="0dp"
+            android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginEnd="@dimen/dm_task4_h_margin"
             android:layout_weight="1"
             android:src="@drawable/dr_gray_rectangle" />
 
         <ImageView
-            android:layout_width="0dp"
+            android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginEnd="@dimen/dm_task4_h_margin"
             android:layout_weight="1"
             android:src="@drawable/dr_gray_rectangle" />
 
         <ImageView
-            android:layout_width="0dp"
+            android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_weight="1"
             android:src="@drawable/dr_gray_rectangle" />
     </LinearLayout>
-
 </LinearLayout>
