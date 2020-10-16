@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".views.add.ContactAddActivity">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glVerticalStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glVerticalEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/color_toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="@string/act_add_toolbar_title"
+        app:titleTextColor="@color/color_fab_inner" />
+
+    <RadioGroup
+        android:id="@+id/rgContactType"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        app:layout_constraintEnd_toStartOf="@+id/glVerticalEnd"
+        app:layout_constraintStart_toStartOf="@+id/glVerticalStart"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <RadioButton
+            android:id="@+id/tbPhoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:buttonTint="@color/color_radio_button"
+            android:text="@string/act_add_rb_phone_number" />
+
+        <RadioButton
+            android:id="@+id/rbEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/act_add_rb_email" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        android:hint="@string/act_add_et_name"
+        app:layout_constraintEnd_toEndOf="@id/glVerticalEnd"
+        app:layout_constraintStart_toStartOf="@id/glVerticalStart"
+        app:layout_constraintTop_toBottomOf="@id/rgContactType" />
+
+    <EditText
+        android:id="@+id/etContact"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        android:hint="@string/act_add_et_phone_number"
+        app:layout_constraintEnd_toEndOf="@id/glVerticalEnd"
+        app:layout_constraintStart_toStartOf="@id/glVerticalStart"
+        app:layout_constraintTop_toBottomOf="@id/etName" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

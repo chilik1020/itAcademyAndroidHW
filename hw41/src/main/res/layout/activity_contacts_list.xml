@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.MainActivity">
+    tools:context=".views.list.ContactsListActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
@@ -37,8 +37,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewContacts"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="@dimen/default_margin"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/default_margin"
         android:clickable="true"
         android:focusable="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />

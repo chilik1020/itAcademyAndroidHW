@@ -1,5 +1,6 @@
-package com.chilik1020.hw41.views
+package com.chilik1020.hw41.views.list
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
@@ -9,15 +10,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chilik1020.hw41.R
 import com.chilik1020.hw41.model.entities.Contact
-import kotlinx.android.synthetic.main.activity_main.*
+import com.chilik1020.hw41.views.add.ContactAddActivity
+import kotlinx.android.synthetic.main.activity_contacts_list.*
 
-class MainActivity : AppCompatActivity() {
+class ContactsListActivity : AppCompatActivity() {
 
-    private val contactAdapter = ContactsRecyclerViewAdapter()
+    private val contactAdapter =
+        ContactsRecyclerViewAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_contacts_list)
 
         initViews()
         setListeners()
@@ -25,12 +28,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViews() {
         setSupportActionBar(toolbar)
-//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-//        supportActionBar?.setHomeButtonEnabled(true)
 
         recyclerViewContacts.apply {
             adapter = contactAdapter
-            layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
+            layoutManager = LinearLayoutManager(this@ContactsListActivity, RecyclerView.VERTICAL, false)
         }
         val list = mutableListOf<Contact>()
         for (i in 0..19) {
@@ -45,10 +46,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setListeners() {
         fab.setOnClickListener {
-            Toast.makeText(this, "Contact creating", Toast.LENGTH_SHORT).apply {
-                setGravity(Gravity.BOTTOM, 0, 0)
-                show()
-            }
+            startActivity(Intent(this, ContactAddActivity::class.java))
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.chilik1020.hw41.views
+package com.chilik1020.hw41.views.list
 
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +17,9 @@ class ContactsRecyclerViewAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_contact, parent, false)
-        return ContactViewHolder(view)
+        return ContactViewHolder(
+            view
+        )
     }
 
     override fun getItemCount(): Int = list.size
