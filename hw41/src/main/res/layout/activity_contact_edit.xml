@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="@string/act_edit_toolbar_title"
-        app:titleTextColor="@color/color_fab_inner" />
+        app:titleTextColor="@color/color_white_bg" />
 
     <EditText
         android:id="@+id/etName"
@@ -57,7 +57,7 @@
         android:layout_margin="@dimen/default_double_margin"
         android:background="@drawable/dr_btn_remove_bg"
         android:text="@string/act_edit_btn_remove"
-        android:textColor="@color/color_fab_inner"
+        android:textColor="@color/color_white_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/glVerticalEnd"
         app:layout_constraintStart_toStartOf="@id/glVerticalStart" />

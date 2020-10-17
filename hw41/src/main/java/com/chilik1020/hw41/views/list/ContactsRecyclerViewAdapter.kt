@@ -10,16 +10,14 @@ import com.chilik1020.hw41.R
 import com.chilik1020.hw41.model.entities.Contact
 import kotlinx.android.synthetic.main.item_contact.view.*
 
-class ContactsRecyclerViewAdapter :
+class ContactsRecyclerViewAdapter(private val listener: OnRecyclerViewItemClickListener) :
     RecyclerView.Adapter<ContactsRecyclerViewAdapter.ContactViewHolder>() {
 
     private val list: MutableList<Contact> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_contact, parent, false)
-        return ContactViewHolder(
-            view
-        )
+        return ContactViewHolder(view, listener)
     }
 
     override fun getItemCount(): Int = list.size
@@ -34,12 +32,19 @@ class ContactsRecyclerViewAdapter :
         notifyDataSetChanged()
     }
 
-    class ContactViewHolder(item: View) : RecyclerView.ViewHolder(item) {
-        val ivContactType: ImageView = item.ivContactType
+    class ContactViewHolder(private val item: View, private val listener: OnRecyclerViewItemClickListener) :
+        RecyclerView.ViewHolder(item) {
+        private lateinit var contact: Contact
+        private val ivContactType: ImageView = item.ivContactType
         private val tvFullname: TextView = item.tvFullname
         private val tvPhoneNumberOrEmail: TextView = item.tvPhonenumberOrEmail
 
+        init {
+            item.setOnClickListener{ listener.onClick(contact.id) }
+        }
+
         fun bind(contact: Contact) {
+            this.contact = contact
             if (contact.type) {
                 ivContactType.setImageResource(R.drawable.ic_contact_phone)
                 tvPhoneNumberOrEmail.text = contact.number
@@ -48,7 +53,6 @@ class ContactsRecyclerViewAdapter :
                 tvPhoneNumberOrEmail.text = contact.email
             }
             tvFullname.text = contact.fullname
-
         }
     }
 }

@@ -5,7 +5,8 @@
     <color name="colorAccent">#570360</color>
 
     <color name="color_toolbar">#1F4FC0</color>
-    <color name="color_searchview">#EDF4F4</color>
+
+    <color name="color_white_bg">#EDF4F4</color>
     <color name="color_radio_button">#52AEF8</color>
     <color name="color_fab">#EF2063</color>
     <color name="color_fab_inner">#FFFFFF</color>

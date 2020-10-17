@@ -31,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="@string/act_add_toolbar_title"
-        app:titleTextColor="@color/color_fab_inner" />
+        app:titleTextColor="@color/color_white_bg" />
 
     <RadioGroup
         android:id="@+id/rgContactType"
