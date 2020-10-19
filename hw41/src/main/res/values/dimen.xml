@@ -6,4 +6,5 @@
 
     <dimen name="size_contact_name">16sp</dimen>
     <dimen name="size_contact_number">12sp</dimen>
+    <dimen name="size_hint">14sp</dimen>
 </resources>

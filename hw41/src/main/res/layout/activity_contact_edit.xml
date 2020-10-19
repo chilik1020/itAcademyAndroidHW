@@ -46,6 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/default_margin"
         android:hint="@string/act_edit_et_phone_number"
+        android:textSize="@dimen/size_hint"
         app:layout_constraintEnd_toEndOf="@id/glVerticalEnd"
         app:layout_constraintStart_toStartOf="@id/glVerticalStart"
         app:layout_constraintTop_toBottomOf="@id/etName" />
@@ -58,6 +59,7 @@
         android:background="@drawable/dr_btn_remove_bg"
         android:text="@string/act_edit_btn_remove"
         android:textColor="@color/color_white_bg"
+        android:textSize="@dimen/size_hint"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/glVerticalEnd"
         app:layout_constraintStart_toStartOf="@id/glVerticalStart" />

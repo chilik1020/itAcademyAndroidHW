@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.chilik1020.hw41.R
 import com.chilik1020.hw41.model.entities.Contact
+import com.chilik1020.hw41.model.entities.ContactType
 import kotlinx.android.synthetic.main.item_contact.view.*
 
 class ContactsRecyclerViewAdapter(private val listener: OnRecyclerViewItemClickListener) :
@@ -32,7 +33,10 @@ class ContactsRecyclerViewAdapter(private val listener: OnRecyclerViewItemClickL
         notifyDataSetChanged()
     }
 
-    class ContactViewHolder(private val item: View, private val listener: OnRecyclerViewItemClickListener) :
+    class ContactViewHolder(
+        private val item: View,
+        private val listener: OnRecyclerViewItemClickListener
+    ) :
         RecyclerView.ViewHolder(item) {
         private lateinit var contact: Contact
         private val ivContactType: ImageView = item.ivContactType
@@ -40,17 +44,20 @@ class ContactsRecyclerViewAdapter(private val listener: OnRecyclerViewItemClickL
         private val tvPhoneNumberOrEmail: TextView = item.tvPhonenumberOrEmail
 
         init {
-            item.setOnClickListener{ listener.onClick(contact.id) }
+            item.setOnClickListener { listener.onClick(contact.id) }
         }
 
         fun bind(contact: Contact) {
             this.contact = contact
-            if (contact.type) {
-                ivContactType.setImageResource(R.drawable.ic_contact_phone)
-                tvPhoneNumberOrEmail.text = contact.number
-            } else {
-                ivContactType.setImageResource(R.drawable.ic_contact_email)
-                tvPhoneNumberOrEmail.text = contact.email
+            when (contact.type) {
+                ContactType.PhoneNumber -> {
+                    ivContactType.setImageResource(R.drawable.ic_contact_phone)
+                    tvPhoneNumberOrEmail.text = contact.number
+                }
+                ContactType.Email -> {
+                    ivContactType.setImageResource(R.drawable.ic_contact_email)
+                    tvPhoneNumberOrEmail.text = contact.email
+                }
             }
             tvFullname.text = contact.fullname
         }

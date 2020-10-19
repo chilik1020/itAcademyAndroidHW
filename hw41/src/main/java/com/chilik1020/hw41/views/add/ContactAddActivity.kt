@@ -3,18 +3,24 @@ package com.chilik1020.hw41.views.add
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.chilik1020.hw41.R
+import com.chilik1020.hw41.model.ContactRepository
+import com.chilik1020.hw41.model.ContactRepositoryAppClassImpl
+import com.chilik1020.hw41.model.entities.Contact
+import com.chilik1020.hw41.model.entities.ContactType
 import kotlinx.android.synthetic.main.activity_contact_add.*
 
 class ContactAddActivity : AppCompatActivity() {
+
+    private val repository: ContactRepository = ContactRepositoryAppClassImpl()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact_add)
 
         initViews()
+        setListeners()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -24,7 +30,19 @@ class ContactAddActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == R.id.miConfirmButton) {
-            Toast.makeText(this, "Confirm creating", Toast.LENGTH_SHORT).show()
+            var contactType: ContactType = ContactType.PhoneNumber
+            if (rbEmail.isChecked) {
+                contactType = ContactType.Email
+            }
+            val id = repository.getLargestId() + 1
+            val name = etName.text.toString()
+            val contactNumber = etContact.text.toString()
+            val contact = when (contactType) {
+                ContactType.PhoneNumber -> Contact(id, contactType, name, number = contactNumber)
+                ContactType.Email -> Contact(id, contactType, name, email = contactNumber)
+            }
+            repository.addContact(contact)
+            finish()
             true
         } else
             super.onOptionsItemSelected(item)
@@ -35,6 +53,11 @@ class ContactAddActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
+    }
+
+    private fun setListeners() {
         toolbar.setNavigationOnClickListener { finish() }
+        rbPhoneNumber.setOnClickListener { etContact.hint = getString(R.string.act_add_et_phone_number) }
+        rbEmail.setOnClickListener { etContact.hint = getString(R.string.act_add_et_email) }
     }
 }

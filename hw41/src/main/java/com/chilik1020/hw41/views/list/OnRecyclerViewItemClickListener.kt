@@ -1,5 +1,5 @@
 package com.chilik1020.hw41.views.list
 
 interface OnRecyclerViewItemClickListener {
-    fun onClick(id: Long)
+    fun onClick(id: Int)
 }
