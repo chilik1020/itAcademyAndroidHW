@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Флаг страны</string>
+    <string name="country_name">Россия</string>
+    <string name="country_name_land">Россия HORIZONTAL</string>
+</resources>
