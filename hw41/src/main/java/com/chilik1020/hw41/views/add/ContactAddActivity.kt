@@ -10,6 +10,7 @@ import com.chilik1020.hw41.model.entities.Contact
 import com.chilik1020.hw41.model.entities.ContactType
 import kotlinx.android.synthetic.main.activity_contact_add.*
 import org.koin.android.ext.android.inject
+import java.util.*
 
 class ContactAddActivity : AppCompatActivity() {
 
@@ -34,7 +35,7 @@ class ContactAddActivity : AppCompatActivity() {
             if (rbEmail.isChecked) {
                 contactType = ContactType.Email
             }
-            val id = repository.getLargestId() + 1
+            val id = UUID.randomUUID()
             val name = etName.text.toString()
             val contactNumber = etContact.text.toString()
             val contact = when (contactType) {
@@ -52,7 +53,6 @@ class ContactAddActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
-
     }
 
     private fun setListeners() {

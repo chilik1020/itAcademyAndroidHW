@@ -1,5 +1,7 @@
 package com.chilik1020.hw41.views.list
 
+import java.util.*
+
 interface OnRecyclerViewItemClickListener {
-    fun onClick(id: Int)
+    fun onClick(id: UUID)
 }

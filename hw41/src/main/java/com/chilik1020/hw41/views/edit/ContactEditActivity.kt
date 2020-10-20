@@ -10,6 +10,7 @@ import com.chilik1020.hw41.model.entities.ContactType
 import com.chilik1020.hw41.util.CONTACT_ID
 import kotlinx.android.synthetic.main.activity_contact_edit.*
 import org.koin.android.ext.android.inject
+import java.util.*
 
 class ContactEditActivity : AppCompatActivity() {
 
@@ -44,7 +45,7 @@ class ContactEditActivity : AppCompatActivity() {
 
     private fun getIntentData() {
         intent?.let {
-            val contactId = it.getIntExtra(CONTACT_ID, 0)
+            val contactId = it.getSerializableExtra(CONTACT_ID) as UUID
             contact = repository.getById(contactId)
         }
         contact?.let {

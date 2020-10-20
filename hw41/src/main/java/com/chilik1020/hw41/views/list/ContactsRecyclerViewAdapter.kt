@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.item_contact.view.*
 class ContactsRecyclerViewAdapter(private val listener: OnRecyclerViewItemClickListener) :
     RecyclerView.Adapter<ContactsRecyclerViewAdapter.ContactViewHolder>() {
 
-    private val list: MutableList<Contact> = mutableListOf()
+    private var list: List<Contact> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_contact, parent, false)
@@ -28,8 +28,7 @@ class ContactsRecyclerViewAdapter(private val listener: OnRecyclerViewItemClickL
     }
 
     fun setData(data: List<Contact>) {
-        list.clear()
-        list.addAll(data)
+        list = data
         notifyDataSetChanged()
     }
 
