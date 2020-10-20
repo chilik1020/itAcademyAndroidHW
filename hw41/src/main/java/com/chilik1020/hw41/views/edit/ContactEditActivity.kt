@@ -5,15 +5,15 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.chilik1020.hw41.R
 import com.chilik1020.hw41.model.ContactRepository
-import com.chilik1020.hw41.model.ContactRepositoryAppClassImpl
 import com.chilik1020.hw41.model.entities.Contact
 import com.chilik1020.hw41.model.entities.ContactType
 import com.chilik1020.hw41.util.CONTACT_ID
 import kotlinx.android.synthetic.main.activity_contact_edit.*
+import org.koin.android.ext.android.inject
 
 class ContactEditActivity : AppCompatActivity() {
 
-    private val repository: ContactRepository = ContactRepositoryAppClassImpl()
+    private val repository: ContactRepository by inject()
     private var contact: Contact? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

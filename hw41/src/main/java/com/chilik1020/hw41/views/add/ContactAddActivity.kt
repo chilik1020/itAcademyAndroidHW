@@ -6,14 +6,14 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.chilik1020.hw41.R
 import com.chilik1020.hw41.model.ContactRepository
-import com.chilik1020.hw41.model.ContactRepositoryAppClassImpl
 import com.chilik1020.hw41.model.entities.Contact
 import com.chilik1020.hw41.model.entities.ContactType
 import kotlinx.android.synthetic.main.activity_contact_add.*
+import org.koin.android.ext.android.inject
 
 class ContactAddActivity : AppCompatActivity() {
 
-    private val repository: ContactRepository = ContactRepositoryAppClassImpl()
+    private val repository: ContactRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +57,9 @@ class ContactAddActivity : AppCompatActivity() {
 
     private fun setListeners() {
         toolbar.setNavigationOnClickListener { finish() }
-        rbPhoneNumber.setOnClickListener { etContact.hint = getString(R.string.act_add_et_phone_number) }
+        rbPhoneNumber.setOnClickListener {
+            etContact.hint = getString(R.string.act_add_et_phone_number)
+        }
         rbEmail.setOnClickListener { etContact.hint = getString(R.string.act_add_et_email) }
     }
 }

@@ -6,18 +6,17 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.chilik1020.hw41.ContactApp
 import com.chilik1020.hw41.R
 import com.chilik1020.hw41.model.ContactRepository
-import com.chilik1020.hw41.model.ContactRepositoryAppClassImpl
 import com.chilik1020.hw41.util.CONTACT_ID
 import com.chilik1020.hw41.views.add.ContactAddActivity
 import com.chilik1020.hw41.views.edit.ContactEditActivity
 import kotlinx.android.synthetic.main.activity_contacts_list.*
+import org.koin.android.ext.android.inject
 
 class ContactsListActivity : AppCompatActivity() {
 
-    private val repository: ContactRepository = ContactRepositoryAppClassImpl()
+    private val repository: ContactRepository by inject()
 
     private val recyclerViewListener: OnRecyclerViewItemClickListener =
         object : OnRecyclerViewItemClickListener {
