@@ -69,7 +69,7 @@ class ContactEditActivity : AppCompatActivity() {
 
     private fun setListener() {
         btnRemoveContact.setOnClickListener {
-            contact?.let { repository.removeContact(it.id) }
+            contact?.let { c -> repository.removeContact(c.id) }
             finish()
         }
     }

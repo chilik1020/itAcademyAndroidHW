@@ -30,9 +30,30 @@ class ContactApp : Application() {
     }
 
     private fun initContacts() {
-        contacts.add(Contact(UUID.randomUUID(), ContactType.PhoneNumber, "John Connor", number = "(781)373-5577"))
-        contacts.add(Contact(UUID.randomUUID(), ContactType.PhoneNumber, "Sara Connor", number = "(781)373-5577"))
-        contacts.add(Contact(UUID.randomUUID(), ContactType.Email, "Eric Cartman", email = "eric@southpark.com"))
+        contacts.add(
+            Contact(
+                UUID.randomUUID(),
+                ContactType.PhoneNumber,
+                "John Connor",
+                number = "(781)373-5577"
+            )
+        )
+        contacts.add(
+            Contact(
+                UUID.randomUUID(),
+                ContactType.PhoneNumber,
+                "Sara Connor",
+                number = "(781)373-5577"
+            )
+        )
+        contacts.add(
+            Contact(
+                UUID.randomUUID(),
+                ContactType.Email,
+                "Eric Cartman",
+                email = "eric@southpark.com"
+            )
+        )
         contacts.add(
             Contact(
                 UUID.randomUUID(),
