@@ -27,6 +27,7 @@ class ColorMixerCustomView @JvmOverloads constructor(
 
     private val rectOuter: RectF = RectF()
     private val paint: Paint
+    private lateinit var listener: ColorMixerTouchListener
 
     private var colorArc0: Int = 0
     private var colorArc1: Int = 0
@@ -42,10 +43,8 @@ class ColorMixerCustomView @JvmOverloads constructor(
         shuffleAllColor()
     }
 
-    private fun initAttrs(attrs: AttributeSet?) {
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ColorMixerCustomView)
-        colorCircle = typedArray.getColor(R.styleable.ColorMixerCustomView_cmcv_centerColor, 0)
-        typedArray.recycle()
+    fun setListener(touchListener: ColorMixerTouchListener) {
+        listener = touchListener
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -83,6 +82,12 @@ class ColorMixerCustomView @JvmOverloads constructor(
         return super.onTouchEvent(event)
     }
 
+    private fun initAttrs(attrs: AttributeSet?) {
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ColorMixerCustomView)
+        colorCircle = typedArray.getColor(R.styleable.ColorMixerCustomView_cmcv_centerColor, 0)
+        typedArray.recycle()
+    }
+
     private fun shuffleAllColor() {
         colorArc0 = getRandomColor()
         colorArc1 = getRandomColor()
@@ -98,19 +103,26 @@ class ColorMixerCustomView @JvmOverloads constructor(
     private fun checkWhereWasEventTouch(x: Float, y: Float) {
         if (checkIfPointInCircle(x, y, centerX.toFloat(), centerY.toFloat(), RADIUS_INNER)) {
             shuffleAllColor()
+            listener.onTouchColorMixer(x,y,null)
             invalidate()
         } else if (checkIfPointInCircle(x, y, centerX.toFloat(), centerY.toFloat(), RADIUS_OUTER)) {
+            var color: Int = 0
             val aboveCenter = y < centerY
             val leftToCenter = x < centerX
             if (aboveCenter && leftToCenter) {
+                color = colorArc2
                 colorArc2 = getRandomColor()
             } else if (aboveCenter && !leftToCenter) {
+                color = colorArc3
                 colorArc3 = getRandomColor()
             } else if (!aboveCenter && leftToCenter) {
+                color = colorArc1
                 colorArc1 = getRandomColor()
             } else if (!aboveCenter && !leftToCenter) {
+                color = colorArc0
                 colorArc0 = getRandomColor()
             }
+            listener.onTouchColorMixer(x,y,color)
             invalidate()
         }
     }
