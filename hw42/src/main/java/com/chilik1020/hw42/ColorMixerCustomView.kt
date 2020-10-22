@@ -2,14 +2,13 @@ package com.chilik1020.hw42
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import java.util.*
-import kotlin.math.sqrt
+import com.chilik1020.hw42.utils.checkIfPointInCircle
+import com.chilik1020.hw42.utils.getRandomColor
 
 class ColorMixerCustomView @JvmOverloads constructor(
     context: Context,
@@ -95,45 +94,31 @@ class ColorMixerCustomView @JvmOverloads constructor(
         colorArc3 = getRandomColor()
     }
 
-    private fun getRandomColor(): Int {
-        val rnd = Random()
-        return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
-    }
-
     private fun checkWhereWasEventTouch(x: Float, y: Float) {
         if (checkIfPointInCircle(x, y, centerX.toFloat(), centerY.toFloat(), RADIUS_INNER)) {
             shuffleAllColor()
-            listener.onTouchColorMixer(x,y,null)
+            listener.onTouchColorMixer(x, y, null)
             invalidate()
         } else if (checkIfPointInCircle(x, y, centerX.toFloat(), centerY.toFloat(), RADIUS_OUTER)) {
-            var color: Int = 0
+            var touchedColor: Int = 0
             val aboveCenter = y < centerY
             val leftToCenter = x < centerX
+
             if (aboveCenter && leftToCenter) {
-                color = colorArc2
+                touchedColor = colorArc2
                 colorArc2 = getRandomColor()
             } else if (aboveCenter && !leftToCenter) {
-                color = colorArc3
+                touchedColor = colorArc3
                 colorArc3 = getRandomColor()
             } else if (!aboveCenter && leftToCenter) {
-                color = colorArc1
+                touchedColor = colorArc1
                 colorArc1 = getRandomColor()
             } else if (!aboveCenter && !leftToCenter) {
-                color = colorArc0
+                touchedColor = colorArc0
                 colorArc0 = getRandomColor()
             }
-            listener.onTouchColorMixer(x,y,color)
+            listener.onTouchColorMixer(x, y, touchedColor)
             invalidate()
         }
-    }
-
-    private fun checkIfPointInCircle(
-        xP: Float,
-        yP: Float,
-        xC: Float,
-        yC: Float,
-        radius: Float
-    ): Boolean {
-        return radius > sqrt((xP - xC) * (xP - xC) + (yP - yC) * (yP - yC))
     }
 }
