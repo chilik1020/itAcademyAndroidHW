@@ -11,22 +11,24 @@ import com.chilik1020.hw2.model.ResultSubject
 import com.chilik1020.hw2.model.base.Observer
 import com.chilik1020.hw2.model.entity.Message
 import com.chilik1020.hw2.model.entity.Result
-import com.chilik1020.hw2.util.*
+import com.chilik1020.hw2.util.DATASET
+import com.chilik1020.hw2.util.RESULT
+import com.chilik1020.hw2.util.generateRandomData
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 class MainActivity : AppCompatActivity() {
 
-    private val LOG_TAG = "AppTag:MainActivity"
-    private val REQUEST_COMPUTATION_CODE = 4201
+    companion object {
+        private const val LOG_TAG = "AppTag:MainActivity"
+        private const val REQUEST_COMPUTATION_CODE = 4201
+    }
+
     private var dataSet = arrayListOf<Int>()
     private val executor: ExecutorService = Executors.newSingleThreadExecutor()
-    private val resultObserver: Observer<Result> = object : Observer<Result> {
-        override fun update(msg: Result) {
-            printResultOfComputation(msg)
-        }
-    }
+    private val resultObserver: Observer<Result> =
+        Observer { msg -> printResultOfComputation(msg) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,11 +55,9 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_COMPUTATION_CODE) {
-            if (data != null) {
-                val result: Result? = data.getSerializableExtra(RESULT) as Result?
-                if (result != null) {
-                    printResultOfComputation(result)
-                }
+            data?.let {
+                val result: Result? = data.getSerializableExtra(RESULT) as? Result?
+                result?.run { printResultOfComputation(this) }
             }
         }
     }
@@ -90,7 +90,10 @@ class MainActivity : AppCompatActivity() {
     private fun printResultOfComputation(result: Result) {
         Log.d(LOG_TAG, "Среднее арифметическое множества : ${result.average}")
         Log.d(LOG_TAG, "Сумма элементов множества : ${result.sum}")
-        Log.d(LOG_TAG, "Результат деления суммы первой половины на разность второй : ${result.division}")
+        Log.d(
+            LOG_TAG,
+            "Результат деления суммы первой половины на разность второй : ${result.division}"
+        )
         runOnUiThread { Toast.makeText(this, "$result", Toast.LENGTH_SHORT).show() }
     }
 }

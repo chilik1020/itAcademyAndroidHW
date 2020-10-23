@@ -1,10 +1,6 @@
 package com.chilik1020.hw2.util
 
-fun getSumOfSet(data : List<Int>) : Int {
-    var sum = 0
-    data.forEach { sum += it }
-    return sum
-}
+fun getSumOfSet(data : List<Int>) = data.sum()
 
 fun getSubtraction(data: List<Int>) : Int {
     if (data.isEmpty()) {

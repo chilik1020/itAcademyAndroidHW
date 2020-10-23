@@ -9,8 +9,10 @@ import com.chilik1020.hw2.model.entity.Result
 import com.chilik1020.hw2.util.*
 
 class SecondActivity : AppCompatActivity() {
+    companion object {
+        private const val LOG_TAG = "AppTag:SecondActivity"
+    }
 
-    private val LOG_TAG = "AppTag:SecondActivity"
     private lateinit var dataSet: ArrayList<Int>
     private var averageValue: Double = 0.0
     private var sum: Int = 0
