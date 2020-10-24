@@ -28,8 +28,6 @@ class ContactRepositoryAppClassImpl(private val data: MutableList<Contact>) : Co
 
     override fun removeContact(id: UUID) {
         val contact = data.find { it.id == id }
-        if (contact != null) {
-            data.remove(contact)
-        }
+        contact?.let { data.remove(it) }
     }
 }

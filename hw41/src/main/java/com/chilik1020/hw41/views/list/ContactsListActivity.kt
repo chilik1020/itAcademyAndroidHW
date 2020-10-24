@@ -29,12 +29,14 @@ class ContactsListActivity : AppCompatActivity() {
     private val repository: ContactRepository by inject()
 
     private val recyclerViewListener: OnRecyclerViewItemClickListener =
-        object : OnRecyclerViewItemClickListener {
-            override fun onClick(id: UUID) {
-                val intent = Intent(this@ContactsListActivity, ContactEditActivity::class.java)
-                intent.putExtra(CONTACT_ID, id)
-                startActivity(intent)
+        OnRecyclerViewItemClickListener { id ->
+            val intent = Intent(
+                this@ContactsListActivity,
+                ContactEditActivity::class.java)
+                .apply {
+                putExtra(CONTACT_ID, id)
             }
+            startActivity(intent)
         }
 
     private val contactAdapter = ContactsRecyclerViewAdapter(recyclerViewListener)
