@@ -97,9 +97,10 @@ class ContactsListActivity : AppCompatActivity() {
     private fun updateDataFromStorage() {
         data = repository.getAllContacts()
         if (data.isEmpty()) {
-            setAdapterData(emptyList())
             tvNoContacts.visibility = View.VISIBLE
+            setAdapterData(emptyList())
         } else {
+            tvNoContacts.visibility = View.INVISIBLE
             updateFilteredData()
         }
     }
