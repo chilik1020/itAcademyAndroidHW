@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CountryFlag</string>
+    <string name="country_name">Great Britain</string>
+    <string name="country_name_land">Great Britain HORIZONTAL</string>
+</resources>
