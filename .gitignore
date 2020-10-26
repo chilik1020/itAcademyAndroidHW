@@ -2,5 +2,4 @@
 .gradle
 /local.properties
 /.idea/*
-hw1/
-hw2/
+/build/*
