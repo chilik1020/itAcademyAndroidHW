@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/dm_task5_padding">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvItemCertified"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dm_task5_h_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivTopImageCertified"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_cat"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvTextOnImageCertified"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dm_task5_h_margin"
+                android:layout_marginBottom="@dimen/dm_task5_v_margin"
+                android:text="@string/task5_certificated"
+                android:textSize="@dimen/dm_task5_text_size_h3"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/ivTopImageCertified"
+                app:layout_constraintStart_toStartOf="@+id/ivTopImageCertified" />
+
+            <ImageView
+                android:id="@+id/ivShareCertified"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dm_task5_v_margin"
+                android:layout_marginEnd="@dimen/dm_task5_h_margin"
+                android:src="@drawable/ic_share"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/ivTopImageCertified"
+                app:layout_constraintTop_toBottomOf="@id/ivTopImageCertified" />
+
+            <ImageView
+                android:id="@+id/ivBookmarksCertified"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dm_task5_v_margin"
+                android:layout_marginEnd="@dimen/dm_task5_h_margin"
+                android:src="@drawable/ic_bookmark"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/ivShareCertified"
+                app:layout_constraintTop_toBottomOf="@id/ivTopImageCertified" />
+
+            <ImageView
+                android:id="@+id/ivFavoriteCertified"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dm_task5_v_margin"
+                android:layout_marginEnd="@dimen/dm_task5_h_margin"
+                android:src="@drawable/ic_favorite"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/ivBookmarksCertified"
+                app:layout_constraintTop_toBottomOf="@id/ivTopImageCertified" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvItemViews"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dm_task5_v_margin"
+        android:layout_marginEnd="@dimen/dm_task5_h_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/cvItemLayouts"
+        app:layout_constraintTop_toBottomOf="@id/cvItemCertified"
+        tools:layout_editor_absoluteY="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivTopImageViews"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@color/task5_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvTextOnImageViews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dm_task5_h_margin"
+                android:layout_marginBottom="@dimen/dm_task5_v_margin"
+                android:text="@string/task5_views"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/dm_task5_text_size_h3"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/ivTopImageViews"
+                app:layout_constraintStart_toStartOf="@+id/ivTopImageViews" />
+
+            <ImageView
+                android:id="@+id/ivShareViews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dm_task5_v_margin"
+                android:layout_marginEnd="@dimen/dm_task5_h_margin"
+                android:src="@drawable/ic_share"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/ivTopImageViews"
+                app:layout_constraintTop_toBottomOf="@id/ivTopImageViews" />
+
+            <ImageView
+                android:id="@+id/ivBookmarksViews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dm_task5_v_margin"
+                android:layout_marginEnd="@dimen/dm_task5_h_margin"
+                android:src="@drawable/ic_bookmark"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/ivShareViews"
+                app:layout_constraintTop_toBottomOf="@id/ivTopImageViews" />
+
+            <ImageView
+                android:id="@+id/ivFavoriteViews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dm_task5_v_margin"
+                android:layout_marginEnd="@dimen/dm_task5_h_margin"
+                android:src="@drawable/ic_favorite"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/ivBookmarksViews"
+                app:layout_constraintTop_toBottomOf="@id/ivTopImageViews" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvItemLayouts"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dm_task5_h_margin"
+        android:layout_marginTop="@dimen/dm_task5_v_margin"
+        app:layout_constraintEnd_toStartOf="@+id/cvItemViews"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cvItemCertified"
+        tools:layout_editor_absoluteY="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivCatImage"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@color/task5_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvTextOnImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dm_task5_h_margin"
+                android:layout_marginBottom="@dimen/dm_task5_v_margin"
+                android:text="@string/task5_layouts"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/dm_task5_text_size_h3"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/ivCatImage"
+                app:layout_constraintStart_toStartOf="@+id/ivCatImage" />
+
+            <ImageView
+                android:id="@+id/ivShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dm_task5_v_margin"
+                android:layout_marginEnd="@dimen/dm_task5_h_margin"
+                android:src="@drawable/ic_share"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/ivCatImage"
+                app:layout_constraintTop_toBottomOf="@id/ivCatImage" />
+
+            <ImageView
+                android:id="@+id/ivBookmarks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dm_task5_v_margin"
+                android:layout_marginEnd="@dimen/dm_task5_h_margin"
+                android:src="@drawable/ic_bookmark"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/ivShare"
+                app:layout_constraintTop_toBottomOf="@id/ivCatImage" />
+
+            <ImageView
+                android:id="@+id/ivFavorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dm_task5_v_margin"
+                android:layout_marginEnd="@dimen/dm_task5_h_margin"
+                android:src="@drawable/ic_favorite"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/ivBookmarks"
+                app:layout_constraintTop_toBottomOf="@id/ivCatImage" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginHorizontal="@dimen/dm_task3_h_margin"
+    android:baselineAligned="false"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tvSignIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dm_task3_v_double_margin"
+        android:text="@string/task3_sign_in"
+        android:textSize="@dimen/dm_task3_text_size_h1"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dm_task3_v_double_margin"
+        android:background="@drawable/dr_rounded_rectangle"
+        android:hint="@string/task3_email"
+        android:padding="@dimen/dm_task3_padding"
+        android:textSize="@dimen/dm_task3_text_size_h1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSignIn" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dm_task3_v_margin"
+        android:background="@drawable/dr_rounded_rectangle"
+        android:hint="@string/task3_password"
+        android:inputType="textPassword"
+        android:padding="@dimen/dm_task3_padding"
+        android:textSize="@dimen/dm_task3_text_size_h1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etEmail" />
+
+    <CheckBox
+        android:id="@+id/cbRemember"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dm_task3_v_double_margin"
+        android:checked="true"
+        android:padding="@dimen/dm_task3_padding"
+        android:text="@string/task3_remember"
+        android:textSize="@dimen/dm_task3_text_size_h2"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etPassword"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
+
+    <TextView
+        android:id="@+id/tvForgotPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dm_task3_v_double_margin"
+        android:gravity="end"
+        android:padding="@dimen/dm_task3_padding"
+        android:text="@string/task3_forgot_password"
+        android:textSize="@dimen/dm_task3_text_size_h2"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cbRemember"
+        app:layout_constraintTop_toBottomOf="@id/etPassword" />
+
+    <Button
+        android:id="@+id/btnSignIn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_task3_btn_sign_in_height"
+        android:layout_marginBottom="@dimen/dm_task3_v_double_margin"
+        android:background="@drawable/dr_rounded_black_rectangle"
+        android:text="@string/task3_sign_in"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/dm_task3_text_size_h1"
+        app:layout_constraintBottom_toTopOf="@+id/tvJustSignIn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cbRemember"
+        app:layout_constraintVertical_chainStyle="spread" />
+
+    <TextView
+        android:id="@+id/tvJustSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dm_task3_v_margin"
+        android:text="@string/task3_just_sign_in"
+        android:textSize="@dimen/dm_task3_text_size_h1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnSignIn" />
+</androidx.constraintlayout.widget.ConstraintLayout>
