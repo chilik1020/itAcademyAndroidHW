@@ -36,6 +36,7 @@ class FilesAdapter(private val listener: OnFileItemClickListener?) :
 
         init {
             itemView.setOnClickListener { listener?.onClick(fileModel) }
+            itemView.setOnLongClickListener { listener?.onLongClick(fileModel)?: false }
         }
 
         fun bind(file: FileModel) {
