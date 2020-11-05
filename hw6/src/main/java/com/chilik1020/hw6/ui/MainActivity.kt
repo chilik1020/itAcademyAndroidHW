@@ -6,6 +6,7 @@ import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import com.chilik1020.hw6.R
 import com.chilik1020.hw6.ui.filelist.FileExplorerFragment
+import com.chilik1020.hw6.utils.FILE_PATH_KEY
 import kotlinx.android.synthetic.main.activity_main.fragment_container
 
 class MainActivity : AppCompatActivity() {
@@ -19,7 +20,9 @@ class MainActivity : AppCompatActivity() {
             }
 
             supportFragmentManager.commit {
-                add<FileExplorerFragment>(R.id.fragment_container, null, intent.extras)
+                val args: Bundle = Bundle()
+                args.putString(FILE_PATH_KEY, getExternalFilesDir(null)?.absolutePath)
+                add<FileExplorerFragment>(R.id.fragment_container, null, args)
             }
         }
     }

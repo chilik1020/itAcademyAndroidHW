@@ -3,14 +3,27 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="@dimen/default_padding">
+
+    <ImageView
+        android:id="@+id/ivFileType"
+        android:src="@drawable/ic_folder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
-        android:id="@+id/tvfileName"
-        android:layout_width="match_parent"
+        android:id="@+id/tvFileName"
+        android:textSize="20sp"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivFileType" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
