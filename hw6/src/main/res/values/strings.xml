@@ -8,6 +8,9 @@
 
     <string name="message_delete_file">Remove file?</string>
     <string name="message_delete_directory">Remove directory?</string>
+    <string name="message_type_directory_name">Type directory name</string>
+    <string name="message_type_file_name">Type file name</string>
     <string name="button_yes">Yes</string>
     <string name="button_cancel">Cancel</string>
+    <string name="save_changes">Save changes</string>
 </resources>

@@ -1,6 +1,5 @@
 package com.chilik1020.hw6.ui.filelist
 
-import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +8,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.OvershootInterpolator
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.add
@@ -18,63 +18,94 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chilik1020.hw6.R
 import com.chilik1020.hw6.model.FileModel
 import com.chilik1020.hw6.model.FileType
+import com.chilik1020.hw6.ui.fileeditor.FileEditorFragment
 import com.chilik1020.hw6.utils.*
 import kotlinx.android.synthetic.main.fragment_file_explorer.*
-import java.io.File
-import kotlin.random.Random
-
 
 class FileExplorerFragment : Fragment() {
 
-    private val onFileClickListener: OnFileItemClickListener = object : OnFileItemClickListener {
-        override fun onClick(file: FileModel) {
-            if (file.type == FileType.FOLDER) {
-                requireActivity().supportFragmentManager.commit {
-                    val path = file.path
-                    val args: Bundle = Bundle()
-                    args.putString(FILE_PATH_KEY, path)
-                    add<FileExplorerFragment>(R.id.fragment_container, null, args)
-                    addToBackStack(path)
-                }
-            }
-        }
-
-        override fun onLongClick(file: FileModel): Boolean {
-            val message =
-                if (file.type == FileType.FILE) R.string.message_delete_file else R.string.message_delete_directory
-            val alertDialog = AlertDialog.Builder(requireContext())
-                .setMessage(message)
-                .setPositiveButton(R.string.button_yes) { dialog: DialogInterface, _: Int ->
-                    deleteFile(file.path)
-                    getFileModelListForAdapter()
-                    dialog.cancel()
-                }.setNegativeButton(R.string.button_cancel) { dialog: DialogInterface, _: Int ->
-                    dialog.cancel()
-                }.create()
-            alertDialog.show()
-            return true
-        }
-    }
-
-    private val filesAdapter: FilesAdapter = FilesAdapter(onFileClickListener)
+    private var fileClicked: FileModel? = null
+    private lateinit var dialogInputText: AppCompatEditText
     private var folderPath: String? = null
 
     private var isMainFabExpanded = false
     private lateinit var animationFabOpen: Animation
     private lateinit var animationFabClose: Animation
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private val onFileClickListener: OnFileItemClickListener = object : OnFileItemClickListener {
+        override fun onClick(file: FileModel) {
+            fileClicked = file
+            if (file.type == FileType.FOLDER) {
+                requireActivity().supportFragmentManager.commit {
+                    val path = file.path
+                    val args = Bundle()
+                    args.putString(FILE_PATH_KEY, path)
+                    add<FileExplorerFragment>(R.id.fragment_container, null, args)
+                    addToBackStack(path)
+                }
+            } else {
+                requireActivity().supportFragmentManager.commit {
+                    val path = file.path
+                    val args = Bundle()
+                    args.putString(FILE_PATH_KEY, path)
+                    add<FileEditorFragment>(R.id.fragment_container, null, args)
+                    addToBackStack(path)
+                }
+            }
+        }
 
-        val path = arguments?.getString(FILE_PATH_KEY)
-        path?.let { folderPath = it }
+        override fun onLongClick(file: FileModel): Boolean {
+            fileClicked = file
+            val msg =
+                if (file.type == FileType.FILE) R.string.message_delete_file else R.string.message_delete_directory
+
+            showAlertDialog(
+                requireContext(),
+                msg,
+                null,
+                onDeleteFilePositiveButtonClickListener,
+                onNegativeButtonClickListener
+            )
+            return true
+        }
     }
+
+    private val filesAdapter: FilesAdapter = FilesAdapter(onFileClickListener)
+
+    private val onDeleteFilePositiveButtonClickListener: DialogInterface.OnClickListener =
+        DialogInterface.OnClickListener { dialog, _ ->
+            fileClicked?.let { deleteFile(it.path) }
+            getFileModelListForAdapter()
+            dialog.cancel()
+        }
+
+    private val onNegativeButtonClickListener: DialogInterface.OnClickListener =
+        DialogInterface.OnClickListener { dialog, _ ->
+            dialog.cancel()
+        }
+
+    private val onCreateDirectoryPositiveClickListener: DialogInterface.OnClickListener =
+        DialogInterface.OnClickListener { dialog, _ ->
+            folderPath?.let { path -> createNewFolder(path, dialogInputText.text.toString()) }
+            getFileModelListForAdapter()
+            dialogInputText.text?.clear()
+            dialog.cancel()
+        }
+
+    private val onCreateFilePositiveClickListener: DialogInterface.OnClickListener =
+        DialogInterface.OnClickListener { dialog, _ ->
+            folderPath?.let { path -> createNewFile(path, dialogInputText.text.toString()) }
+            getFileModelListForAdapter()
+            dialogInputText.text?.clear()
+            dialog.cancel()
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        arguments?.getString(FILE_PATH_KEY).let { folderPath = it }
         return inflater.inflate(R.layout.fragment_file_explorer, container, false)
     }
 
@@ -91,32 +122,27 @@ class FileExplorerFragment : Fragment() {
         getFileModelListForAdapter()
     }
 
+    override fun onPause() {
+        super.onPause()
+        if (isMainFabExpanded) {
+            collapseFabMenu()
+        }
+    }
+
     private fun getFileModelListForAdapter() {
         folderPath?.let {
-            val file = File(it)
-            tvCurrentFolder.text = file.path
-            val listFiles = file.listFiles()
-            if (listFiles.isNullOrEmpty()) {
-                tvEmptyFolder.visibility = View.VISIBLE
-                filesAdapter.setData(emptyList())
-            } else {
-                tvEmptyFolder.visibility = View.GONE
-                filesAdapter.setData(listFiles
-                    .map { fileInMap ->
-                        FileModel(
-                            fileInMap.name,
-                            fileInMap.absolutePath,
-                            type = if (fileInMap.isDirectory) FileType.FOLDER else FileType.FILE
-                        )
-                    }
-                    .sortedBy { fileInSort ->
-                        fileInSort.type
-                    })
-            }
+            val toolbarName = "../${it.substringAfterLast("/")}"
+            tvCurrentFolder.text = toolbarName
+
+            val fileModelsList = createFileModelsListFromDirPath(it)
+            tvEmptyFolder.visibility = if (fileModelsList.isEmpty()) View.VISIBLE else View.GONE
+            filesAdapter.setData(fileModelsList)
         }
     }
 
     private fun initViews() {
+        dialogInputText = AppCompatEditText(requireContext())
+
         recyclerViewFiles.apply {
             adapter = filesAdapter
             layoutManager = LinearLayoutManager(requireContext())
@@ -136,24 +162,32 @@ class FileExplorerFragment : Fragment() {
             }
 
         }
+
         fabDirectoryCreate.setOnClickListener {
-            folderPath?.let { path -> createNewFolder(path, "innerDir${Random.nextInt()}") }
-            getFileModelListForAdapter()
+            collapseFabMenu()
+            showAlertDialog(
+                requireActivity(),
+                R.string.message_type_directory_name,
+                dialogInputText,
+                onCreateDirectoryPositiveClickListener,
+                onNegativeButtonClickListener
+            )
         }
+
         fabFileCreate.setOnClickListener {
-            folderPath?.let { path -> createNewFile(path, "innerDir${Random.nextInt()}") }
-            getFileModelListForAdapter()
+            collapseFabMenu()
+            showAlertDialog(
+                requireActivity(),
+                R.string.message_type_file_name,
+                dialogInputText,
+                onCreateFilePositiveClickListener,
+                onNegativeButtonClickListener
+            )
         }
     }
 
     private fun expandFabMenu() {
-        ViewCompat.animate(mainFab)
-            .rotation(45.0F)
-            .withLayer()
-            .setDuration(300)
-            .setInterpolator(OvershootInterpolator(10.0F))
-            .start()
-
+        rotateMainFab(45.0f)
         llFileCreate.startAnimation(animationFabOpen)
         llDirectoryCreate.startAnimation(animationFabOpen)
         llFileCreate.isClickable = true
@@ -162,18 +196,21 @@ class FileExplorerFragment : Fragment() {
     }
 
     private fun collapseFabMenu() {
-        ViewCompat.animate(mainFab)
-            .rotation(0.0F)
-            .withLayer()
-            .setDuration(300)
-            .setInterpolator(OvershootInterpolator(10.0F))
-            .start()
-
+        rotateMainFab(0.0f)
         llFileCreate.startAnimation(animationFabClose)
         llDirectoryCreate.startAnimation(animationFabClose)
         llFileCreate.isClickable = false
         llDirectoryCreate.isClickable = false
         isMainFabExpanded = false
+    }
+
+    private fun rotateMainFab(angle: Float) {
+        ViewCompat.animate(mainFab)
+            .rotation(angle)
+            .withLayer()
+            .setDuration(300)
+            .setInterpolator(OvershootInterpolator(10.0F))
+            .start()
     }
 
     companion object {
