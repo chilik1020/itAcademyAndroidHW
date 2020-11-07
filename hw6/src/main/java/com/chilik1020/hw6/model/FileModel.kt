@@ -10,3 +10,8 @@ enum class FileType {
     FOLDER,
     FILE
 }
+
+enum class StorageType(val type: String) {
+    INTERNAL("internal"),
+    EXTERNAL("external")
+}

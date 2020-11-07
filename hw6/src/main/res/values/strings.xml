@@ -13,4 +13,8 @@
     <string name="button_yes">Yes</string>
     <string name="button_cancel">Cancel</string>
     <string name="save_changes">Save changes</string>
+    <string name="settings">Settings</string>
+    <string name="storage">Storage</string>
+    <string name="internal">Internal</string>
+    <string name="external">External</string>
 </resources>

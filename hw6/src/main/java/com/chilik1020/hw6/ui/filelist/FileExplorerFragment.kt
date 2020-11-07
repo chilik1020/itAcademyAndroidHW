@@ -2,12 +2,11 @@ package com.chilik1020.hw6.ui.filelist
 
 import android.content.DialogInterface
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.OvershootInterpolator
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
@@ -19,7 +18,9 @@ import com.chilik1020.hw6.R
 import com.chilik1020.hw6.model.FileModel
 import com.chilik1020.hw6.model.FileType
 import com.chilik1020.hw6.ui.fileeditor.FileEditorFragment
+import com.chilik1020.hw6.ui.settings.SettingsFragment
 import com.chilik1020.hw6.utils.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_file_explorer.*
 
 class FileExplorerFragment : Fragment() {
@@ -100,11 +101,17 @@ class FileExplorerFragment : Fragment() {
             dialog.cancel()
         }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         arguments?.getString(FILE_PATH_KEY).let { folderPath = it }
         return inflater.inflate(R.layout.fragment_file_explorer, container, false)
     }
@@ -129,6 +136,23 @@ class FileExplorerFragment : Fragment() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        inflater.inflate(R.menu.menu_toolbar, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.menuItemSettings) {
+            requireActivity().supportFragmentManager.commit {
+                add<SettingsFragment>(R.id.fragment_container, null, null)
+                addToBackStack(null)
+            }
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun getFileModelListForAdapter() {
         folderPath?.let {
             val toolbarName = "../${it.substringAfterLast("/")}"
@@ -141,6 +165,10 @@ class FileExplorerFragment : Fragment() {
     }
 
     private fun initViews() {
+        if(activity is AppCompatActivity){
+            (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        }
+
         dialogInputText = AppCompatEditText(requireContext())
 
         recyclerViewFiles.apply {
