@@ -56,21 +56,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         val fragments = supportFragmentManager.fragments
-        when {
-            fragments.size == 1 -> {
-                finish()
+        if (fragments.last().tag == SETTINGS_FRAGMENT_TAG) {
+            getCurrentStorageFromPref()
+            clearBackStackFragments()
+            supportFragmentManager.commit {
+                val args = Bundle()
+                args.putString(FILE_PATH_KEY, path)
+                add(R.id.fragment_container, FileExplorerFragment::class.java, args)
             }
-            fragments.last().tag == SETTINGS_FRAGMENT_TAG -> {
-                getCurrentStorageFromPref()
-                clearBackStackFragments()
-                supportFragmentManager.commit {
-                    val args = Bundle()
-                    args.putString(FILE_PATH_KEY, path)
-                    replace(R.id.fragment_container, FileExplorerFragment::class.java, args)
-                }
-            }
+        } else {
+            super.onBackPressed()
         }
-        super.onBackPressed()
     }
 
     private fun clearBackStackFragments() {
