@@ -1,5 +1,6 @@
 package com.chilik1020.hw6.ui.filelist
 
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
@@ -17,17 +18,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chilik1020.hw6.R
 import com.chilik1020.hw6.model.FileModel
 import com.chilik1020.hw6.model.FileType
+import com.chilik1020.hw6.model.StorageType
 import com.chilik1020.hw6.ui.fileeditor.FileEditorFragment
 import com.chilik1020.hw6.ui.settings.SettingsFragment
 import com.chilik1020.hw6.utils.*
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_file_explorer.*
 
 class FileExplorerFragment : Fragment() {
 
+    private var folderPath: String? = null
+    private lateinit var storageType: StorageType
+
     private var fileClicked: FileModel? = null
     private lateinit var dialogInputText: AppCompatEditText
-    private var folderPath: String? = null
 
     private var isMainFabExpanded = false
     private lateinit var animationFabOpen: Animation
@@ -41,7 +44,7 @@ class FileExplorerFragment : Fragment() {
                     val path = file.path
                     val args = Bundle()
                     args.putString(FILE_PATH_KEY, path)
-                    add<FileExplorerFragment>(R.id.fragment_container, null, args)
+                    add<FileExplorerFragment>(R.id.fragment_container, path, args)
                     addToBackStack(path)
                 }
             } else {
@@ -49,7 +52,7 @@ class FileExplorerFragment : Fragment() {
                     val path = file.path
                     val args = Bundle()
                     args.putString(FILE_PATH_KEY, path)
-                    add<FileEditorFragment>(R.id.fragment_container, null, args)
+                    add<FileEditorFragment>(R.id.fragment_container, path, args)
                     addToBackStack(path)
                 }
             }
@@ -118,10 +121,8 @@ class FileExplorerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        animationFabOpen = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_open_animation)
-        animationFabClose =
-            AnimationUtils.loadAnimation(requireContext(), R.anim.fab_close_animation)
         initViews()
+        getTypeOfStorageFromPref()
     }
 
     override fun onResume() {
@@ -145,19 +146,27 @@ class FileExplorerFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.menuItemSettings) {
             requireActivity().supportFragmentManager.commit {
-                add<SettingsFragment>(R.id.fragment_container, null, null)
-                addToBackStack(null)
+                add<SettingsFragment>(R.id.fragment_container, SETTINGS_FRAGMENT_TAG, null)
+                addToBackStack(SETTINGS_FRAGMENT_TAG)
             }
             return true
         }
         return super.onOptionsItemSelected(item)
     }
 
+    private fun getTypeOfStorageFromPref() {
+        storageType = StorageType.INTERNAL
+        val pref = requireActivity().getPreferences(Context.MODE_PRIVATE)
+        pref.getString(SELECTED_STORAGE_PREF, null)?.let {
+            if (StorageType.valueOf(it) == StorageType.EXTERNAL) {
+                storageType = StorageType.EXTERNAL
+            }
+        }
+        tvCurrentFolder.text = if (storageType == StorageType.INTERNAL) "Internal" else "External"
+    }
+
     private fun getFileModelListForAdapter() {
         folderPath?.let {
-            val toolbarName = "../${it.substringAfterLast("/")}"
-            tvCurrentFolder.text = toolbarName
-
             val fileModelsList = createFileModelsListFromDirPath(it)
             tvEmptyFolder.visibility = if (fileModelsList.isEmpty()) View.VISIBLE else View.GONE
             filesAdapter.setData(fileModelsList)
@@ -165,7 +174,11 @@ class FileExplorerFragment : Fragment() {
     }
 
     private fun initViews() {
-        if(activity is AppCompatActivity){
+        animationFabOpen = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_open_animation)
+        animationFabClose =
+            AnimationUtils.loadAnimation(requireContext(), R.anim.fab_close_animation)
+
+        if (activity is AppCompatActivity) {
             (activity as AppCompatActivity).setSupportActionBar(toolbar)
         }
 
