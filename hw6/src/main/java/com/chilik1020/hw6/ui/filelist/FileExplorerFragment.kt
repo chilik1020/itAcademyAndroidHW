@@ -3,7 +3,12 @@ package com.chilik1020.hw6.ui.filelist
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.OvershootInterpolator
@@ -21,8 +26,23 @@ import com.chilik1020.hw6.model.FileType
 import com.chilik1020.hw6.model.StorageType
 import com.chilik1020.hw6.ui.fileeditor.FileEditorFragment
 import com.chilik1020.hw6.ui.settings.SettingsFragment
-import com.chilik1020.hw6.utils.*
-import kotlinx.android.synthetic.main.fragment_file_explorer.*
+import com.chilik1020.hw6.utils.FILE_PATH_KEY
+import com.chilik1020.hw6.utils.SELECTED_STORAGE_PREF
+import com.chilik1020.hw6.utils.SETTINGS_FRAGMENT_TAG
+import com.chilik1020.hw6.utils.createFileModelsListFromDirPath
+import com.chilik1020.hw6.utils.createNewFile
+import com.chilik1020.hw6.utils.createNewFolder
+import com.chilik1020.hw6.utils.deleteFile
+import com.chilik1020.hw6.utils.showAlertDialog
+import kotlinx.android.synthetic.main.fragment_file_explorer.fabDirectoryCreate
+import kotlinx.android.synthetic.main.fragment_file_explorer.fabFileCreate
+import kotlinx.android.synthetic.main.fragment_file_explorer.llDirectoryCreate
+import kotlinx.android.synthetic.main.fragment_file_explorer.llFileCreate
+import kotlinx.android.synthetic.main.fragment_file_explorer.mainFab
+import kotlinx.android.synthetic.main.fragment_file_explorer.recyclerViewFiles
+import kotlinx.android.synthetic.main.fragment_file_explorer.toolbar
+import kotlinx.android.synthetic.main.fragment_file_explorer.tvCurrentFolder
+import kotlinx.android.synthetic.main.fragment_file_explorer.tvEmptyFolder
 
 class FileExplorerFragment : Fragment() {
 

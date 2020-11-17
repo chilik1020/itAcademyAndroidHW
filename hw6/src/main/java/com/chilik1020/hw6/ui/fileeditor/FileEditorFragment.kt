@@ -9,7 +9,8 @@ import com.chilik1020.hw6.R
 import com.chilik1020.hw6.utils.FILE_PATH_KEY
 import com.chilik1020.hw6.utils.readTextFromFile
 import com.chilik1020.hw6.utils.writeTexInFile
-import kotlinx.android.synthetic.main.fragment_file_editor.*
+import kotlinx.android.synthetic.main.fragment_file_editor.etTextFileContent
+import kotlinx.android.synthetic.main.fragment_file_editor.fabSaveFileChanges
 
 
 class FileEditorFragment : Fragment() {
