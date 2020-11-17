@@ -11,7 +11,7 @@ import com.chilik1020.hw6.ui.filelist.FileExplorerFragment
 import com.chilik1020.hw6.utils.FILE_PATH_KEY
 import com.chilik1020.hw6.utils.SELECTED_STORAGE_PREF
 import com.chilik1020.hw6.utils.SETTINGS_FRAGMENT_TAG
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.fragment_container
 
 class MainActivity : AppCompatActivity() {
 

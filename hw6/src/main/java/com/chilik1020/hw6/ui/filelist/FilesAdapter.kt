@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chilik1020.hw6.R
 import com.chilik1020.hw6.model.FileModel
 import com.chilik1020.hw6.model.FileType
-import kotlinx.android.synthetic.main.item_file.view.*
+import kotlinx.android.synthetic.main.item_file.view.tvFileName
+import kotlinx.android.synthetic.main.item_file.view.ivFileType
 
 class FilesAdapter(private val listener: OnFileItemClickListener?) :
     RecyclerView.Adapter<FilesAdapter.FileViewHolder>() {

@@ -253,8 +253,4 @@ class FileExplorerFragment : Fragment() {
             .setInterpolator(OvershootInterpolator(10.0F))
             .start()
     }
-
-    companion object {
-        const val LOG = "$BASE_LOG:ExplFrag"
-    }
 }
