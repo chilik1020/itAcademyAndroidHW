@@ -17,14 +17,15 @@ import com.chilik1020.hw41.util.CONTACT_ID
 import com.chilik1020.hw41.util.LOG_TAG_APP
 import com.chilik1020.hw41.views.add.ContactAddActivity
 import com.chilik1020.hw41.views.edit.ContactEditActivity
-import kotlinx.android.synthetic.main.activity_contacts_list.*
+import kotlinx.android.synthetic.main.activity_contacts_list.fab
+import kotlinx.android.synthetic.main.activity_contacts_list.recyclerViewContacts
+import kotlinx.android.synthetic.main.activity_contacts_list.searchView
+import kotlinx.android.synthetic.main.activity_contacts_list.toolbar
+import kotlinx.android.synthetic.main.activity_contacts_list.tvNoContacts
 import org.koin.android.ext.android.inject
 import java.util.*
 
 class ContactsListActivity : AppCompatActivity() {
-    companion object {
-        private const val LOG_TAG = "$LOG_TAG_APP:ContactsList"
-    }
 
     private val repository: ContactRepository by inject()
 
@@ -32,8 +33,8 @@ class ContactsListActivity : AppCompatActivity() {
         OnRecyclerViewItemClickListener { id ->
             val intent = Intent(
                 this@ContactsListActivity,
-                ContactEditActivity::class.java)
-                .apply {
+                ContactEditActivity::class.java
+            ).apply {
                 putExtra(CONTACT_ID, id)
             }
             startActivity(intent)
@@ -49,7 +50,6 @@ class ContactsListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_contacts_list)
 
         initViews()
-        setListeners()
     }
 
     override fun onResume() {
@@ -60,19 +60,16 @@ class ContactsListActivity : AppCompatActivity() {
     private fun initViews() {
         setSupportActionBar(toolbar)
 
-        val recyclerViewLayoutManager =
-            if (this.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
-                GridLayoutManager(this, 2)
-            else
-                LinearLayoutManager(this@ContactsListActivity, RecyclerView.VERTICAL, false)
-
         recyclerViewContacts.apply {
             adapter = contactAdapter
-            layoutManager = recyclerViewLayoutManager
+            layoutManager =
+                if (this.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    GridLayoutManager(this@ContactsListActivity, 2)
+                } else {
+                    LinearLayoutManager(this@ContactsListActivity, RecyclerView.VERTICAL, false)
+                }
         }
-    }
 
-    private fun setListeners() {
         fab.setOnClickListener {
             startActivity(Intent(this, ContactAddActivity::class.java))
         }
@@ -100,7 +97,7 @@ class ContactsListActivity : AppCompatActivity() {
             tvNoContacts.visibility = View.VISIBLE
             setAdapterData(emptyList())
         } else {
-            tvNoContacts.visibility = View.INVISIBLE
+            tvNoContacts.visibility = View.GONE
             updateFilteredData()
         }
     }
@@ -111,17 +108,22 @@ class ContactsListActivity : AppCompatActivity() {
     }
 
     private fun filterDataWithHint() {
-        dataFilteredWithHint = if (searchViewHint.isNotEmpty())
+        dataFilteredWithHint = if (searchViewHint.isNotEmpty()) {
             data.filter {
                 it.fullname
                     .toLowerCase(Locale.getDefault())
                     .contains(searchViewHint.toLowerCase(Locale.getDefault()))
             }
-        else
+        } else {
             data
+        }
     }
 
     private fun setAdapterData(list: List<Contact>) {
         contactAdapter.setData(list)
+    }
+
+    companion object {
+        private const val LOG_TAG = "$LOG_TAG_APP:ContactsList"
     }
 }

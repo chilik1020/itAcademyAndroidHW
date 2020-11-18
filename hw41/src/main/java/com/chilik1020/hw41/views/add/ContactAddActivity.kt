@@ -8,7 +8,11 @@ import com.chilik1020.hw41.R
 import com.chilik1020.hw41.model.ContactRepository
 import com.chilik1020.hw41.model.entities.Contact
 import com.chilik1020.hw41.model.entities.ContactType
-import kotlinx.android.synthetic.main.activity_contact_add.*
+import kotlinx.android.synthetic.main.activity_contact_add.etContact
+import kotlinx.android.synthetic.main.activity_contact_add.etName
+import kotlinx.android.synthetic.main.activity_contact_add.rbEmail
+import kotlinx.android.synthetic.main.activity_contact_add.rbPhoneNumber
+import kotlinx.android.synthetic.main.activity_contact_add.toolbar
 import org.koin.android.ext.android.inject
 import java.util.*
 
@@ -21,7 +25,6 @@ class ContactAddActivity : AppCompatActivity() {
         setContentView(R.layout.activity_contact_add)
 
         initViews()
-        setListeners()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -45,17 +48,18 @@ class ContactAddActivity : AppCompatActivity() {
             repository.addContact(contact)
             finish()
             true
-        } else
+        } else {
             super.onOptionsItemSelected(item)
+        }
     }
 
     private fun initViews() {
         setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-    }
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
+        }
 
-    private fun setListeners() {
         toolbar.setNavigationOnClickListener { finish() }
         rbPhoneNumber.setOnClickListener {
             etContact.hint = getString(R.string.act_add_et_phone_number)
