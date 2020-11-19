@@ -10,11 +10,9 @@ fun getRandomColor(): Int {
 }
 
 fun checkIfPointInCircle(
-    xP: Float,
-    yP: Float,
-    xC: Float,
-    yC: Float,
+    xPoint: Float,
+    yPoint: Float,
+    xCenter: Float,
+    yCenter: Float,
     radius: Float
-): Boolean {
-    return radius > sqrt((xP - xC) * (xP - xC) + (yP - yC) * (yP - yC))
-}
+) = radius > sqrt((xPoint - xCenter) * (xPoint - xCenter) + (yPoint - yCenter) * (yPoint - yCenter))

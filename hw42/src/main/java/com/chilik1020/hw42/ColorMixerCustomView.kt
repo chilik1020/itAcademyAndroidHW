@@ -16,17 +16,12 @@ class ColorMixerCustomView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
-    companion object {
-        const val RADIUS_OUTER = 400.0F
-        const val RADIUS_INNER = 100.0F
-    }
-
     private var centerX: Int = 0
     private var centerY: Int = 0
 
     private val rectOuter: RectF = RectF()
     private val paint: Paint
-    private lateinit var listener: ColorMixerTouchListener
+    private var listener: ColorMixerTouchListener? = null
 
     private var colorArc0: Int = 0
     private var colorArc1: Int = 0
@@ -97,7 +92,7 @@ class ColorMixerCustomView @JvmOverloads constructor(
     private fun checkWhereWasEventTouch(x: Float, y: Float) {
         if (checkIfPointInCircle(x, y, centerX.toFloat(), centerY.toFloat(), RADIUS_INNER)) {
             shuffleAllColor()
-            listener.onTouchColorMixer(x, y, null)
+            listener?.onTouchColorMixer(x, y, null)
             invalidate()
         } else if (checkIfPointInCircle(x, y, centerX.toFloat(), centerY.toFloat(), RADIUS_OUTER)) {
             var touchedColor: Int = 0
@@ -117,8 +112,13 @@ class ColorMixerCustomView @JvmOverloads constructor(
                 touchedColor = colorArc0
                 colorArc0 = getRandomColor()
             }
-            listener.onTouchColorMixer(x, y, touchedColor)
+            listener?.onTouchColorMixer(x, y, touchedColor)
             invalidate()
         }
+    }
+
+    companion object {
+        const val RADIUS_OUTER = 400.0F
+        const val RADIUS_INNER = 100.0F
     }
 }
