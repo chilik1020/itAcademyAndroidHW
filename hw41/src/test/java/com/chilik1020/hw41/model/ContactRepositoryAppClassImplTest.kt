@@ -23,16 +23,16 @@ class ContactRepositoryAppClassImplTest {
             data.add(
                 Contact(
                     UUID.randomUUID(),
-                    ContactType.PhoneNumber,
+                    ContactType.PHONENUMBER,
                     "user$i",
-                    "phone$i",
-                    "email$i"
+                    "contactInfo$i"
                 )
             )
         }
         val list = mutableListOf<Contact>()
         list.addAll(data)
-        repository = ContactRepositoryAppClassImpl(list)
+        SimpleDataStorage.contacts = list
+        repository = ContactRepositoryAppClassImpl(SimpleDataStorage)
     }
 
     @After
@@ -54,7 +54,7 @@ class ContactRepositoryAppClassImplTest {
     @Test
     fun addContact() {
         val newUser =
-            Contact(UUID.randomUUID(), ContactType.PhoneNumber, "user6", "phone6", "email6")
+            Contact(UUID.randomUUID(), ContactType.PHONENUMBER, "user6", "contactInfo6")
         repository.addContact(newUser)
         Assert.assertEquals(DATA_SIZE + 1, repository.getAllContacts().size)
     }
@@ -63,12 +63,10 @@ class ContactRepositoryAppClassImplTest {
     fun editContact() {
         val firstUser = data.first()
         firstUser.fullname = "newFullname"
-        firstUser.number = "newPhoneNumber"
-        firstUser.email = "newEmail"
+        firstUser.contactInfo = "newPhoneNumber"
         repository.editContact(firstUser)
         Assert.assertEquals("newFullname", repository.getById(firstUser.id).fullname)
-        Assert.assertEquals("newPhoneNumber", repository.getById(firstUser.id).number)
-        Assert.assertEquals("newEmail", repository.getById(firstUser.id).email)
+        Assert.assertEquals("newPhoneNumber", repository.getById(firstUser.id).contactInfo)
     }
 
     @Test

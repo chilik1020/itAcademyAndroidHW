@@ -37,10 +37,9 @@ class ContactEditActivity : AppCompatActivity() {
 
         toolbar.setNavigationOnClickListener {
             contact?.let {
-                it.fullname = etName.text.toString()
-                when (it.type) {
-                    ContactType.PhoneNumber -> it.number = etContact.text.toString()
-                    ContactType.Email -> it.email = etContact.text.toString()
+                it.apply {
+                    fullname = etName.text.toString()
+                    contactInfo = etContact.text.toString()
                 }
                 repository.editContact(it)
             }
@@ -60,11 +59,11 @@ class ContactEditActivity : AppCompatActivity() {
             etName.setText(it.fullname, TextView.BufferType.EDITABLE)
 
             when (it.type) {
-                ContactType.PhoneNumber -> {
-                    setEtContactAttr(getString(R.string.act_edit_et_phone_number), it.number)
+                ContactType.PHONENUMBER -> {
+                    setEtContactAttr(getString(R.string.act_edit_et_phone_number), it.contactInfo)
                 }
-                ContactType.Email -> {
-                    setEtContactAttr(getString(R.string.act_edit_et_email), it.email)
+                ContactType.EMAIL -> {
+                    setEtContactAttr(getString(R.string.act_edit_et_email), it.contactInfo)
                 }
             }
         }

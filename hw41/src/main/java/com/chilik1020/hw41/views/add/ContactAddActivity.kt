@@ -34,17 +34,14 @@ class ContactAddActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == R.id.miConfirmButton) {
-            var contactType: ContactType = ContactType.PhoneNumber
+            var contactType = ContactType.PHONENUMBER
             if (rbEmail.isChecked) {
-                contactType = ContactType.Email
+                contactType = ContactType.EMAIL
             }
             val id = UUID.randomUUID()
             val name = etName.text.toString()
-            val contactNumber = etContact.text.toString()
-            val contact = when (contactType) {
-                ContactType.PhoneNumber -> Contact(id, contactType, name, number = contactNumber)
-                ContactType.Email -> Contact(id, contactType, name, email = contactNumber)
-            }
+            val contactInfo = etContact.text.toString()
+            val contact = Contact(id, contactType, name, contactInfo)
             repository.addContact(contact)
             finish()
             true

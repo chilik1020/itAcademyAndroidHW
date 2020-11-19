@@ -20,8 +20,7 @@ class ContactRepositoryAppClassImpl(private val storage: SimpleDataStorage) : Co
     override fun editContact(contact: Contact) {
         storage.contacts.find { it.id == contact.id }?.apply {
             fullname = contact.fullname
-            number = contact.number
-            email = contact.email
+            contactInfo = contact.contactInfo
         }
     }
 

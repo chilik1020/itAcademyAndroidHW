@@ -46,16 +46,15 @@ class ContactsRecyclerViewAdapter(private val listener: OnRecyclerViewItemClickL
         fun bind(contact: Contact) {
             this.contact = contact
             when (contact.type) {
-                ContactType.PhoneNumber -> {
+                ContactType.PHONENUMBER -> {
                     item.ivContactType.setImageResource(R.drawable.ic_contact_phone)
-                    item.tvPhonenumberOrEmail.text = contact.number
                 }
-                ContactType.Email -> {
+                ContactType.EMAIL -> {
                     item.ivContactType.setImageResource(R.drawable.ic_contact_email)
-                    item.tvPhonenumberOrEmail.text = contact.email
                 }
             }
             item.tvFullname.text = contact.fullname
+            item.tvPhonenumberOrEmail.text = contact.contactInfo
         }
     }
 }

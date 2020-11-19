@@ -5,47 +5,47 @@ import com.chilik1020.hw41.model.entities.ContactType
 import java.util.*
 
 object SimpleDataStorage {
-    val contacts = mutableListOf<Contact>()
+    var contacts = mutableListOf<Contact>()
 
     init {
         contacts.add(
             Contact(
                 UUID.randomUUID(),
-                ContactType.PhoneNumber,
+                ContactType.PHONENUMBER,
                 "John Connor",
-                number = "(781)373-5577"
+                contactInfo = "(781)373-5577"
             )
         )
         contacts.add(
             Contact(
                 UUID.randomUUID(),
-                ContactType.PhoneNumber,
+                ContactType.PHONENUMBER,
                 "Sara Connor",
-                number = "(781)373-5577"
+                contactInfo = "(781)373-5577"
             )
         )
         contacts.add(
             Contact(
                 UUID.randomUUID(),
-                ContactType.Email,
+                ContactType.EMAIL,
                 "Eric Cartman",
-                email = "eric@southpark.com"
+                contactInfo = "eric@southpark.com"
             )
         )
         contacts.add(
             Contact(
                 UUID.randomUUID(),
-                ContactType.PhoneNumber,
+                ContactType.PHONENUMBER,
                 "Kyle Broflovski",
-                number = "(720)351-5555"
+                contactInfo = "(720)351-5555"
             )
         )
         contacts.add(
             Contact(
                 UUID.randomUUID(),
-                ContactType.Email,
+                ContactType.EMAIL,
                 "Kenny McCormick",
-                email = "misterion@southpark.com"
+                contactInfo = "misterion@southpark.com"
             )
         )
     }
