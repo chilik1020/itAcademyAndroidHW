@@ -10,7 +10,7 @@ object SimpleDataStorage {
     init {
         contacts.add(
             Contact(
-                UUID.randomUUID(),
+                UUID.randomUUID().toString(),
                 ContactType.PHONENUMBER,
                 "John Connor",
                 contactInfo = "(781)373-5577"
@@ -18,7 +18,7 @@ object SimpleDataStorage {
         )
         contacts.add(
             Contact(
-                UUID.randomUUID(),
+                UUID.randomUUID().toString(),
                 ContactType.PHONENUMBER,
                 "Sara Connor",
                 contactInfo = "(781)373-5577"
@@ -26,7 +26,7 @@ object SimpleDataStorage {
         )
         contacts.add(
             Contact(
-                UUID.randomUUID(),
+                UUID.randomUUID().toString(),
                 ContactType.EMAIL,
                 "Eric Cartman",
                 contactInfo = "eric@southpark.com"
@@ -34,7 +34,7 @@ object SimpleDataStorage {
         )
         contacts.add(
             Contact(
-                UUID.randomUUID(),
+                UUID.randomUUID().toString(),
                 ContactType.PHONENUMBER,
                 "Kyle Broflovski",
                 contactInfo = "(720)351-5555"
@@ -42,7 +42,7 @@ object SimpleDataStorage {
         )
         contacts.add(
             Contact(
-                UUID.randomUUID(),
+                UUID.randomUUID().toString(),
                 ContactType.EMAIL,
                 "Kenny McCormick",
                 contactInfo = "misterion@southpark.com"

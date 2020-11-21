@@ -9,7 +9,7 @@ class ContactRepositoryAppClassImpl(private val storage: SimpleDataStorage) : Co
         return storage.contacts
     }
 
-    override fun getById(id: UUID): Contact {
+    override fun getById(id: String): Contact {
         return storage.contacts.first { it.id == id }
     }
 
@@ -24,7 +24,7 @@ class ContactRepositoryAppClassImpl(private val storage: SimpleDataStorage) : Co
         }
     }
 
-    override fun removeContact(id: UUID) {
+    override fun removeContact(id: String) {
         val contact = storage.contacts.find { it.id == id }
         contact?.let { storage.contacts.remove(it) }
     }

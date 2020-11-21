@@ -38,7 +38,7 @@ class ContactAddActivity : AppCompatActivity() {
             if (rbEmail.isChecked) {
                 contactType = ContactType.EMAIL
             }
-            val id = UUID.randomUUID()
+            val id = UUID.randomUUID().toString()
             val name = etName.text.toString()
             val contactInfo = etContact.text.toString()
             val contact = Contact(id, contactType, name, contactInfo)

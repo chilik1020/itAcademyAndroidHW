@@ -13,7 +13,6 @@ import kotlinx.android.synthetic.main.activity_contact_edit.etContact
 import kotlinx.android.synthetic.main.activity_contact_edit.etName
 import kotlinx.android.synthetic.main.activity_contact_edit.toolbar
 import org.koin.android.ext.android.inject
-import java.util.*
 
 class ContactEditActivity : AppCompatActivity() {
 
@@ -53,7 +52,7 @@ class ContactEditActivity : AppCompatActivity() {
     }
 
     private fun getIntentData() {
-        contact = intent?.let { repository.getById(it.getSerializableExtra(CONTACT_ID) as UUID) }
+        contact = intent?.let { repository.getById(it.getSerializableExtra(CONTACT_ID) as String) }
 
         contact?.let {
             etName.setText(it.fullname, TextView.BufferType.EDITABLE)

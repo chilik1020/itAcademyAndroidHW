@@ -5,8 +5,8 @@ import java.util.*
 
 interface ContactRepository {
     fun getAllContacts(): List<Contact>
-    fun getById(id: UUID): Contact
+    fun getById(id: String): Contact
     fun addContact(contact: Contact)
     fun editContact(contact: Contact)
-    fun removeContact(id: UUID)
+    fun removeContact(id: String)
 }
