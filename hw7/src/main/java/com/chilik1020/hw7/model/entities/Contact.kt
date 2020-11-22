@@ -4,7 +4,6 @@ import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
-import androidx.room.TypeConverters
 import java.util.*
 
 const val TYPE_EMAIL = "email"

@@ -1,7 +1,6 @@
 package com.chilik1020.hw7.model
 
 import com.chilik1020.hw7.model.entities.Contact
-import java.util.*
 
 class ContactRepositoryAppClassImpl(private val storage: SimpleDataStorage) : ContactRepository {
 
