@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ColorMixerCustomView">
+        <attr name="cmcv_centerColor" format="color"/>
+    </declare-styleable>
+</resources>
