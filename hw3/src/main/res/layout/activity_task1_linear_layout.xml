@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            style="@style/Task1ImageView"
+            android:src="@drawable/ic_task1_folder" />
+
+        <TextView
+            style="@style/Widget.AppCompat.TextView.Task1TextView"
+            android:text="@string/task1_attractions" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            style="@style/Task1ImageView"
+            android:src="@drawable/ic_task1_dining" />
+
+        <TextView
+            style="@style/Widget.AppCompat.TextView.Task1TextView"
+            android:text="@string/task1_dining" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            style="@style/Task1ImageView"
+            android:src="@drawable/ic_task1_education" />
+
+        <TextView
+            style="@style/Widget.AppCompat.TextView.Task1TextView"
+            android:text="@string/task1_education" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            style="@style/Task1ImageView"
+            android:src="@drawable/ic_task1_family" />
+
+        <TextView
+            style="@style/Widget.AppCompat.TextView.Task1TextView"
+            android:text="@string/task1_family" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            style="@style/Task1ImageView"
+            android:src="@drawable/ic_task1_health" />
+
+        <TextView
+            style="@style/Widget.AppCompat.TextView.Task1TextView"
+            android:text="@string/task1_health" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            style="@style/Task1ImageView"
+            android:src="@drawable/ic_task1_office" />
+
+        <TextView
+            style="@style/Widget.AppCompat.TextView.Task1TextView"
+            android:text="@string/task1_office" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            style="@style/Task1ImageView"
+            android:src="@drawable/ic_task1_promotions" />
+
+        <TextView
+            style="@style/Widget.AppCompat.TextView.Task1TextView"
+            android:text="@string/task1_promotions" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            style="@style/Task1ImageView"
+            android:src="@drawable/ic_task1_radio" />
+
+        <TextView
+            style="@style/Widget.AppCompat.TextView.Task1TextView"
+            android:text="@string/task1_radio" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            style="@style/Task1ImageView"
+            android:src="@drawable/ic_task1_recipes" />
+
+        <TextView
+            style="@style/Widget.AppCompat.TextView.Task1TextView"
+            android:text="@string/task1_recipes" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            style="@style/Task1ImageView"
+            android:src="@drawable/ic_task1_sports" />
+
+        <TextView
+            style="@style/Widget.AppCompat.TextView.Task1TextView"
+            android:text="@string/task1_sports" />
+    </LinearLayout>
+</LinearLayout>
