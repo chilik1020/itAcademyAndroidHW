@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">ContactsApp</string>
+
+    <string name="act_list_no_contacts">No contacts. Please add</string>
+    <string name="act_list_search">Search contacts</string>
+
+    <string name="act_add_toolbar_title">Add contact</string>
+    <string name="act_add_rb_phone_number">Phone number</string>
+    <string name="act_add_rb_email">Email</string>
+    <string name="act_add_et_name">Name</string>
+    <string name="act_add_et_phone_number">Phone number</string>
+    <string name="act_add_et_email">Email</string>
+
+    <string name="act_edit_toolbar_title">Edit contact</string>
+    <string name="act_edit_et_name">Name</string>
+    <string name="act_edit_et_phone_number">Phone number</string>
+    <string name="act_edit_et_email">Email</string>
+    <string name="act_edit_btn_remove">Remove</string>
+
+</resources>

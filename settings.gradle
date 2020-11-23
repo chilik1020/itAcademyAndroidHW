@@ -2,5 +2,8 @@ include ':hw7'
 include ':hw1'
 include ':hw2'
 include ':hw3'
+include ':hw41'
+include ':hw42'
+include ':hw6'
 include ':app'
 rootProject.name = "ItAcademyHW"

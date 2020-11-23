@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">TextEditor</string>
+    <string name="empty_folder">Empty folder</string>
+    <string name="add_new_file">Add new file</string>
+    <string name="directory">Directory</string>
+    <string name="file">Text file</string>
+    <string name="menu_delete">Delete</string>
+
+    <string name="message_delete_file">Remove file?</string>
+    <string name="message_delete_directory">Remove directory?</string>
+    <string name="message_type_directory_name">Type directory name</string>
+    <string name="message_type_file_name">Type file name</string>
+    <string name="button_yes">Yes</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="save_changes">Save changes</string>
+    <string name="settings">Settings</string>
+    <string name="storage">Storage</string>
+    <string name="internal">Internal</string>
+    <string name="external">External</string>
+</resources>
