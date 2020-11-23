@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ContactsDbApp</string>
+    <string name="app_name">ContactsDbMtApp</string>
 
     <string name="act_list_no_contacts">No contacts. Please add</string>
     <string name="act_list_search">Search contacts</string>
