@@ -1,6 +1,8 @@
 package com.chilik1020.hw8.views.edit
 
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.chilik1020.hw8.R
@@ -8,14 +10,21 @@ import com.chilik1020.hw8.model.ContactRepository
 import com.chilik1020.hw8.model.entities.Contact
 import com.chilik1020.hw8.model.entities.ContactType
 import com.chilik1020.hw8.util.CONTACT_ID
+import com.chilik1020.hw8.util.LOG_TAG_APP
+import com.chilik1020.hw8.util.REPOSITORY_TYPE_KEY
+import com.chilik1020.hw8.util.TYPE_COMPLETABLE_FUTURE
+import com.chilik1020.hw8.util.TYPE_RX_JAVA
 import kotlinx.android.synthetic.main.activity_contact_edit.btnRemoveContact
 import kotlinx.android.synthetic.main.activity_contact_edit.etContact
 import kotlinx.android.synthetic.main.activity_contact_edit.etName
 import kotlinx.android.synthetic.main.activity_contact_edit.toolbar
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ContactEditActivity : AppCompatActivity() {
 
+    private val pref: SharedPreferences by inject()
+    private val viewModel: EditContactViewModel by viewModel()
     private val repository: ContactRepository by inject()
     private var contact: Contact? = null
 
@@ -28,6 +37,7 @@ class ContactEditActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
+        pref.edit().putString(REPOSITORY_TYPE_KEY, TYPE_RX_JAVA).apply()
         setSupportActionBar(toolbar)
         supportActionBar?.apply {
             setDisplayShowHomeEnabled(true)
@@ -45,6 +55,11 @@ class ContactEditActivity : AppCompatActivity() {
             finish()
         }
 
+        viewModel.contactLiveData.observe(this){
+            Log.d(LOG_TAG_APP, "Contact = $contact")
+
+        }
+
         btnRemoveContact.setOnClickListener {
             contact?.let { c -> repository.removeContact(c.id) }
             finish()
@@ -52,7 +67,7 @@ class ContactEditActivity : AppCompatActivity() {
     }
 
     private fun getIntentData() {
-        contact = intent?.let { repository.getById(it.getSerializableExtra(CONTACT_ID) as String) }
+        contact = intent?.let { viewModel.getContactById(it.getSerializableExtra(CONTACT_ID) as String) }
 
         contact?.let {
             etName.setText(it.fullname, TextView.BufferType.EDITABLE)
