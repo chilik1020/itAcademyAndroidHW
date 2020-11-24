@@ -12,10 +12,12 @@ class ContactEditViewModel(contactDao: ContactDao, pref: SharedPreferences) :
     BaseViewModel(contactDao, pref) {
 
     private val contactLiveDataMutable = MutableLiveData<Contact>()
-    val contact: LiveData<Contact> = contactLiveDataMutable
+    val contact: LiveData<Contact>
+        get() = contactLiveDataMutable
 
     private val hintTextContactInfoMutable = MutableLiveData<String>()
-    val hintTextContactInfo: LiveData<String> = hintTextContactInfoMutable
+    val hintTextContactInfo: LiveData<String>
+        get() = hintTextContactInfoMutable
 
     fun getContactById(id: String) {
         contactLiveDataMutable.value = repository.getById(id)

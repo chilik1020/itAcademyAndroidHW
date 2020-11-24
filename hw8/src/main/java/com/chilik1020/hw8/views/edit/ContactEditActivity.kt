@@ -17,11 +17,15 @@ class ContactEditActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityContactEditBinding =
-            DataBindingUtil.setContentView(this, R.layout.activity_contact_edit)
-        binding.apply {
-            viewModel = viewModelEdit
-        }
+
+        DataBindingUtil.setContentView<ActivityContactEditBinding>(
+            this,
+            R.layout.activity_contact_edit
+        )
+            .run {
+                lifecycleOwner = this@ContactEditActivity
+                viewModel = viewModelEdit
+            }
 
         initViews()
         getIntentData()
