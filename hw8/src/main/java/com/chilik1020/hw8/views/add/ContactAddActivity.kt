@@ -1,7 +1,6 @@
 package com.chilik1020.hw8.views.add
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +18,8 @@ import java.util.*
 
 class ContactAddActivity : AppCompatActivity() {
 
-    private val repository: ContactRepository by inject()
+    private val viewModel: ContactAddViewModel by inject()
+//    private val repository: ContactRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +43,7 @@ class ContactAddActivity : AppCompatActivity() {
             val name = etName.text.toString()
             val contactInfo = etContact.text.toString()
             val contact = Contact(id, contactType, name, contactInfo)
-            repository.addContact(contact)
+            viewModel.addContact(contact)
             finish()
             true
         } else {

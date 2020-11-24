@@ -27,7 +27,8 @@ import java.util.*
 
 class ContactsListActivity : AppCompatActivity() {
 
-    private val repository: ContactRepository by inject()
+    private val viewModel: ContactsListViewModel by inject()
+//    private val repository: ContactRepository by inject()
 
     private val recyclerViewListener: OnRecyclerViewItemClickListener =
         OnRecyclerViewItemClickListener { id ->
@@ -92,7 +93,7 @@ class ContactsListActivity : AppCompatActivity() {
     }
 
     private fun updateDataFromStorage() {
-        data = repository.getAllContacts()
+        data = viewModel.fetchContacts()
         if (data.isEmpty()) {
             tvNoContacts.visibility = View.VISIBLE
             setAdapterData(emptyList())

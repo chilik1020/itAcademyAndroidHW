@@ -22,7 +22,6 @@ abstract class BaseViewModel(
 
     init {
         val type = pref.getString(REPOSITORY_TYPE_KEY, TYPE_COMPLETABLE_FUTURE)
-        Log.d(LOG_TAG_APP, "Repository type: ${type.toString()}")
         repository = when (type) {
             TYPE_RX_JAVA -> ContactRepositoryRxJavaImpl(contactDao)
             TYPE_EXECUTOR_HANDLER -> ContactRepositoryHandlerImpl(contactDao)

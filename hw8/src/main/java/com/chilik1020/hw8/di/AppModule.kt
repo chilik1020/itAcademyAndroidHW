@@ -6,17 +6,23 @@ import android.content.SharedPreferences
 import androidx.room.Room
 import com.chilik1020.hw8.model.AppDatabase
 import com.chilik1020.hw8.model.ContactRepository
-import com.chilik1020.hw8.model.ContactRepositoryCompletableFutureImpl
 import com.chilik1020.hw8.model.ContactRepositoryRxJavaImpl
 import com.chilik1020.hw8.util.DATABASE_NAME
 import com.chilik1020.hw8.util.SHARED_PREF_NAME
-import com.chilik1020.hw8.views.edit.EditContactViewModel
+import com.chilik1020.hw8.views.add.ContactAddViewModel
+import com.chilik1020.hw8.views.edit.ContactEditViewModel
+import com.chilik1020.hw8.views.list.ContactsListViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
-    single<SharedPreferences>{androidApplication().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)}
+    single<SharedPreferences> {
+        androidApplication().getSharedPreferences(
+            SHARED_PREF_NAME,
+            Context.MODE_PRIVATE
+        )
+    }
 }
 
 val roomModule = module {
@@ -31,11 +37,8 @@ val roomModule = module {
     single { provideContactsDao(get()) }
 }
 
-val repositoryModule = module {
-//    factory<ContactRepository> { ContactRepositoryCompletableFutureImpl(contactDao = get()) }
-    factory<ContactRepository> { ContactRepositoryRxJavaImpl(contactDao = get()) }
-}
-
 val viewModelModule = module {
-    viewModel {EditContactViewModel(contactDao = get(), pref = get())}
+    viewModel { ContactsListViewModel(contactDao = get(), pref = get()) }
+    viewModel { ContactAddViewModel(contactDao = get(), pref = get()) }
+    viewModel { ContactEditViewModel(contactDao = get(), pref = get()) }
 }

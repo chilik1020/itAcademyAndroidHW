@@ -1,43 +1,33 @@
 package com.chilik1020.hw8.views.edit
 
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.chilik1020.hw8.R
-import com.chilik1020.hw8.model.ContactRepository
-import com.chilik1020.hw8.model.entities.Contact
-import com.chilik1020.hw8.model.entities.ContactType
+import com.chilik1020.hw8.databinding.ActivityContactEditBinding
 import com.chilik1020.hw8.util.CONTACT_ID
-import com.chilik1020.hw8.util.LOG_TAG_APP
-import com.chilik1020.hw8.util.REPOSITORY_TYPE_KEY
-import com.chilik1020.hw8.util.TYPE_COMPLETABLE_FUTURE
-import com.chilik1020.hw8.util.TYPE_RX_JAVA
 import kotlinx.android.synthetic.main.activity_contact_edit.btnRemoveContact
-import kotlinx.android.synthetic.main.activity_contact_edit.etContact
-import kotlinx.android.synthetic.main.activity_contact_edit.etName
 import kotlinx.android.synthetic.main.activity_contact_edit.toolbar
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ContactEditActivity : AppCompatActivity() {
 
-    private val pref: SharedPreferences by inject()
-    private val viewModel: EditContactViewModel by viewModel()
-    private val repository: ContactRepository by inject()
-    private var contact: Contact? = null
+    private val viewModelEdit: ContactEditViewModel by viewModel()
+    private var contactId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_contact_edit)
+        val binding: ActivityContactEditBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_contact_edit)
+        binding.apply {
+            viewModel = viewModelEdit
+        }
 
         initViews()
         getIntentData()
     }
 
     private fun initViews() {
-        pref.edit().putString(REPOSITORY_TYPE_KEY, TYPE_RX_JAVA).apply()
         setSupportActionBar(toolbar)
         supportActionBar?.apply {
             setDisplayShowHomeEnabled(true)
@@ -45,49 +35,18 @@ class ContactEditActivity : AppCompatActivity() {
         }
 
         toolbar.setNavigationOnClickListener {
-            contact?.let {
-                it.apply {
-                    fullname = etName.text.toString()
-                    contactInfo = etContact.text.toString()
-                }
-                repository.editContact(it)
-            }
+            viewModelEdit.editContact()
             finish()
         }
 
-        viewModel.contactLiveData.observe(this){
-            Log.d(LOG_TAG_APP, "Contact = $contact")
-
-        }
-
         btnRemoveContact.setOnClickListener {
-            contact?.let { c -> repository.removeContact(c.id) }
+            viewModelEdit.deleteContact()
             finish()
         }
     }
 
     private fun getIntentData() {
-        contact = intent?.let { viewModel.getContactById(it.getSerializableExtra(CONTACT_ID) as String) }
-
-        contact?.let {
-            etName.setText(it.fullname, TextView.BufferType.EDITABLE)
-
-            when (it.type) {
-                ContactType.PHONENUMBER -> {
-                    setEtContactAttr(getString(R.string.act_edit_et_phone_number), it.contactInfo)
-                }
-                ContactType.EMAIL -> {
-                    setEtContactAttr(getString(R.string.act_edit_et_email), it.contactInfo)
-                }
-            }
-        }
-    }
-
-    private fun setEtContactAttr(hint: String, text: String) {
-        etContact.hint = hint
-        etContact.setText(
-            text,
-            TextView.BufferType.EDITABLE
-        )
+        contactId = intent?.let { it.getSerializableExtra(CONTACT_ID) as String }
+        contactId?.let { viewModelEdit.getContactById(it) }
     }
 }
