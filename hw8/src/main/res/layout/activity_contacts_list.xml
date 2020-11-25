@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="adapter"
             type="com.chilik1020.hw8.views.list.ContactsRecyclerViewAdapter" />
+
         <variable
             name="viewModel"
             type="com.chilik1020.hw8.views.list.ContactsListViewModel" />
@@ -28,7 +30,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/color_toolbar"
-                android:padding="@dimen/default_padding"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
@@ -37,7 +38,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginHorizontal="@dimen/default_margin"
+                    android:layout_marginHorizontal="@dimen/default_padding"
+                    android:layout_marginVertical="@dimen/default_padding"
                     android:background="@color/color_white_bg"
                     android:iconifiedByDefault="false"
                     android:queryHint="@string/act_list_search"
@@ -48,9 +50,9 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewContacts"
+            setAdapter="@{adapter}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            setAdapter="@{adapter}"
             android:clickable="true"
             android:focusable="true"
             android:paddingHorizontal="@dimen/default_margin"
