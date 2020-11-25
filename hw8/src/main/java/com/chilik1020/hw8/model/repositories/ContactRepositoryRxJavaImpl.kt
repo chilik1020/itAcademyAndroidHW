@@ -17,12 +17,8 @@ class ContactRepositoryRxJavaImpl(private val contactDao: ContactDao) : ContactR
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                {
-                    listener.onSuccess(it)
-                },
-                {
-                    listener.onError()
-                }
+                { listener.onSuccess(it) },
+                { listener.onError() }
             )
     }
 
@@ -44,7 +40,6 @@ class ContactRepositoryRxJavaImpl(private val contactDao: ContactDao) : ContactR
         Log.d(LOG_TAG_APP, "RxJava: addContact")
         val subscribe = contactDao.addRx(contact)
             .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
             .subscribe {}
     }
 
