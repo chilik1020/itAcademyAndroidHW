@@ -7,9 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.chilik1020.hw8.R
 import com.chilik1020.hw8.databinding.ActivityContactAddBinding
-import kotlinx.android.synthetic.main.activity_contact_add.etContact
-import kotlinx.android.synthetic.main.activity_contact_add.rbEmail
-import kotlinx.android.synthetic.main.activity_contact_add.rbPhoneNumber
 import kotlinx.android.synthetic.main.activity_contact_add.toolbar
 import org.koin.android.ext.android.inject
 
@@ -53,9 +50,5 @@ class ContactAddActivity : AppCompatActivity() {
         }
 
         toolbar.setNavigationOnClickListener { finish() }
-        rbPhoneNumber.setOnClickListener {
-            etContact.hint = getString(R.string.act_add_et_phone_number)
-        }
-        rbEmail.setOnClickListener { etContact.hint = getString(R.string.act_add_et_email) }
     }
 }

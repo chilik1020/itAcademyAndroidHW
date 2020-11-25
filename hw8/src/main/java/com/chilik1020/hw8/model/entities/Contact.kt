@@ -6,15 +6,15 @@ import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
 import java.util.*
 
-const val TYPE_EMAIL = "email"
-const val TYPE_PHONENUMBER = "phonenumber"
+const val TYPE_EMAIL = "Email"
+const val TYPE_PHONENUMBER = "Phonenumber"
 
 @Entity(tableName = "contacts")
 data class Contact(
     @NonNull
     @PrimaryKey
     val id: String = UUID.randomUUID().toString(),
-    val type: ContactType,
+    var type: ContactType,
     var fullname: String,
     var contactInfo: String = "not defined"
 )
