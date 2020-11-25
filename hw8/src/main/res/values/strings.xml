@@ -16,5 +16,8 @@
     <string name="act_edit_et_phone_number">Phone number</string>
     <string name="act_edit_et_email">Email</string>
     <string name="act_edit_btn_remove">Remove</string>
+    <string name="handler_thread">HandlerThread</string>
+    <string name="completable_future">Completable future</string>
+    <string name="rxjava">RxJava</string>
 
 </resources>
