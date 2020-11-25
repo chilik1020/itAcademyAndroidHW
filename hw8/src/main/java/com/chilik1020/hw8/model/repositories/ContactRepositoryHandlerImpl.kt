@@ -1,10 +1,8 @@
-package com.chilik1020.hw8.model
+package com.chilik1020.hw8.model.repositories
 
-import android.os.Handler
-import android.os.HandlerThread
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import com.chilik1020.hw8.model.local.ContactDao
+import com.chilik1020.hw8.model.FetchContactsInteractor
 import com.chilik1020.hw8.model.entities.Contact
 import com.chilik1020.hw8.util.LOG_TAG_APP
 import java.util.concurrent.Executors
@@ -13,7 +11,7 @@ class ContactRepositoryHandlerImpl(private  val contactDao: ContactDao) : Contac
 
     private val executor = Executors.newSingleThreadExecutor()
 
-    override fun getAllContacts(): List<Contact> {
+    override fun getAllContacts(listener: FetchContactsInteractor.OnFetchContactsListener) {
         Log.d(LOG_TAG_APP, "Handler: getAllContacts")
         TODO("Not yet implemented")
     }

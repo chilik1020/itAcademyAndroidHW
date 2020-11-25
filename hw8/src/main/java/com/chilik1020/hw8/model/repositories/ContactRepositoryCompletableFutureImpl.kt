@@ -1,6 +1,8 @@
-package com.chilik1020.hw8.model
+package com.chilik1020.hw8.model.repositories
 
 import android.util.Log
+import com.chilik1020.hw8.model.local.ContactDao
+import com.chilik1020.hw8.model.FetchContactsInteractor
 import com.chilik1020.hw8.model.entities.Contact
 import com.chilik1020.hw8.util.LOG_TAG_APP
 import java.util.concurrent.CompletableFuture
@@ -12,11 +14,11 @@ class ContactRepositoryCompletableFutureImpl(private val contactDao: ContactDao)
 
     private val executor = Executors.newSingleThreadExecutor()
 
-    override fun getAllContacts(): List<Contact> {
+    override fun getAllContacts(listener: FetchContactsInteractor.OnFetchContactsListener) {
         Log.d(LOG_TAG_APP, "CompletableFuture: getAllContacts")
         val supplyAsyncList =
             CompletableFuture.supplyAsync(Supplier<List<Contact>> { contactDao.getAll() }, executor)
-        return supplyAsyncList.get()
+        supplyAsyncList.get()
     }
 
     override fun getById(id: String): Contact {
@@ -28,16 +30,16 @@ class ContactRepositoryCompletableFutureImpl(private val contactDao: ContactDao)
 
     override fun addContact(contact: Contact) {
         Log.d(LOG_TAG_APP, "CompletableFuture: addContact")
-        CompletableFuture.runAsync (Runnable { contactDao.add(contact) }, executor)
+        CompletableFuture.runAsync(Runnable { contactDao.add(contact) }, executor)
     }
 
     override fun editContact(contact: Contact) {
         Log.d(LOG_TAG_APP, "CompletableFuture: editContact")
-        CompletableFuture.runAsync (Runnable { contactDao.edit(contact) }, executor)
+        CompletableFuture.runAsync(Runnable { contactDao.edit(contact) }, executor)
     }
 
     override fun removeContact(id: String) {
         Log.d(LOG_TAG_APP, "CompletableFuture: removeContact")
-        CompletableFuture.runAsync (Runnable { contactDao.delete(id) }, executor)
+        CompletableFuture.runAsync(Runnable { contactDao.delete(id) }, executor)
     }
 }

@@ -3,7 +3,7 @@ package com.chilik1020.hw8.views.edit
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.chilik1020.hw8.model.ContactDao
+import com.chilik1020.hw8.model.local.ContactDao
 import com.chilik1020.hw8.model.entities.Contact
 import com.chilik1020.hw8.model.entities.ContactType
 import com.chilik1020.hw8.views.BaseViewModel

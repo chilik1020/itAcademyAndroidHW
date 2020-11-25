@@ -1,4 +1,4 @@
-package com.chilik1020.hw8.model
+package com.chilik1020.hw8.model.local
 
 import androidx.room.Dao
 import androidx.room.Insert

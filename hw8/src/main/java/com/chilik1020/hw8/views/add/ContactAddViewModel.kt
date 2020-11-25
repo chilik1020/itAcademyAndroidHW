@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.chilik1020.hw8.model.ContactDao
+import com.chilik1020.hw8.model.local.ContactDao
 import com.chilik1020.hw8.model.entities.Contact
 import com.chilik1020.hw8.model.entities.ContactType
 import com.chilik1020.hw8.util.LOG_TAG_APP
