@@ -8,6 +8,7 @@ import com.chilik1020.hw8.di.roomModule
 import com.chilik1020.hw8.di.viewModelModule
 import com.chilik1020.hw8.util.REPOSITORY_TYPE_KEY
 import com.chilik1020.hw8.util.SHARED_PREF_NAME
+import com.chilik1020.hw8.util.TYPE_COMPLETABLE_FUTURE
 import com.chilik1020.hw8.util.TYPE_RX_JAVA
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger

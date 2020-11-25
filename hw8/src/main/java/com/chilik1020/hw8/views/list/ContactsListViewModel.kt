@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.chilik1020.hw8.model.local.ContactDao
-import com.chilik1020.hw8.model.FetchContactsInteractor
+import com.chilik1020.hw8.model.interactors.FetchContactsInteractor
 import com.chilik1020.hw8.model.entities.Contact
 import com.chilik1020.hw8.util.LOG_TAG_APP
 import com.chilik1020.hw8.views.BaseViewModel

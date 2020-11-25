@@ -16,7 +16,7 @@ abstract class BaseViewModel(
     private val contactDao: ContactDao,
     private val pref: SharedPreferences
 ) : ViewModel() {
-    lateinit var repository: ContactRepository
+    var repository: ContactRepository
 
     init {
         val type = pref.getString(REPOSITORY_TYPE_KEY, TYPE_COMPLETABLE_FUTURE)

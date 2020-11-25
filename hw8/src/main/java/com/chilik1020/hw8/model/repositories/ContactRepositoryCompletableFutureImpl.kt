@@ -2,8 +2,9 @@ package com.chilik1020.hw8.model.repositories
 
 import android.util.Log
 import com.chilik1020.hw8.model.local.ContactDao
-import com.chilik1020.hw8.model.FetchContactsInteractor
+import com.chilik1020.hw8.model.interactors.FetchContactsInteractor
 import com.chilik1020.hw8.model.entities.Contact
+import com.chilik1020.hw8.model.interactors.CreateContactInteractor
 import com.chilik1020.hw8.util.LOG_TAG_APP
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.Executors
@@ -18,7 +19,8 @@ class ContactRepositoryCompletableFutureImpl(private val contactDao: ContactDao)
         Log.d(LOG_TAG_APP, "CompletableFuture: getAllContacts")
         val supplyAsyncList =
             CompletableFuture.supplyAsync(Supplier<List<Contact>> { contactDao.getAll() }, executor)
-        supplyAsyncList.get()
+
+        listener.onSuccess(supplyAsyncList.get())
     }
 
     override fun getById(id: String): Contact {

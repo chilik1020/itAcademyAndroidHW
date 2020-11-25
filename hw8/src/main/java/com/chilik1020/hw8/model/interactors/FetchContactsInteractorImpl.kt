@@ -1,4 +1,4 @@
-package com.chilik1020.hw8.model
+package com.chilik1020.hw8.model.interactors
 
 import com.chilik1020.hw8.model.repositories.ContactRepository
 

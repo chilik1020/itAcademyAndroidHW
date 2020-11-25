@@ -37,14 +37,6 @@ class ContactAddActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == R.id.miConfirmButton) {
-//            var contactType = ContactType.PHONENUMBER
-//            if (rbEmail.isChecked) {
-//                contactType = ContactType.EMAIL
-//            }
-//            val id = UUID.randomUUID().toString()
-//            val name = etName.text.toString()
-//            val contactInfo = etContact.text.toString()
-//            val contact = Contact(id, contactType, name, contactInfo)
             viewModelAdd.saveContact()
             finish()
             true
