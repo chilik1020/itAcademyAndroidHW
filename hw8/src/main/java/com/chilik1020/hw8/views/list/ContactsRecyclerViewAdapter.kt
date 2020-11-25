@@ -1,14 +1,15 @@
 package com.chilik1020.hw8.views.list
 
-import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.chilik1020.hw8.R
-import com.chilik1020.hw8.databinding.ItemContactBinding
 import com.chilik1020.hw8.model.entities.Contact
-import com.chilik1020.hw8.util.LOG_TAG_APP
+import com.chilik1020.hw8.model.entities.ContactType
+import kotlinx.android.synthetic.main.item_contact.view.ivContactType
+import kotlinx.android.synthetic.main.item_contact.view.tvFullname
+import kotlinx.android.synthetic.main.item_contact.view.tvPhonenumberOrEmail
 
 class ContactsRecyclerViewAdapter(private val listener: OnRecyclerViewItemClickListener) :
     RecyclerView.Adapter<ContactsRecyclerViewAdapter.ContactViewHolder>() {
@@ -16,10 +17,8 @@ class ContactsRecyclerViewAdapter(private val listener: OnRecyclerViewItemClickL
     private var list: List<Contact> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val binding: ItemContactBinding =
-            DataBindingUtil.inflate(layoutInflater, R.layout.item_contact, parent, false)
-        return ContactViewHolder(binding, listener)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_contact, parent, false)
+        return ContactViewHolder(view, listener)
     }
 
     override fun getItemCount(): Int = list.size
@@ -34,34 +33,28 @@ class ContactsRecyclerViewAdapter(private val listener: OnRecyclerViewItemClickL
     }
 
     class ContactViewHolder(
-        private val binding: ItemContactBinding,
+        private val item: View,
         private val listener: OnRecyclerViewItemClickListener
-    ) : RecyclerView.ViewHolder(binding.root) {
+    ) :
+        RecyclerView.ViewHolder(item) {
+        private lateinit var contact: Contact
 
-        fun bind(item: Contact) {
-            binding.apply {
-                contact = item
-                executePendingBindings()
+        init {
+            item.setOnClickListener { listener.onClick(contact.id) }
+        }
+
+        fun bind(contact: Contact) {
+            this.contact = contact
+            when (contact.type) {
+                ContactType.PHONENUMBER -> {
+                    item.ivContactType.setImageResource(R.drawable.ic_contact_phone)
+                }
+                ContactType.EMAIL -> {
+                    item.ivContactType.setImageResource(R.drawable.ic_contact_email)
+                }
             }
-            Log.d(LOG_TAG_APP, "Binded ${binding.contact?.fullname}")
+            item.tvFullname.text = contact.fullname
+            item.tvPhonenumberOrEmail.text = contact.contactInfo
         }
     }
-
-//        init {
-//            binding.root.setOnClickListener { listener.onClick(contact.id) }
-//        }
-
-//        fun bind(contact: Contact) {
-//            this.contact = contact
-//            when (contact.type) {
-//                ContactType.PHONENUMBER -> {
-//                    item.ivContactType.setImageResource(R.drawable.ic_contact_phone)
-//                }
-//                ContactType.EMAIL -> {
-//                    item.ivContactType.setImageResource(R.drawable.ic_contact_email)
-//                }
-//            }
-//            item.tvFullname.text = contact.fullname
-//            item.tvPhonenumberOrEmail.text = contact.contactInfo
-//        }
 }

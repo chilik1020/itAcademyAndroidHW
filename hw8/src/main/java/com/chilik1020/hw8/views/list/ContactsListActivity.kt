@@ -41,19 +41,6 @@ class ContactsListActivity : AppCompatActivity() {
 
     private val contactAdapter = ContactsRecyclerViewAdapter(recyclerViewListener)
 
-    private val binding: ActivityContactsListBinding by lazy {
-        DataBindingUtil.setContentView<ActivityContactsListBinding>(
-            this,
-            R.layout.activity_contacts_list
-        ).apply {
-            lifecycleOwner = this@ContactsListActivity
-            viewModel = viewModelList
-//            adapter = contactAdapter
-        }
-    }
-
-    private var data = listOf<Contact>()
-    private var dataFilteredWithHint = listOf<Contact>()
     private var searchViewHint: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,16 +55,15 @@ class ContactsListActivity : AppCompatActivity() {
             adapter = contactAdapter
         }
 
-        viewModelList.contacts.observe(this) {
+        viewModelList.contactsFiltered.observe(this) {
             contactAdapter.setData(it)
-            Log.d(LOG_TAG_APP, it.toString())
         }
 
         initViews()
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onRestart() {
+        super.onRestart()
         viewModelList.fetchContacts()
     }
 
@@ -100,52 +86,19 @@ class ContactsListActivity : AppCompatActivity() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchViewHint = query ?: ""
-              //  updateFilteredData()
+                updateFilteredData()
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 searchViewHint = newText ?: ""
-              //  updateFilteredData()
+                updateFilteredData()
                 return false
             }
         })
     }
 
-//    private fun updateDataFromStorage() {
-
-
-//        if (data.isEmpty()) {
-//            tvNoContacts.visibility = View.VISIBLE
-//            setAdapterData(emptyList())
-//        } else {
-//            tvNoContacts.visibility = View.GONE
-//            updateFilteredData()
-//        }
- //   }
-
-//    private fun updateFilteredData() {
-//        filterDataWithHint()
-//        setAdapterData(dataFilteredWithHint)
-//    }
-//
-//    private fun filterDataWithHint() {
-//        dataFilteredWithHint = if (searchViewHint.isNotEmpty()) {
-//            data.filter {
-//                it.fullname
-//                    .toLowerCase(Locale.getDefault())
-//                    .contains(searchViewHint.toLowerCase(Locale.getDefault()))
-//            }
-//        } else {
-//            data
-//        }
-//    }
-//
-//    private fun setAdapterData(list: List<Contact>) {
-////        contactAdapter.setData(list)
-//    }
-//
-//    companion object {
-//        private const val LOG_TAG = "$LOG_TAG_APP:ContactsList"
-//    }
+    private fun updateFilteredData() {
+        viewModelList.updateFilterHint(searchViewHint)
+    }
 }

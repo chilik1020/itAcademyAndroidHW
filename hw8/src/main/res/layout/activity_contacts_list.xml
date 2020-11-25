@@ -49,9 +49,9 @@
             android:id="@+id/recyclerViewContacts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            setAdapter="@{adapter}"
             android:clickable="true"
             android:focusable="true"
-            app:setAdapter="@{adapter}"
             android:paddingHorizontal="@dimen/default_margin"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/act_list_no_contacts"
-            android:visibility="invisible" />
+            android:visibility="@{viewModel.tvNoContactsVisibility}" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"

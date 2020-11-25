@@ -5,8 +5,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
 import com.chilik1020.hw8.model.AppDatabase
-import com.chilik1020.hw8.model.ContactRepository
-import com.chilik1020.hw8.model.ContactRepositoryRxJavaImpl
 import com.chilik1020.hw8.util.DATABASE_NAME
 import com.chilik1020.hw8.util.SHARED_PREF_NAME
 import com.chilik1020.hw8.views.add.ContactAddViewModel
