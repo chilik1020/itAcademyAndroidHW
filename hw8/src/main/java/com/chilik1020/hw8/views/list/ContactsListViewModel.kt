@@ -37,7 +37,7 @@ class ContactsListViewModel(
         }
 
         override fun onError() {
-            Log.d(LOG_TAG_APP, "FetchDataError")
+            Log.d(LOG_TAG_APP, "FetchContactListError")
         }
     }
 

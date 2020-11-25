@@ -1,13 +1,14 @@
 package com.chilik1020.hw8.model.repositories
 
 import android.util.Log
-import com.chilik1020.hw8.model.local.ContactDao
-import com.chilik1020.hw8.model.interactors.FetchContactsInteractor
 import com.chilik1020.hw8.model.entities.Contact
+import com.chilik1020.hw8.model.interactors.EditContactInteractor
+import com.chilik1020.hw8.model.interactors.FetchContactsInteractor
+import com.chilik1020.hw8.model.local.ContactDao
 import com.chilik1020.hw8.util.LOG_TAG_APP
 import java.util.concurrent.Executors
 
-class ContactRepositoryHandlerImpl(private  val contactDao: ContactDao) : ContactRepository {
+class ContactRepositoryHandlerImpl(private val contactDao: ContactDao) : ContactRepository {
 
     private val executor = Executors.newSingleThreadExecutor()
 
@@ -16,7 +17,10 @@ class ContactRepositoryHandlerImpl(private  val contactDao: ContactDao) : Contac
         TODO("Not yet implemented")
     }
 
-    override fun getById(id: String): Contact {
+    override fun getById(
+        id: String,
+        listener: EditContactInteractor.OnFetchContactByIdListener
+    ) {
         Log.d(LOG_TAG_APP, "Handler: getById")
         TODO("Not yet implemented")
     }

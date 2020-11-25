@@ -22,7 +22,7 @@ class ContactApp : Application() {
 
         applicationContext.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
             .edit()
-            .putString(REPOSITORY_TYPE_KEY, TYPE_RX_JAVA)
+            .putString(REPOSITORY_TYPE_KEY, TYPE_COMPLETABLE_FUTURE)
             .apply()
     }
 

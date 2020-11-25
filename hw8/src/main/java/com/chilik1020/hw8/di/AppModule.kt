@@ -6,6 +6,8 @@ import android.content.SharedPreferences
 import androidx.room.Room
 import com.chilik1020.hw8.model.interactors.CreateContactInteractor
 import com.chilik1020.hw8.model.interactors.CreateContactInteractorImpl
+import com.chilik1020.hw8.model.interactors.EditContactInteractor
+import com.chilik1020.hw8.model.interactors.EditContactInteractorImpl
 import com.chilik1020.hw8.model.interactors.FetchContactsInteractor
 import com.chilik1020.hw8.model.interactors.FetchContactsInteractorImpl
 import com.chilik1020.hw8.model.local.AppDatabase
@@ -41,10 +43,11 @@ val roomModule = module {
 val interactorModule = module {
     factory<FetchContactsInteractor> { FetchContactsInteractorImpl() }
     factory<CreateContactInteractor> { CreateContactInteractorImpl() }
+    factory<EditContactInteractor> { EditContactInteractorImpl()  }
 }
 
 val viewModelModule = module {
     viewModel { ContactsListViewModel(contactDao = get(), pref = get(), interactor = get()) }
     viewModel { ContactAddViewModel(contactDao = get(), pref = get(), interactor = get()) }
-    viewModel { ContactEditViewModel(contactDao = get(), pref = get()) }
+    viewModel { ContactEditViewModel(contactDao = get(), pref = get(), interactor = get()) }
 }
