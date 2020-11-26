@@ -1,5 +1,6 @@
 package com.chilik1020.hw8.views.add
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -15,9 +16,10 @@ import java.util.*
 class ContactAddViewModel(
     contactDao: ContactDao,
     pref: SharedPreferences,
-    private val interactor: CreateContactInteractor
+    private val interactor: CreateContactInteractor,
+    context: Context
 ) :
-    BaseViewModel(contactDao, pref) {
+    BaseViewModel(contactDao, pref, context) {
 
     val contact: LiveData<Contact> = MutableLiveData<Contact>(
         Contact(

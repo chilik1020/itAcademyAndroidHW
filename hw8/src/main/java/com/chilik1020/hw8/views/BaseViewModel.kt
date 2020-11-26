@@ -1,6 +1,8 @@
 package com.chilik1020.hw8.views
 
+import android.content.Context
 import android.content.SharedPreferences
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import com.chilik1020.hw8.model.local.ContactDao
 import com.chilik1020.hw8.model.repositories.ContactRepository
@@ -14,7 +16,8 @@ import com.chilik1020.hw8.util.TYPE_RX_JAVA
 
 abstract class BaseViewModel(
     private val contactDao: ContactDao,
-    private val pref: SharedPreferences
+    private val pref: SharedPreferences,
+    private val context: Context
 ) : ViewModel() {
     var repository: ContactRepository
 
@@ -23,7 +26,7 @@ abstract class BaseViewModel(
         repository = when (type) {
             TYPE_RX_JAVA -> ContactRepositoryRxJavaImpl(contactDao)
             TYPE_HANDLER -> ContactRepositoryHandlerImpl(contactDao)
-            else -> ContactRepositoryCompletableFutureImpl(contactDao)
+            else -> ContactRepositoryCompletableFutureImpl(contactDao, ContextCompat.getMainExecutor(context))
         }
     }
 }

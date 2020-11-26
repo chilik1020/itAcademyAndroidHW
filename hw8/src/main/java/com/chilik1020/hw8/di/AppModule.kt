@@ -47,7 +47,7 @@ val interactorModule = module {
 }
 
 val viewModelModule = module {
-    viewModel { ContactsListViewModel(contactDao = get(), pref = get(), interactor = get()) }
-    viewModel { ContactAddViewModel(contactDao = get(), pref = get(), interactor = get()) }
-    viewModel { ContactEditViewModel(contactDao = get(), pref = get(), interactor = get()) }
+    viewModel { ContactsListViewModel(contactDao = get(), pref = get(), interactor = get(), androidApplication()) }
+    viewModel { ContactAddViewModel(contactDao = get(), pref = get(), interactor = get(), androidApplication()) }
+    viewModel { ContactEditViewModel(contactDao = get(), pref = get(), interactor = get(), androidApplication()) }
 }

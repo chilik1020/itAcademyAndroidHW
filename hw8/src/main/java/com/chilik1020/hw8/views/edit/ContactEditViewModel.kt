@@ -1,5 +1,6 @@
 package com.chilik1020.hw8.views.edit
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -14,9 +15,10 @@ import com.chilik1020.hw8.views.BaseViewModel
 class ContactEditViewModel(
     contactDao: ContactDao,
     pref: SharedPreferences,
-    private val interactor: EditContactInteractor
+    private val interactor: EditContactInteractor,
+    context: Context
 ) :
-    BaseViewModel(contactDao, pref) {
+    BaseViewModel(contactDao, pref,context) {
 
     private val contactLiveDataMutable = MutableLiveData<Contact>()
     val contact: LiveData<Contact>

@@ -1,5 +1,6 @@
 package com.chilik1020.hw8.views.list
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import android.view.View
@@ -16,9 +17,10 @@ import java.util.*
 class ContactsListViewModel(
     contactDao: ContactDao,
     pref: SharedPreferences,
-    private val interactor: FetchContactsInteractor
+    private val interactor: FetchContactsInteractor,
+    context: Context
 ) :
-    BaseViewModel(contactDao, pref) {
+    BaseViewModel(contactDao, pref,context) {
 
     private val contacts = MutableLiveData<List<Contact>>(emptyList())
     private val contactsFilteredMutable = MutableLiveData<List<Contact>>()
