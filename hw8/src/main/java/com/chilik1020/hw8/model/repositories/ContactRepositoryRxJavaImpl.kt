@@ -45,20 +45,56 @@ class ContactRepositoryRxJavaImpl(private val contactDao: ContactDao) : ContactR
         Log.d(LOG_TAG_APP, "RxJava: addContact")
         val subscribe = contactDao.addRx(contact)
             .subscribeOn(Schedulers.io())
-            .subscribe {}
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    if (it >= 0) {
+                        listener.onFinish(Result.Success(it))
+                    } else {
+                        listener.onFinish(Result.Failure(Throwable()))
+                    }
+                },
+                { listener.onFinish(Result.Failure(it)) }
+            )
     }
 
-    override fun editContact(contact: Contact) {
+    override fun editContact(
+        contact: Contact,
+        listener: EditContactInteractor.OnEditContactListener
+    ) {
         Log.d(LOG_TAG_APP, "RxJava: editContact")
-        contactDao.editRx(contact)
+        val subscribe = contactDao.editRx(contact)
             .subscribeOn(Schedulers.io())
-            .subscribe()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    if (it > 0) {
+                        listener.onFinish(Result.Success(it))
+                    } else {
+                        listener.onFinish(Result.Failure(Throwable()))
+                    }
+                },
+                { listener.onFinish(Result.Failure(it)) }
+            )
     }
 
-    override fun removeContact(id: String) {
+    override fun removeContact(
+        id: String,
+        listener: EditContactInteractor.OnDeleteContactListener
+    ) {
         Log.d(LOG_TAG_APP, "RxJava: removeContact")
-        contactDao.deleteRx(id)
+        val subscribe = contactDao.deleteRx(id)
             .subscribeOn(Schedulers.io())
-            .subscribe()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    if (it > 0) {
+                        listener.onFinish(Result.Success(it))
+                    } else {
+                        listener.onFinish(Result.Failure(Throwable()))
+                    }
+                },
+                {listener.onFinish(Result.Failure(it))}
+            )
     }
 }

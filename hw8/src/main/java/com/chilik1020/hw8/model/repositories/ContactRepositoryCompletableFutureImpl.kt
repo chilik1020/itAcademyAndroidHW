@@ -75,18 +75,30 @@ class ContactRepositoryCompletableFutureImpl(
             )
     }
 
-    override fun editContact(contact: Contact) {
+    override fun editContact(
+        contact: Contact,
+        listener: EditContactInteractor.OnEditContactListener
+    ) {
         Log.d(LOG_TAG_APP, "CompletableFuture: editContact")
         CompletableFuture.supplyAsync(
             Supplier { contactDao.edit(contact) },
             executor
         ).thenAcceptAsync(
-            Consumer { Log.d(LOG_TAG_APP, " NumberOfUpdated = $it") },
+            Consumer {
+                if (it > 0) {
+                    listener.onFinish(Result.Success(it))
+                } else {
+                    listener.onFinish(Result.Failure(Throwable("Contact not found")))
+                }
+            },
             mainThreadExecutor
         )
     }
 
-    override fun removeContact(id: String) {
+    override fun removeContact(
+        id: String,
+        listener: EditContactInteractor.OnDeleteContactListener
+    ) {
         Log.d(LOG_TAG_APP, "CompletableFuture: removeContact")
         CompletableFuture
             .supplyAsync(
@@ -94,7 +106,13 @@ class ContactRepositoryCompletableFutureImpl(
                 executor
             )
             .thenAcceptAsync(
-                Consumer { Log.d(LOG_TAG_APP, " NumberOfDeleted = $it") },
+                Consumer {
+                    if (it > 0) {
+                        listener.onFinish(Result.Success(it))
+                    } else {
+                        listener.onFinish(Result.Failure(Throwable("Contact not found")))
+                    }
+                },
                 mainThreadExecutor
             )
     }

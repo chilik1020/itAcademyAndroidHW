@@ -9,6 +9,6 @@ interface ContactRepository {
     fun getAllContacts(listener: FetchContactsInteractor.OnFetchContactsListener)
     fun getById(id: String, listener: EditContactInteractor.OnFetchContactByIdListener)
     fun addContact(contact: Contact, listener: CreateContactInteractor.OnCreateContactListener)
-    fun editContact(contact: Contact)
-    fun removeContact(id: String)
+    fun editContact(contact: Contact, listener: EditContactInteractor.OnEditContactListener)
+    fun removeContact(id: String, listener: EditContactInteractor.OnDeleteContactListener)
 }

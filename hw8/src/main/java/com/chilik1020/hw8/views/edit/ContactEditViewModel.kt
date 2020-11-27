@@ -41,19 +41,41 @@ class ContactEditViewModel(
         }
     }
 
+    private val listenerEditContact = EditContactInteractor.OnEditContactListener {
+        when (it) {
+            is Result.Success -> {
+                Log.d(LOG_TAG_APP, "Contact updated")
+            }
+            is Result.Failure -> {
+                Log.d(LOG_TAG_APP, "EditContactError")
+            }
+        }
+    }
+
+    private val listenerDeleteContact = EditContactInteractor.OnDeleteContactListener {
+        when (it) {
+            is Result.Success -> {
+                Log.d(LOG_TAG_APP, "Contact deleted")
+            }
+            is Result.Failure -> {
+                Log.d(LOG_TAG_APP, "DeleteContactError")
+            }
+        }
+    }
+
     fun getContactById(id: String) {
         interactor.fetchContactById(id, repository, listenerFetchById)
     }
 
     fun deleteContact() {
         contact.value?.let {
-            interactor.deleteContact(it.id, repository)
+            interactor.deleteContact(it.id, repository, listenerDeleteContact)
         }
     }
 
     fun editContact() {
         contact.value?.let {
-            interactor.editContact(it, repository)
+            interactor.editContact(it, repository, listenerEditContact)
         }
     }
 

@@ -44,17 +44,47 @@ class ContactRepositoryHandlerImpl(private val contactDao: ContactDao) : Contact
         listener: CreateContactInteractor.OnCreateContactListener
     ) {
         Log.d(LOG_TAG_APP, "Handler: addContact")
-        workerThread.postTask(Runnable { contactDao.add(contact) })
+        workerThread.postTask(Runnable {
+            val newContactId = contactDao.add(contact)
+            val taskToMainThread = if (newContactId >= 0) {
+                Runnable { listener.onFinish(Result.Success(newContactId)) }
+            } else {
+                Runnable { listener.onFinish(Result.Failure(Throwable())) }
+            }
+            uiHandler.post(taskToMainThread)
+        })
     }
 
-    override fun editContact(contact: Contact) {
+    override fun editContact(
+        contact: Contact,
+        listener: EditContactInteractor.OnEditContactListener
+    ) {
         Log.d(LOG_TAG_APP, "Handler: editContact")
-        workerThread.postTask(Runnable { contactDao.edit(contact) })
+        workerThread.postTask(Runnable {
+            val numberOfRows = contactDao.edit(contact)
+            val taskToMainThread = if (numberOfRows > 0) {
+                Runnable { listener.onFinish(Result.Success(numberOfRows)) }
+            } else {
+                Runnable { listener.onFinish(Result.Failure(Throwable("Contact not found"))) }
+            }
+            uiHandler.post(taskToMainThread)
+        })
     }
 
-    override fun removeContact(id: String) {
+    override fun removeContact(
+        id: String,
+        listener: EditContactInteractor.OnDeleteContactListener
+    ) {
         Log.d(LOG_TAG_APP, "Handler: removeContact")
-        workerThread.postTask(Runnable { contactDao.delete(id) })
+        workerThread.postTask(Runnable {
+            val numberOfRows = contactDao.delete(id)
+            val taskToMainThread = if (numberOfRows > 0) {
+                Runnable { listener.onFinish(Result.Success(numberOfRows)) }
+            } else {
+                Runnable { listener.onFinish(Result.Failure(Throwable("Contact not found"))) }
+            }
+            uiHandler.post(taskToMainThread)
+        })
     }
 
     class WorkerThread(name: String) : HandlerThread(name) {

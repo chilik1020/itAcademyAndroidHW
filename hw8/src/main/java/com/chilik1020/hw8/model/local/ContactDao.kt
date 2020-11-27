@@ -8,6 +8,8 @@ import androidx.room.Update
 import com.chilik1020.hw8.model.entities.Contact
 import io.reactivex.Completable
 import io.reactivex.Flowable
+import io.reactivex.Maybe
+import io.reactivex.Single
 
 @Dao
 interface ContactDao {
@@ -35,11 +37,11 @@ interface ContactDao {
     fun getByIdRx(id: String): Flowable<Contact>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addRx(contact: Contact): Completable
+    fun addRx(contact: Contact): Maybe<Long>
 
     @Update
-    fun editRx(contact: Contact): Completable
+    fun editRx(contact: Contact): Single<Int>
 
     @Query("DELETE FROM contacts WHERE id = :id")
-    fun deleteRx(id: String): Completable
+    fun deleteRx(id: String): Single<Int>
 }

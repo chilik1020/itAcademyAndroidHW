@@ -12,11 +12,19 @@ class EditContactInteractorImpl : EditContactInteractor {
         repository.getById(id, listener)
     }
 
-    override fun editContact(contact: Contact, repository: ContactRepository) {
-        repository.editContact(contact)
+    override fun editContact(
+        contact: Contact,
+        repository: ContactRepository,
+        listener: EditContactInteractor.OnEditContactListener
+    ) {
+        repository.editContact(contact, listener)
     }
 
-    override fun deleteContact(id: String, repository: ContactRepository) {
-        repository.removeContact(id)
+    override fun deleteContact(
+        id: String,
+        repository: ContactRepository,
+        listener: EditContactInteractor.OnDeleteContactListener
+    ) {
+        repository.removeContact(id, listener)
     }
 }
