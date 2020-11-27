@@ -2,15 +2,15 @@ package com.chilik1020.hw8.views.add
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.chilik1020.hw8.model.entities.Contact
 import com.chilik1020.hw8.model.entities.ContactType
+import com.chilik1020.hw8.model.entities.Result
 import com.chilik1020.hw8.model.interactors.CreateContactInteractor
 import com.chilik1020.hw8.model.local.ContactDao
-import com.chilik1020.hw8.util.LOG_TAG_APP
 import com.chilik1020.hw8.views.BaseViewModel
+import com.chilik1020.hw8.views.SingleLiveEvent
 import java.util.*
 
 class ContactAddViewModel(
@@ -34,16 +34,9 @@ class ContactAddViewModel(
     val contactInfoHint: LiveData<String>
         get() = contactInfoHintMutable
 
-    private val listener = object : CreateContactInteractor.OnCreateContactListener {
-        override fun onSuccess() {
-            Log.d(LOG_TAG_APP, "Contact created")
-        }
-
-        override fun onError() {
-            Log.d(LOG_TAG_APP, "Something went wrong while creating contact")
-        }
-
-    }
+    val eventMessage = SingleLiveEvent<Result<Long>>()
+    private val listener =
+        CreateContactInteractor.OnCreateContactListener { eventMessage.value = it }
 
     fun saveContact() {
         contact.value?.let { interactor.createContact(it, repository, listener) }

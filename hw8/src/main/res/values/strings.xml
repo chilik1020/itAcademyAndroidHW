@@ -10,6 +10,8 @@
     <string name="act_add_et_name">Name</string>
     <string name="act_add_et_phone_number">Phone number</string>
     <string name="act_add_et_email">Email</string>
+    <string name="act_add_msg_contact_created">Contact created</string>
+    <string name="act_add_msg_contact_create_error">"Something went wrong while creating contact"</string>
 
     <string name="act_edit_toolbar_title">Edit contact</string>
     <string name="act_edit_et_name">Name</string>

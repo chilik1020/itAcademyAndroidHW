@@ -7,6 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.chilik1020.hw8.R
 import com.chilik1020.hw8.databinding.ActivityContactAddBinding
+import com.chilik1020.hw8.model.entities.Result
+import com.chilik1020.hw8.model.entities.Result.Success
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_contact_add.etName
 import kotlinx.android.synthetic.main.activity_contact_add.toolbar
 import org.koin.android.ext.android.inject
 
@@ -35,7 +39,7 @@ class ContactAddActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == R.id.miConfirmButton) {
             viewModelAdd.saveContact()
-            finish()
+
             true
         } else {
             super.onOptionsItemSelected(item)
@@ -50,5 +54,12 @@ class ContactAddActivity : AppCompatActivity() {
         }
 
         toolbar.setNavigationOnClickListener { finish() }
+        viewModelAdd.eventMessage.observe(this){result ->
+            val msg = when(result) {
+                is Success -> R.string.act_add_msg_contact_created
+                is Result.Failure -> R.string.act_add_msg_contact_create_error
+            }
+            Snackbar.make(etName, msg, Snackbar.LENGTH_SHORT).show()
+        }
     }
 }

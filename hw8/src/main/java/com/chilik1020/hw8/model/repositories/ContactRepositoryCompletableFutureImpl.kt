@@ -2,6 +2,7 @@ package com.chilik1020.hw8.model.repositories
 
 import android.util.Log
 import com.chilik1020.hw8.model.entities.Contact
+import com.chilik1020.hw8.model.entities.Result
 import com.chilik1020.hw8.model.interactors.CreateContactInteractor
 import com.chilik1020.hw8.model.interactors.EditContactInteractor
 import com.chilik1020.hw8.model.interactors.FetchContactsInteractor
@@ -63,7 +64,13 @@ class ContactRepositoryCompletableFutureImpl(
                 executor
             )
             .thenAcceptAsync(
-                Consumer { if (it >= 0) listener.onSuccess() else listener.onError() },
+                Consumer {
+                    if (it >= 0) {
+                        listener.onFinish(Result.Success(it))
+                    } else {
+                        listener.onFinish(Result.Failure(Throwable()))
+                    }
+                },
                 mainThreadExecutor
             )
     }
