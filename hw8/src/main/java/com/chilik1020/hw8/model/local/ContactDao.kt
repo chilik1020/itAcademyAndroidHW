@@ -19,13 +19,13 @@ interface ContactDao {
     fun getById(id: String): Contact
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun add(contact: Contact)
+    fun add(contact: Contact): Long
 
     @Update
-    fun edit(contact: Contact)
+    fun edit(contact: Contact): Int
 
     @Query("DELETE FROM contacts WHERE id = :id")
-    fun delete(id: String)
+    fun delete(id: String): Int
 
 
     @Query("SELECT * FROM contacts")
