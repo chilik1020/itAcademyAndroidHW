@@ -33,8 +33,8 @@ class ContactRepositoryRxJavaImpl(private val contactDao: ContactDao) : ContactR
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { listener.onSuccess(it) },
-                { listener.onError() }
+                { listener.onFinish(Result.Success(it)) },
+                { listener.onFinish(Result.Failure(Throwable("FetchContactByIdError"))) }
             )
     }
 

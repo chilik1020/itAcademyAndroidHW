@@ -35,7 +35,7 @@ class ContactRepositoryHandlerImpl(private val contactDao: ContactDao) : Contact
         Log.d(LOG_TAG_APP, "Handler: getById")
         workerThread.postTask(Runnable {
             val contact = contactDao.getById(id)
-            uiHandler.post(Runnable { listener.onSuccess(contact) })
+            uiHandler.post(Runnable { listener.onFinish(Result.Success(contact)) })
         })
     }
 

@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.chilik1020.hw8.model.entities.Contact
 import com.chilik1020.hw8.model.entities.ContactType
+import com.chilik1020.hw8.model.entities.Result
 import com.chilik1020.hw8.model.interactors.EditContactInteractor
 import com.chilik1020.hw8.model.local.ContactDao
 import com.chilik1020.hw8.util.LOG_TAG_APP
@@ -18,7 +19,7 @@ class ContactEditViewModel(
     private val interactor: EditContactInteractor,
     context: Context
 ) :
-    BaseViewModel(contactDao, pref,context) {
+    BaseViewModel(contactDao, pref, context) {
 
     private val contactLiveDataMutable = MutableLiveData<Contact>()
     val contact: LiveData<Contact>
@@ -28,20 +29,20 @@ class ContactEditViewModel(
     val hintTextContactInfo: LiveData<String>
         get() = hintTextContactInfoMutable
 
-    private val listener = object : EditContactInteractor.OnFetchContactByIdListener {
-        override fun onSuccess(contact: Contact) {
-            contactLiveDataMutable.value = contact
-            updateHintText()
+    private val listenerFetchById = EditContactInteractor.OnFetchContactByIdListener {
+        when (it) {
+            is Result.Success -> {
+                contactLiveDataMutable.value = it.data
+                updateHintText()
+            }
+            is Result.Failure -> {
+                Log.d(LOG_TAG_APP, "FetchContactByIdError")
+            }
         }
-
-        override fun onError() {
-            Log.d(LOG_TAG_APP, "FetchContactByIdError")
-        }
-
     }
 
     fun getContactById(id: String) {
-        interactor.fetchContactById(id,repository,listener)
+        interactor.fetchContactById(id, repository, listenerFetchById)
     }
 
     fun deleteContact() {
@@ -52,7 +53,7 @@ class ContactEditViewModel(
 
     fun editContact() {
         contact.value?.let {
-            interactor.editContact(it,repository)
+            interactor.editContact(it, repository)
         }
     }
 
