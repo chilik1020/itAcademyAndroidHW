@@ -12,6 +12,7 @@ import java.util.concurrent.CompletableFuture
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 import java.util.function.Consumer
+import java.util.function.Function
 import java.util.function.Supplier
 
 class ContactRepositoryCompletableFutureImpl(
@@ -34,6 +35,10 @@ class ContactRepositoryCompletableFutureImpl(
                     Consumer { listener.onFinish(Result.Success(it)) },
                     mainThreadExecutor
                 )
+                .exceptionally(Function {
+                    listener.onFinish(Result.Failure(it))
+                    null
+                })
     }
 
     override fun getById(
@@ -51,6 +56,10 @@ class ContactRepositoryCompletableFutureImpl(
                     Consumer { listener.onFinish(Result.Success(it)) },
                     mainThreadExecutor
                 )
+                .exceptionally(Function {
+                    listener.onFinish(Result.Failure(it))
+                    null
+                })
     }
 
     override fun addContact(
@@ -73,6 +82,10 @@ class ContactRepositoryCompletableFutureImpl(
                 },
                 mainThreadExecutor
             )
+            .exceptionally(Function {
+                listener.onFinish(Result.Failure(it))
+                null
+            })
     }
 
     override fun editContact(
@@ -83,16 +96,21 @@ class ContactRepositoryCompletableFutureImpl(
         CompletableFuture.supplyAsync(
             Supplier { contactDao.edit(contact) },
             executor
-        ).thenAcceptAsync(
-            Consumer {
-                if (it > 0) {
-                    listener.onFinish(Result.Success(it))
-                } else {
-                    listener.onFinish(Result.Failure(Throwable("Contact not found")))
-                }
-            },
-            mainThreadExecutor
         )
+            .thenAcceptAsync(
+                Consumer {
+                    if (it > 0) {
+                        listener.onFinish(Result.Success(it))
+                    } else {
+                        listener.onFinish(Result.Failure(Throwable("Contact not found")))
+                    }
+                },
+                mainThreadExecutor
+            )
+            .exceptionally(Function {
+                listener.onFinish(Result.Failure(it))
+                null
+            })
     }
 
     override fun removeContact(
@@ -115,5 +133,9 @@ class ContactRepositoryCompletableFutureImpl(
                 },
                 mainThreadExecutor
             )
+            .exceptionally(Function {
+                listener.onFinish(Result.Failure(it))
+                null
+            })
     }
 }
