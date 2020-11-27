@@ -36,7 +36,7 @@ class ContactEditViewModel(
                 updateHintText()
             }
             is Result.Failure -> {
-                Log.d(LOG_TAG_APP, "FetchContactByIdError")
+                Log.d(LOG_TAG_APP, it.error?.message.toString())
             }
         }
     }
@@ -47,7 +47,7 @@ class ContactEditViewModel(
                 Log.d(LOG_TAG_APP, "Contact updated")
             }
             is Result.Failure -> {
-                Log.d(LOG_TAG_APP, "EditContactError")
+                Log.d(LOG_TAG_APP, it.error?.message.toString())
             }
         }
     }
@@ -58,7 +58,7 @@ class ContactEditViewModel(
                 Log.d(LOG_TAG_APP, "Contact deleted")
             }
             is Result.Failure -> {
-                Log.d(LOG_TAG_APP, "DeleteContactError")
+                Log.d(LOG_TAG_APP, it.error?.message.toString())
             }
         }
     }

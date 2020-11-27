@@ -73,13 +73,7 @@ class ContactRepositoryCompletableFutureImpl(
                 executor
             )
             .thenAcceptAsync(
-                Consumer {
-                    if (it >= 0) {
-                        listener.onFinish(Result.Success(it))
-                    } else {
-                        listener.onFinish(Result.Failure(Throwable()))
-                    }
-                },
+                Consumer { listener.onFinish(Result.Success(it)) },
                 mainThreadExecutor
             )
             .exceptionally(Function {
@@ -98,13 +92,7 @@ class ContactRepositoryCompletableFutureImpl(
             executor
         )
             .thenAcceptAsync(
-                Consumer {
-                    if (it > 0) {
-                        listener.onFinish(Result.Success(it))
-                    } else {
-                        listener.onFinish(Result.Failure(Throwable("Contact not found")))
-                    }
-                },
+                Consumer { listener.onFinish(Result.Success(it)) },
                 mainThreadExecutor
             )
             .exceptionally(Function {
@@ -124,13 +112,7 @@ class ContactRepositoryCompletableFutureImpl(
                 executor
             )
             .thenAcceptAsync(
-                Consumer {
-                    if (it > 0) {
-                        listener.onFinish(Result.Success(it))
-                    } else {
-                        listener.onFinish(Result.Failure(Throwable("Contact not found")))
-                    }
-                },
+                Consumer { listener.onFinish(Result.Success(it)) },
                 mainThreadExecutor
             )
             .exceptionally(Function {

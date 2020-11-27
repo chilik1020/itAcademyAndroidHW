@@ -23,8 +23,13 @@ class ContactRepositoryHandlerImpl(private val contactDao: ContactDao) : Contact
     override fun getAllContacts(listener: FetchContactsInteractor.OnFetchContactsListener) {
         Log.d(LOG_TAG_APP, "Handler: getAllContacts")
         workerThread.postTask(Runnable {
-            val data = contactDao.getAll()
-            uiHandler.post(Runnable { listener.onFinish(Result.Success(data)) })
+            val taskToMainThread = try {
+                val data = contactDao.getAll()
+                Runnable { listener.onFinish(Result.Success(data)) }
+            } catch (ex: Exception) {
+                Runnable { listener.onFinish(Result.Failure(ex)) }
+            }
+            uiHandler.post(taskToMainThread)
         })
     }
 
@@ -34,8 +39,13 @@ class ContactRepositoryHandlerImpl(private val contactDao: ContactDao) : Contact
     ) {
         Log.d(LOG_TAG_APP, "Handler: getById")
         workerThread.postTask(Runnable {
-            val contact = contactDao.getById(id)
-            uiHandler.post(Runnable { listener.onFinish(Result.Success(contact)) })
+            val taskToMainThread = try {
+                val data = contactDao.getById(id)
+                Runnable { listener.onFinish(Result.Success(data)) }
+            } catch (ex: Exception) {
+                Runnable { listener.onFinish(Result.Failure(ex)) }
+            }
+            uiHandler.post(taskToMainThread)
         })
     }
 
@@ -45,11 +55,11 @@ class ContactRepositoryHandlerImpl(private val contactDao: ContactDao) : Contact
     ) {
         Log.d(LOG_TAG_APP, "Handler: addContact")
         workerThread.postTask(Runnable {
-            val newContactId = contactDao.add(contact)
-            val taskToMainThread = if (newContactId >= 0) {
+            val taskToMainThread = try {
+                val newContactId = contactDao.add(contact)
                 Runnable { listener.onFinish(Result.Success(newContactId)) }
-            } else {
-                Runnable { listener.onFinish(Result.Failure(Throwable())) }
+            } catch (ex: Exception) {
+                Runnable { listener.onFinish(Result.Failure(ex)) }
             }
             uiHandler.post(taskToMainThread)
         })
@@ -61,11 +71,11 @@ class ContactRepositoryHandlerImpl(private val contactDao: ContactDao) : Contact
     ) {
         Log.d(LOG_TAG_APP, "Handler: editContact")
         workerThread.postTask(Runnable {
-            val numberOfRows = contactDao.edit(contact)
-            val taskToMainThread = if (numberOfRows > 0) {
-                Runnable { listener.onFinish(Result.Success(numberOfRows)) }
-            } else {
-                Runnable { listener.onFinish(Result.Failure(Throwable("Contact not found"))) }
+            val taskToMainThread = try {
+                val numberOfUpdatedRows = contactDao.edit(contact)
+                Runnable { listener.onFinish(Result.Success(numberOfUpdatedRows)) }
+            } catch (ex: Exception) {
+                Runnable { listener.onFinish(Result.Failure(ex)) }
             }
             uiHandler.post(taskToMainThread)
         })
@@ -77,11 +87,11 @@ class ContactRepositoryHandlerImpl(private val contactDao: ContactDao) : Contact
     ) {
         Log.d(LOG_TAG_APP, "Handler: removeContact")
         workerThread.postTask(Runnable {
-            val numberOfRows = contactDao.delete(id)
-            val taskToMainThread = if (numberOfRows > 0) {
-                Runnable { listener.onFinish(Result.Success(numberOfRows)) }
-            } else {
-                Runnable { listener.onFinish(Result.Failure(Throwable("Contact not found"))) }
+            val taskToMainThread = try {
+                val numberOfDeletedRows = contactDao.delete(id)
+                Runnable { listener.onFinish(Result.Success(numberOfDeletedRows)) }
+            } catch (ex: Exception) {
+                Runnable { listener.onFinish(Result.Failure(ex)) }
             }
             uiHandler.post(taskToMainThread)
         })

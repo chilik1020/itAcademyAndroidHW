@@ -20,7 +20,7 @@ class ContactRepositoryRxJavaImpl(private val contactDao: ContactDao) : ContactR
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { listener.onFinish(Result.Success(it)) },
-                { listener.onFinish(Result.Failure(Throwable("FetchContactsError"))) }
+                { listener.onFinish(Result.Failure(it)) }
             )
     }
 
@@ -34,7 +34,7 @@ class ContactRepositoryRxJavaImpl(private val contactDao: ContactDao) : ContactR
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { listener.onFinish(Result.Success(it)) },
-                { listener.onFinish(Result.Failure(Throwable("FetchContactByIdError"))) }
+                { listener.onFinish(Result.Failure(it)) }
             )
     }
 
@@ -47,13 +47,7 @@ class ContactRepositoryRxJavaImpl(private val contactDao: ContactDao) : ContactR
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                {
-                    if (it >= 0) {
-                        listener.onFinish(Result.Success(it))
-                    } else {
-                        listener.onFinish(Result.Failure(Throwable()))
-                    }
-                },
+                { listener.onFinish(Result.Success(it)) },
                 { listener.onFinish(Result.Failure(it)) }
             )
     }
@@ -67,13 +61,7 @@ class ContactRepositoryRxJavaImpl(private val contactDao: ContactDao) : ContactR
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                {
-                    if (it > 0) {
-                        listener.onFinish(Result.Success(it))
-                    } else {
-                        listener.onFinish(Result.Failure(Throwable()))
-                    }
-                },
+                { listener.onFinish(Result.Success(it)) },
                 { listener.onFinish(Result.Failure(it)) }
             )
     }
@@ -87,14 +75,8 @@ class ContactRepositoryRxJavaImpl(private val contactDao: ContactDao) : ContactR
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                {
-                    if (it > 0) {
-                        listener.onFinish(Result.Success(it))
-                    } else {
-                        listener.onFinish(Result.Failure(Throwable()))
-                    }
-                },
-                {listener.onFinish(Result.Failure(it))}
+                { listener.onFinish(Result.Success(it)) },
+                { listener.onFinish(Result.Failure(it)) }
             )
     }
 }
