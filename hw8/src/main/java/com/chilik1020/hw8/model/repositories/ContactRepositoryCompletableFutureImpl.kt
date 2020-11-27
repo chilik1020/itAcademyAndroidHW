@@ -53,16 +53,38 @@ class ContactRepositoryCompletableFutureImpl(
 
     override fun addContact(contact: Contact) {
         Log.d(LOG_TAG_APP, "CompletableFuture: addContact")
-        CompletableFuture.runAsync(Runnable { contactDao.add(contact) }, executor)
+        CompletableFuture
+            .supplyAsync(
+                Supplier { contactDao.add(contact) },
+                executor
+            )
+            .thenAcceptAsync(
+                Consumer { Log.d(LOG_TAG_APP, " LongID = $it") },
+                mainThreadExecutor
+            )
     }
 
     override fun editContact(contact: Contact) {
         Log.d(LOG_TAG_APP, "CompletableFuture: editContact")
-        CompletableFuture.runAsync(Runnable { contactDao.edit(contact) }, executor)
+        CompletableFuture.supplyAsync(
+            Supplier { contactDao.edit(contact) },
+            executor
+        ).thenAcceptAsync(
+            Consumer { Log.d(LOG_TAG_APP, " NumberOfUpdated = $it") },
+            mainThreadExecutor
+        )
     }
 
     override fun removeContact(id: String) {
         Log.d(LOG_TAG_APP, "CompletableFuture: removeContact")
-        CompletableFuture.runAsync(Runnable { contactDao.delete(id) }, executor)
+        CompletableFuture
+            .supplyAsync(
+                Supplier { contactDao.delete(id) },
+                executor
+            )
+            .thenAcceptAsync(
+                Consumer { Log.d(LOG_TAG_APP, " NumberOfDeleted = $it") },
+                mainThreadExecutor
+            )
     }
 }
