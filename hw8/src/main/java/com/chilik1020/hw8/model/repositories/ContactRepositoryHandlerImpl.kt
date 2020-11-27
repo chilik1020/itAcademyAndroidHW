@@ -5,6 +5,7 @@ import android.os.HandlerThread
 import android.os.Looper
 import android.util.Log
 import com.chilik1020.hw8.model.entities.Contact
+import com.chilik1020.hw8.model.entities.Result
 import com.chilik1020.hw8.model.interactors.CreateContactInteractor
 import com.chilik1020.hw8.model.interactors.EditContactInteractor
 import com.chilik1020.hw8.model.interactors.FetchContactsInteractor
@@ -23,7 +24,7 @@ class ContactRepositoryHandlerImpl(private val contactDao: ContactDao) : Contact
         Log.d(LOG_TAG_APP, "Handler: getAllContacts")
         workerThread.postTask(Runnable {
             val data = contactDao.getAll()
-            uiHandler.post(Runnable { listener.onSuccess(data) })
+            uiHandler.post(Runnable { listener.onFinish(Result.Success(data)) })
         })
     }
 

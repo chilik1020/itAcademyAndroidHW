@@ -2,6 +2,7 @@ package com.chilik1020.hw8.model.repositories
 
 import android.util.Log
 import com.chilik1020.hw8.model.entities.Contact
+import com.chilik1020.hw8.model.entities.Result
 import com.chilik1020.hw8.model.interactors.CreateContactInteractor
 import com.chilik1020.hw8.model.interactors.EditContactInteractor
 import com.chilik1020.hw8.model.interactors.FetchContactsInteractor
@@ -18,8 +19,8 @@ class ContactRepositoryRxJavaImpl(private val contactDao: ContactDao) : ContactR
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { listener.onSuccess(it) },
-                { listener.onError() }
+                { listener.onFinish(Result.Success(it)) },
+                { listener.onFinish(Result.Failure(Throwable("FetchContactsError"))) }
             )
     }
 

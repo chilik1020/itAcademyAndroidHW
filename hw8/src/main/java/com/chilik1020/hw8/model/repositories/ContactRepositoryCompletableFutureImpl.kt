@@ -31,7 +31,7 @@ class ContactRepositoryCompletableFutureImpl(
                     executor
                 )
                 .thenAcceptAsync(
-                    Consumer { listener.onSuccess(it) },
+                    Consumer { listener.onFinish(Result.Success(it)) },
                     mainThreadExecutor
                 )
     }

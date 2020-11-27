@@ -1,13 +1,13 @@
 package com.chilik1020.hw8.model.interactors
 
 import com.chilik1020.hw8.model.entities.Contact
+import com.chilik1020.hw8.model.entities.Result
 import com.chilik1020.hw8.model.repositories.ContactRepository
 
 interface FetchContactsInteractor {
 
-    interface OnFetchContactsListener {
-        fun onSuccess(data: List<Contact>)
-        fun onError()
+    fun interface OnFetchContactsListener {
+        fun onFinish(result: Result<List<Contact>>)
     }
 
     fun fetchData(
