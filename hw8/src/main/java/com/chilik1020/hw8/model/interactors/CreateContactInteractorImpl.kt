@@ -6,8 +6,9 @@ import com.chilik1020.hw8.model.repositories.ContactRepository
 class CreateContactInteractorImpl : CreateContactInteractor {
     override fun createContact(
         contact: Contact,
-        repository: ContactRepository
+        repository: ContactRepository,
+        listener: CreateContactInteractor.OnCreateContactListener
     ) {
-        repository.addContact(contact)
+        repository.addContact(contact, listener)
     }
 }

@@ -2,6 +2,7 @@ package com.chilik1020.hw8.model.repositories
 
 import android.util.Log
 import com.chilik1020.hw8.model.entities.Contact
+import com.chilik1020.hw8.model.interactors.CreateContactInteractor
 import com.chilik1020.hw8.model.interactors.EditContactInteractor
 import com.chilik1020.hw8.model.interactors.FetchContactsInteractor
 import com.chilik1020.hw8.model.local.ContactDao
@@ -36,7 +37,10 @@ class ContactRepositoryRxJavaImpl(private val contactDao: ContactDao) : ContactR
             )
     }
 
-    override fun addContact(contact: Contact) {
+    override fun addContact(
+        contact: Contact,
+        listener: CreateContactInteractor.OnCreateContactListener
+    ) {
         Log.d(LOG_TAG_APP, "RxJava: addContact")
         val subscribe = contactDao.addRx(contact)
             .subscribeOn(Schedulers.io())

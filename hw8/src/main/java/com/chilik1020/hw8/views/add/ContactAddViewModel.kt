@@ -34,8 +34,19 @@ class ContactAddViewModel(
     val contactInfoHint: LiveData<String>
         get() = contactInfoHintMutable
 
+    private val listener = object : CreateContactInteractor.OnCreateContactListener {
+        override fun onSuccess() {
+            Log.d(LOG_TAG_APP, "Contact created")
+        }
+
+        override fun onError() {
+            Log.d(LOG_TAG_APP, "Something went wrong while creating contact")
+        }
+
+    }
+
     fun saveContact() {
-        contact.value?.let { interactor.createContact(it, repository) }
+        contact.value?.let { interactor.createContact(it, repository, listener) }
     }
 
     fun setContactType(type: ContactType) {
