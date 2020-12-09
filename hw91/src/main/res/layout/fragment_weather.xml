@@ -23,11 +23,11 @@
         android:id="@+id/ivWeatherIcon"
         android:layout_width="52dp"
         android:layout_height="52dp"
+        android:contentDescription="@string/current_weather_icon_description"
         app:layout_constraintBottom_toTopOf="@id/ivWeatherIcon"
         app:layout_constraintStart_toEndOf="@id/tvCityName"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_default_icon"
-        android:contentDescription="@string/current_weather_icon_description" />
+        tools:src="@drawable/ic_default_icon" />
 
     <TextView
         android:id="@+id/tvCityName"
@@ -65,8 +65,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/default_margin"
-        app:layout_constraintEnd_toEndOf="@id/glVerticalEnd"
-        app:layout_constraintStart_toStartOf="@id/glVerticalStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvWeatherDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

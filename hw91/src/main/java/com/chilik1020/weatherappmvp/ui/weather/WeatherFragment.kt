@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.chilik1020.weatherappmvp.databinding.FragmentWeatherBinding
 import com.chilik1020.weatherappmvp.model.entities.WeatherForecastTopObject
@@ -21,6 +22,8 @@ class WeatherFragment : Fragment() {
     private val weatherApi = WeatherApiImpl()
     private lateinit var subscribe: Disposable
 
+    private val adapterWeatherForecast = WeatherForecastAdapter()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,12 +35,22 @@ class WeatherFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViews()
+
         subscribe = weatherApi.getHourlyForecastWeather()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { setFields(it) },
                 { Log.d(LOG_TAG, it.message.toString()) }
             )
+    }
+
+    private fun initViews() {
+        binding.rvWeatherForecast.apply {
+            adapter = adapterWeatherForecast
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        }
     }
 
     private fun setFields(data: WeatherForecastTopObject) {
@@ -48,6 +61,8 @@ class WeatherFragment : Fragment() {
             Glide.with(root)
                 .load(ICON_BASE_URL.format(data.current.weatherList[0].icon))
                 .into(ivWeatherIcon)
+
+            adapterWeatherForecast.setData(data.hourlyList)
         }
     }
 }
