@@ -1,8 +1,9 @@
 package com.chilik1020.weatherappmvp.model.entities
 
-data class WeatherTopObject(
+data class WeatherCurrentTopObject(
     val id: Int,
     val name: String,
+    val coord: Coord,
     val weatherList: List<Weather>,
     val main: Main
 )
@@ -16,4 +17,9 @@ data class Weather(
 
 data class Main(
     val temp: String
+)
+
+data class Coord(
+    val lon: String,
+    val lat: String
 )
