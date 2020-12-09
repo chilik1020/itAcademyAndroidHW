@@ -1,4 +1,5 @@
 package com.chilik1020.weatherappmvp.utils
 
-const val BASE_URL = "api.openweathermap.org"
-const val API_KEY = "1a072e12a6d24555f80e76e5f3a5e57e"
+const val REQUEST_BASE_URL = "http://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s&units=%s"
+const val API_KEY = ""
+const val ICON_BASE_URL = "http://openweathermap.org/img/wn/%s@2x.png"
