@@ -9,4 +9,11 @@ interface RequestFactory {
         apiKey: String,
         units: String
     ): Request
+
+    fun getHourlyWeatherForecastRequest(
+        lat: String,
+        lon: String,
+        apiKey: String,
+        units: String
+    ): Request
 }

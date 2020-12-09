@@ -1,12 +1,22 @@
 package com.chilik1020.weatherappmvp.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.chilik1020.weatherappmvp.R
+import androidx.appcompat.app.AppCompatActivity
+import com.chilik1020.weatherappmvp.databinding.ActivityMainBinding
+import com.chilik1020.weatherappmvp.ui.weather.WeatherFragment
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        supportFragmentManager.beginTransaction()
+            .add(binding.fragmentContainer.id, WeatherFragment())
+            .commit()
     }
 }
