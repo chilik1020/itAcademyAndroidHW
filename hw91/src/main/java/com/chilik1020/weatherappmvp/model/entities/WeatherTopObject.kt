@@ -3,7 +3,7 @@ package com.chilik1020.weatherappmvp.model.entities
 data class WeatherTopObject(
     val id: Int,
     val name: String,
-    val weather: Weather,
+    val weatherList: List<Weather>,
     val main: Main
 )
 

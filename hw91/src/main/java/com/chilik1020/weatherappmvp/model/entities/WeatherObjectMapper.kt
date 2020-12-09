@@ -9,13 +9,19 @@ class WeatherObjectMapper : (String) -> WeatherTopObject {
         val id = jsonMainObject.getInt("id")
         val name = jsonMainObject.getString("name")
 
-        val jsonWeather = jsonMainObject.getJSONObject("weather")
-        val weather = Weather(
-            id = jsonWeather.getInt("id"),
-            main = jsonWeather.getString("main"),
-            description = jsonWeather.getString("description"),
-            icon = jsonWeather.getString("icon")
-        )
+        val jsonWeatherArray = jsonMainObject.getJSONArray("weather")
+        val weatherList = mutableListOf<Weather>()
+        for (i  in 0 until jsonWeatherArray.length()) {
+            val jsonWeather  = jsonWeatherArray.getJSONObject(i)
+            val weather = Weather(
+                id = jsonWeather.getInt("id"),
+                main = jsonWeather.getString("main"),
+                description = jsonWeather.getString("description"),
+                icon = jsonWeather.getString("icon")
+            )
+            weatherList.add(weather)
+        }
+
 
         val jsonMain = jsonMainObject.getJSONObject("main")
         val main = Main(
@@ -23,7 +29,7 @@ class WeatherObjectMapper : (String) -> WeatherTopObject {
         )
 
         return WeatherTopObject(
-            id, name, weather, main
+            id, name, weatherList, main
         )
     }
 }
