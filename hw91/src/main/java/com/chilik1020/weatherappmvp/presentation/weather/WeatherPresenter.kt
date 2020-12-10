@@ -10,6 +10,7 @@ class WeatherPresenter(private val useCase: ForecastWeatherUseCase) :
     private var view: WeatherContract.View? = null
 
     override fun loadData() {
+        view?.render(WeatherForecastViewState.Loading)
         useCase.getHourlyForecast(lat = "53.9", lon = "20.0", listener = this)
     }
 
@@ -24,9 +25,10 @@ class WeatherPresenter(private val useCase: ForecastWeatherUseCase) :
     override fun onResponse(data: Result<WeatherForecastTopObject>) {
         when (data) {
             is Result.Success -> {
-                view?.setData(data.data)
+                view?.render(WeatherForecastViewState.Loaded(data.data))
             }
             is Result.Failure -> {
+                view?.render(WeatherForecastViewState.Error("Error"))
             }
         }
     }

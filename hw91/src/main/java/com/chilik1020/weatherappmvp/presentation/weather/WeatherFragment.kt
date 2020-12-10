@@ -65,8 +65,16 @@ class WeatherFragment : Fragment(), WeatherContract.View {
         presenter.detachView()
     }
 
-    override fun setData(data: WeatherForecastTopObject) {
-        setFields(data)
+    override fun render(state: WeatherForecastViewState) {
+        when (state) {
+            is WeatherForecastViewState.Loading -> {
+            }
+            is WeatherForecastViewState.Loaded -> {
+                setFields(state.data)
+            }
+            is WeatherForecastViewState.Error -> {
+            }
+        }
     }
 
     private fun initViews() {
