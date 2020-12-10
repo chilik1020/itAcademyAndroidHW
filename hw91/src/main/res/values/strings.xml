@@ -2,4 +2,7 @@
     <string name="app_name">WeatherAppMvp</string>
     <string name="current_weather_icon_description">Current weather icon</string>
     <string name="add_city_image_description">add_city</string>
+    <string name="weather">Weather</string>
+    <string name="imperial">Imperial</string>
+    <string name="metric">Metric</string>
 </resources>

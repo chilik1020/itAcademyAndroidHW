@@ -8,8 +8,8 @@ import com.chilik1020.weatherappmvp.data.remote.RequestFactory
 import com.chilik1020.weatherappmvp.data.remote.RequestFactoryImpl
 import com.chilik1020.weatherappmvp.data.remote.WeatherApi
 import com.chilik1020.weatherappmvp.data.remote.WeatherApiImpl
-import com.chilik1020.weatherappmvp.domain.WeatherContract
-import com.chilik1020.weatherappmvp.domain.WeatherPresenter
+import com.chilik1020.weatherappmvp.presentation.weather.WeatherContract
+import com.chilik1020.weatherappmvp.presentation.weather.WeatherPresenter
 import com.chilik1020.weatherappmvp.utils.SHARED_PREF_NAME
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidApplication
@@ -32,6 +32,6 @@ val remoteModule = module {
     factory<WeatherApi> { WeatherApiImpl(get(), get(), get(), get()) }
 }
 
-val domainModule = module {
+val presenterModule = module {
     single<WeatherContract.Presenter> { WeatherPresenter(get()) }
 }

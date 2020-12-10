@@ -1,4 +1,4 @@
-package com.chilik1020.weatherappmvp.domain
+package com.chilik1020.weatherappmvp.presentation.weather
 
 import android.util.Log
 import com.chilik1020.weatherappmvp.data.remote.WeatherApi

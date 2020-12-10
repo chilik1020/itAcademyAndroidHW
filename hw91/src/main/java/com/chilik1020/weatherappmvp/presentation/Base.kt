@@ -1,4 +1,4 @@
-package com.chilik1020.weatherappmvp.domain
+package com.chilik1020.weatherappmvp.presentation
 
 interface MvpView
 interface MvpPresenter<V : MvpView> {
