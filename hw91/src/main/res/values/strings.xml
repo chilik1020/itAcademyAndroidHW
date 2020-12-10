@@ -5,4 +5,6 @@
     <string name="weather">Weather</string>
     <string name="imperial">Imperial</string>
     <string name="metric">Metric</string>
+    <string name="settings">Settings</string>
+    <string name="city">City</string>
 </resources>

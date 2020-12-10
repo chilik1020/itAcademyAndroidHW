@@ -4,7 +4,7 @@ import com.chilik1020.weatherappmvp.data.entities.WeatherCurrentTopObject
 
 interface CurrentWeatherUseCase {
 
-    interface OnFinished {
+    fun interface OnFinished {
         fun onResponse(result: Result<WeatherCurrentTopObject>)
     }
 

@@ -36,3 +36,8 @@ data class Coord(
     val lon: String,
     val lat: String
 )
+
+enum class Units(val value: String) {
+    METRIC("metric"),
+    IMPERIAL("imperial")
+}

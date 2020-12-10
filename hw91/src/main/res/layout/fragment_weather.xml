@@ -20,15 +20,15 @@
         app:layout_constraintGuide_end="16dp" />
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarWeatherFrag"
+        android:id="@+id/toolbarSettingsFrag"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/teal_700"
-        app:title="@string/weather"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="@string/weather" />
 
     <ImageView
         android:id="@+id/ivWeatherIcon"
@@ -38,7 +38,7 @@
         android:contentDescription="@string/current_weather_icon_description"
         app:layout_constraintBottom_toTopOf="@id/ivWeatherIcon"
         app:layout_constraintStart_toEndOf="@id/tvCityName"
-        app:layout_constraintTop_toBottomOf="@id/toolbarWeatherFrag"
+        app:layout_constraintTop_toBottomOf="@id/toolbarSettingsFrag"
         tools:src="@drawable/ic_default_icon" />
 
     <TextView
@@ -82,7 +82,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvWeatherDescription" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAddCity"
+        android:id="@+id/fabNavigateToCityFrag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/default_margin"

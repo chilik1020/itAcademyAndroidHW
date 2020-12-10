@@ -11,3 +11,5 @@ const val LOG_TAG = "WEATHERTAG"
 
 const val SHARED_PREF_NAME = "sharedPref"
 const val UNITS_SYSTEM = "unitsSystem"
+
+const val DATABASE_NAME = "appWeatherDatabase"
