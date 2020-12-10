@@ -1,15 +1,14 @@
 package com.chilik1020.weatherappmvp.domain
 
 import android.util.Log
-import com.chilik1020.weatherappmvp.data.remote.WeatherApiImpl
+import com.chilik1020.weatherappmvp.data.remote.WeatherApi
 import com.chilik1020.weatherappmvp.utils.LOG_TAG
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 
-class WeatherPresenter : WeatherContract.Presenter {
+class WeatherPresenter(private val weatherApi: WeatherApi) : WeatherContract.Presenter {
 
     private var view: WeatherContract.View? = null
-    private val weatherApi = WeatherApiImpl()
     private lateinit var subscribe: Disposable
 
     override fun loadData() {

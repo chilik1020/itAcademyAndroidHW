@@ -10,13 +10,13 @@ import com.bumptech.glide.Glide
 import com.chilik1020.weatherappmvp.data.entities.WeatherForecastTopObject
 import com.chilik1020.weatherappmvp.databinding.FragmentWeatherBinding
 import com.chilik1020.weatherappmvp.domain.WeatherContract
-import com.chilik1020.weatherappmvp.domain.WeatherPresenter
 import com.chilik1020.weatherappmvp.utils.ICON_BASE_URL
+import org.koin.android.ext.android.inject
 
 class WeatherFragment : Fragment(), WeatherContract.View {
 
     private lateinit var binding: FragmentWeatherBinding
-    private lateinit var presenter: WeatherPresenter
+    private val presenter: WeatherContract.Presenter by inject()
 
     private val adapterWeatherForecast = WeatherForecastAdapter()
 

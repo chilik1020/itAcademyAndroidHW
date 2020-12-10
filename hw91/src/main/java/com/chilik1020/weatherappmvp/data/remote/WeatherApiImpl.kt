@@ -12,10 +12,10 @@ import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 
 class WeatherApiImpl(
-    private val okHttpClient: OkHttpClient = OkHttpClient(),
-    private val requestFactory: RequestFactory = RequestFactoryImpl(),
-    private val weatherCurrentMapper: WeatherCurrentMapper = WeatherCurrentMapper(),
-    private val weatherForecastMapper: WeatherForecastMapper = WeatherForecastMapper()
+    private val okHttpClient: OkHttpClient,
+    private val requestFactory: RequestFactory,
+    private val weatherCurrentMapper: WeatherCurrentMapper,
+    private val weatherForecastMapper: WeatherForecastMapper
 ) : WeatherApi {
 
     override fun getCurrentWeather(

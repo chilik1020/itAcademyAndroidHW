@@ -8,3 +8,5 @@ const val API_KEY = ""
 const val ICON_BASE_URL = "http://openweathermap.org/img/wn/%s@2x.png"
 
 const val LOG_TAG = "WEATHERTAG"
+
+const val SHARED_PREF_NAME = "sharedPref"
