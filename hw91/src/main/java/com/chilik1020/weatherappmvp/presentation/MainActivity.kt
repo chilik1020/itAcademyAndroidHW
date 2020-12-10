@@ -1,9 +1,9 @@
-package com.chilik1020.weatherappmvp.ui
+package com.chilik1020.weatherappmvp.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.chilik1020.weatherappmvp.databinding.ActivityMainBinding
-import com.chilik1020.weatherappmvp.ui.weather.WeatherFragment
+import com.chilik1020.weatherappmvp.presentation.weather.WeatherFragment
 
 class MainActivity : AppCompatActivity() {
 

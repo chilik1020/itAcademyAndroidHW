@@ -1,10 +1,10 @@
-package com.chilik1020.weatherappmvp.model.remote
+package com.chilik1020.weatherappmvp.data.remote
 
 import android.util.Log
-import com.chilik1020.weatherappmvp.model.entities.WeatherCurrentMapper
-import com.chilik1020.weatherappmvp.model.entities.WeatherFore
-import com.chilik1020.weatherappmvp.model.entities.WeatherForecastMapper
-import com.chilik1020.weatherappmvp.model.entities.WeatherForecastTopObject
+import com.chilik1020.weatherappmvp.data.entities.WeatherCurrentMapper
+import com.chilik1020.weatherappmvp.data.entities.WeatherCurrentTopObject
+import com.chilik1020.weatherappmvp.data.entities.WeatherForecastMapper
+import com.chilik1020.weatherappmvp.data.entities.WeatherForecastTopObject
 import com.chilik1020.weatherappmvp.utils.LOG_TAG
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -22,7 +22,7 @@ class WeatherApiImpl(
         location: String,
         apiKey: String,
         units: String
-    ): Single<WeatherFore> {
+    ): Single<WeatherCurrentTopObject> {
         val request = requestFactory.getCurrentWeatherRequest(location, apiKey, units)
         return Single.create<String> { emitter ->
             val response = okHttpClient.newCall(request).execute()

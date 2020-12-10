@@ -1,11 +1,11 @@
-package com.chilik1020.weatherappmvp.ui.weather
+package com.chilik1020.weatherappmvp.presentation.weather
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.chilik1020.weatherappmvp.databinding.ItemWeatherForecastBinding
-import com.chilik1020.weatherappmvp.model.entities.WeatherAtTimeStamp
+import com.chilik1020.weatherappmvp.data.entities.WeatherAtTimeStamp
 import com.chilik1020.weatherappmvp.utils.ICON_BASE_URL
 
 class WeatherForecastAdapter :

@@ -1,4 +1,4 @@
-package com.chilik1020.weatherappmvp.model.entities
+package com.chilik1020.weatherappmvp.data.entities
 
 import org.json.JSONObject
 

@@ -1,6 +1,6 @@
-package com.chilik1020.weatherappmvp.model.entities
+package com.chilik1020.weatherappmvp.data.entities
 
-data class WeatherFore(
+data class WeatherCurrentTopObject(
     val id: Int,
     val name: String,
     val coord: Coord,

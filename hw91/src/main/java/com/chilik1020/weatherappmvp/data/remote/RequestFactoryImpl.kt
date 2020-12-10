@@ -1,9 +1,8 @@
-package com.chilik1020.weatherappmvp.model.remote
+package com.chilik1020.weatherappmvp.data.remote
 
 import com.chilik1020.weatherappmvp.utils.REQUEST_CURRENT_BASE_URL
 import com.chilik1020.weatherappmvp.utils.REQUEST_FORECAST_BASE_URL
 import okhttp3.Request
-
 
 class RequestFactoryImpl : RequestFactory {
     override fun getCurrentWeatherRequest(

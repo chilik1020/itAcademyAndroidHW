@@ -1,9 +1,9 @@
-package com.chilik1020.weatherappmvp.model.entities
+package com.chilik1020.weatherappmvp.data.entities
 
 import org.json.JSONObject
 
-class WeatherCurrentMapper : (String) -> WeatherFore {
-    override fun invoke(json: String): WeatherFore {
+class WeatherCurrentMapper : (String) -> WeatherCurrentTopObject {
+    override fun invoke(json: String): WeatherCurrentTopObject {
         val jsonMainObject = JSONObject(json)
 
         val id = jsonMainObject.getInt("id")
@@ -33,7 +33,7 @@ class WeatherCurrentMapper : (String) -> WeatherFore {
             temp = jsonMain.getString("temp")
         )
 
-        return WeatherFore(
+        return WeatherCurrentTopObject(
             id, name, coord, weatherList, main
         )
     }

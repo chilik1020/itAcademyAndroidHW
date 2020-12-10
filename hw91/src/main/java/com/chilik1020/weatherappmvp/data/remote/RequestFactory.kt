@@ -1,4 +1,4 @@
-package com.chilik1020.weatherappmvp.model.remote
+package com.chilik1020.weatherappmvp.data.remote
 
 import okhttp3.Request
 

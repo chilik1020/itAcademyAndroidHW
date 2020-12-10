@@ -1,8 +1,8 @@
-package com.chilik1020.weatherappmvp.model.remote
+package com.chilik1020.weatherappmvp.data.remote
 
-import com.chilik1020.weatherappmvp.model.entities.Units
-import com.chilik1020.weatherappmvp.model.entities.WeatherFore
-import com.chilik1020.weatherappmvp.model.entities.WeatherForecastTopObject
+import com.chilik1020.weatherappmvp.data.entities.Units
+import com.chilik1020.weatherappmvp.data.entities.WeatherCurrentTopObject
+import com.chilik1020.weatherappmvp.data.entities.WeatherForecastTopObject
 import com.chilik1020.weatherappmvp.utils.API_KEY
 import io.reactivex.Single
 
@@ -12,7 +12,7 @@ interface WeatherApi {
         location: String = "Minsk",
         apiKey: String = API_KEY,
         units: String = Units.METRIC.value
-    ): Single<WeatherFore>
+    ): Single<WeatherCurrentTopObject>
 
     fun getHourlyForecastWeather(
         lat: String = "53.9",
