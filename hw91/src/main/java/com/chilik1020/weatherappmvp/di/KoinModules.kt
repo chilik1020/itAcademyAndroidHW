@@ -2,8 +2,9 @@ package com.chilik1020.weatherappmvp.di
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.chilik1020.weatherappmvp.data.entities.WeatherCurrentMapper
-import com.chilik1020.weatherappmvp.data.entities.WeatherForecastMapper
+import com.chilik1020.weatherappmvp.data.entities.JsonToWeatherCurrentMapper
+import com.chilik1020.weatherappmvp.data.entities.JsonToWeatherForecastMapper
+import com.chilik1020.weatherappmvp.data.entities.WeatherForecastToDomainMapperImpl
 import com.chilik1020.weatherappmvp.data.remote.RequestFactory
 import com.chilik1020.weatherappmvp.data.remote.RequestFactoryImpl
 import com.chilik1020.weatherappmvp.data.remote.WeatherApi
@@ -12,6 +13,8 @@ import com.chilik1020.weatherappmvp.data.repositories.WeatherRepository
 import com.chilik1020.weatherappmvp.data.repositories.WeatherRepositoryImpl
 import com.chilik1020.weatherappmvp.domain.ForecastWeatherUseCase
 import com.chilik1020.weatherappmvp.domain.ForecastWeatherUseCaseImpl
+import com.chilik1020.weatherappmvp.presentation.models.WeatherForecastDomainToUiMapperImpl
+import com.chilik1020.weatherappmvp.presentation.models.WeatherForecastDomainToUiMapper
 import com.chilik1020.weatherappmvp.presentation.weather.WeatherContract
 import com.chilik1020.weatherappmvp.presentation.weather.WeatherPresenter
 import com.chilik1020.weatherappmvp.utils.SHARED_PREF_NAME
@@ -29,16 +32,24 @@ val appModule = module {
 }
 
 val presenterModule = module {
-    single<WeatherContract.Presenter> { WeatherPresenter(get()) }
+    factory<WeatherForecastDomainToUiMapper> { WeatherForecastDomainToUiMapperImpl() }
+    single<WeatherContract.Presenter> { WeatherPresenter(get(), get()) }
 }
 
 val dataModule = module {
     factory<RequestFactory> { RequestFactoryImpl() }
     factory<OkHttpClient> { OkHttpClient() }
-    factory { WeatherCurrentMapper() }
-    factory { WeatherForecastMapper() }
+    factory { JsonToWeatherCurrentMapper() }
+    factory { JsonToWeatherForecastMapper() }
+    factory { WeatherForecastToDomainMapperImpl() }
     factory<WeatherApi> { WeatherApiImpl(get(), get(), get(), get()) }
-    factory<WeatherRepository> { WeatherRepositoryImpl(weatherApi = get(), pref = get()) }
+    factory<WeatherRepository> {
+        WeatherRepositoryImpl(
+            weatherApi = get(),
+            pref = get(),
+            forecastMapper = get()
+        )
+    }
 }
 
 val useCaseModule = module {

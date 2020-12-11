@@ -2,7 +2,7 @@ package com.chilik1020.weatherappmvp.data.entities
 
 import org.json.JSONObject
 
-class WeatherCurrentMapper : (String) -> WeatherCurrentTopObject {
+class JsonToWeatherCurrentMapper : (String) -> WeatherCurrentTopObject {
     override fun invoke(json: String): WeatherCurrentTopObject {
         val jsonMainObject = JSONObject(json)
 

@@ -1,9 +1,9 @@
 package com.chilik1020.weatherappmvp.data.remote
 
 import android.util.Log
-import com.chilik1020.weatherappmvp.data.entities.WeatherCurrentMapper
+import com.chilik1020.weatherappmvp.data.entities.JsonToWeatherCurrentMapper
 import com.chilik1020.weatherappmvp.data.entities.WeatherCurrentTopObject
-import com.chilik1020.weatherappmvp.data.entities.WeatherForecastMapper
+import com.chilik1020.weatherappmvp.data.entities.JsonToWeatherForecastMapper
 import com.chilik1020.weatherappmvp.data.entities.WeatherForecastTopObject
 import com.chilik1020.weatherappmvp.utils.LOG_TAG
 import io.reactivex.Single
@@ -14,8 +14,8 @@ import okhttp3.ResponseBody
 class WeatherApiImpl(
     private val okHttpClient: OkHttpClient,
     private val requestFactory: RequestFactory,
-    private val weatherCurrentMapper: WeatherCurrentMapper,
-    private val weatherForecastMapper: WeatherForecastMapper
+    private val weatherCurrentMapper: JsonToWeatherCurrentMapper,
+    private val weatherForecastMapper: JsonToWeatherForecastMapper
 ) : WeatherApi {
 
     override fun getCurrentWeather(

@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.chilik1020.weatherappmvp.R
 import com.chilik1020.weatherappmvp.data.entities.WeatherForecastTopObject
 import com.chilik1020.weatherappmvp.databinding.FragmentWeatherBinding
+import com.chilik1020.weatherappmvp.presentation.models.WeatherForecastUiModel
 import com.chilik1020.weatherappmvp.presentation.settings.SettingsFragment
 import com.chilik1020.weatherappmvp.utils.ICON_BASE_URL
 import org.koin.android.ext.android.inject
@@ -89,7 +90,7 @@ class WeatherFragment : Fragment(), WeatherContract.View {
         }
     }
 
-    private fun setFields(data: WeatherForecastTopObject) {
+    private fun setFields(data: WeatherForecastUiModel) {
         with(binding) {
             tvCityName.text = "${data.lat} ${data.lon}"
             tvTempCurrent.text = data.current.temp
