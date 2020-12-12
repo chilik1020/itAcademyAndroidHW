@@ -37,6 +37,7 @@ class WeatherFragment : Fragment(), WeatherContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        presenter.attachView(this)
         initViews()
     }
 
@@ -78,7 +79,6 @@ class WeatherFragment : Fragment(), WeatherContract.View {
     private fun initViews() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarWeatherFrag)
         setHasOptionsMenu(true)
-        presenter.attachView(this)
 
         binding.rvWeatherForecast.apply {
             adapter = adapterWeatherForecast

@@ -21,7 +21,7 @@ class WeatherApp : Application() {
         startKoin {
             androidLogger()
             androidContext(this@WeatherApp)
-            modules(appModule, roomModule, dataModule, presentationModule, domainModule)
+            modules(appModule, roomModule, domainModule, dataModule, presentationModule)
         }
     }
 }

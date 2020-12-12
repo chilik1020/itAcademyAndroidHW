@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import androidx.room.Room
 import com.chilik1020.weatherappmvp.data.entities.CityDomainToDataMapper
 import com.chilik1020.weatherappmvp.data.entities.CityDomainToDataMapperImpl
+import com.chilik1020.weatherappmvp.data.entities.CityToDomainMapperImpl
 import com.chilik1020.weatherappmvp.data.entities.JsonToWeatherCurrentMapper
 import com.chilik1020.weatherappmvp.data.entities.JsonToWeatherForecastMapper
 import com.chilik1020.weatherappmvp.data.entities.WeatherForecastToDomainMapperImpl
@@ -22,9 +23,14 @@ import com.chilik1020.weatherappmvp.domain.CityAddUseCase
 import com.chilik1020.weatherappmvp.domain.CityAddUseCaseImpl
 import com.chilik1020.weatherappmvp.domain.CityListUseCase
 import com.chilik1020.weatherappmvp.domain.CityListUseCaseImpl
+import com.chilik1020.weatherappmvp.domain.CurrentWeatherUseCase
+import com.chilik1020.weatherappmvp.domain.CurrentWeatherUseCaseImpl
 import com.chilik1020.weatherappmvp.domain.ForecastWeatherUseCase
 import com.chilik1020.weatherappmvp.domain.ForecastWeatherUseCaseImpl
+import com.chilik1020.weatherappmvp.domain.models.CityToDomainMapper
 import com.chilik1020.weatherappmvp.domain.models.WeatherForecastToDomainMapper
+import com.chilik1020.weatherappmvp.presentation.addcity.AddCityContract
+import com.chilik1020.weatherappmvp.presentation.addcity.AddCityPresenter
 import com.chilik1020.weatherappmvp.presentation.city.CityContract
 import com.chilik1020.weatherappmvp.presentation.city.CityPresenter
 import com.chilik1020.weatherappmvp.presentation.models.CityDomainToUiMapper
@@ -62,27 +68,6 @@ val roomModule = module {
     single { provideCityDao(get()) }
 }
 
-val presentationModule = module {
-    factory<WeatherForecastDomainToUiMapper> { WeatherForecastDomainToUiMapperImpl() }
-    factory<CityDomainToUiMapper> { CityDomainToUiMapperImpl() }
-    factory<CityUiToDomainMapper> { CityUiToDomainMapperImpl() }
-
-    single<WeatherContract.Presenter> {
-        WeatherPresenter(
-            useCase = get(),
-            forecastDomainToUiMapper = get()
-        )
-    }
-    single<CityContract.Presenter> {
-        CityPresenter(
-            cityListUseCase = get(),
-            cityAddUseCase = get(),
-            currentWeatherUseCase = get(),
-            cityDomainToUiMapper = get(),
-            cityUiToDomainMapper = get()
-        )
-    }
-}
 
 val dataModule = module {
     factory<RequestFactory> { RequestFactoryImpl() }
@@ -120,7 +105,35 @@ val dataModule = module {
 
 val domainModule = module {
     factory<ForecastWeatherUseCase> { ForecastWeatherUseCaseImpl(weatherRepository = get()) }
+    factory<CurrentWeatherUseCase> { CurrentWeatherUseCaseImpl(weatherRepository = get()) }
     factory<CityListUseCase> { CityListUseCaseImpl(cityRepository = get()) }
     factory<CityAddUseCase> { CityAddUseCaseImpl(cityRepository = get()) }
 }
 
+val presentationModule = module {
+    factory<WeatherForecastDomainToUiMapper> { WeatherForecastDomainToUiMapperImpl() }
+    factory<CityDomainToUiMapper> { CityDomainToUiMapperImpl() }
+    factory<CityUiToDomainMapper> { CityUiToDomainMapperImpl() }
+    factory<CityToDomainMapper> { CityToDomainMapperImpl() }
+
+    single<WeatherContract.Presenter> {
+        WeatherPresenter(
+            useCase = get(),
+            forecastDomainToUiMapper = get()
+        )
+    }
+    single<CityContract.Presenter> {
+        CityPresenter(
+            cityListUseCase = get(),
+            cityDomainToUiMapper = get()
+        )
+    }
+
+    single<AddCityContract.Presenter> {
+        AddCityPresenter(
+            cityAddUseCase = get(),
+            currentWeatherUseCase = get(),
+            cityUiToDomainMapper = get()
+        )
+    }
+}
