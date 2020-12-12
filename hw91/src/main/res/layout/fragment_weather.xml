@@ -38,7 +38,7 @@
         android:contentDescription="@string/current_weather_icon_description"
         app:layout_constraintBottom_toTopOf="@id/ivWeatherIcon"
         app:layout_constraintStart_toEndOf="@id/tvCityName"
-        app:layout_constraintTop_toBottomOf="@id/toolbarSettingsFrag"
+        app:layout_constraintTop_toBottomOf="@id/toolbarWeatherFrag"
         tools:src="@drawable/ic_default_icon" />
 
     <TextView

@@ -4,9 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.chilik1020.weatherappmvp.databinding.ItemWeatherForecastBinding
 import com.chilik1020.weatherappmvp.data.entities.WeatherAtTimeStamp
+import com.chilik1020.weatherappmvp.databinding.ItemWeatherForecastBinding
 import com.chilik1020.weatherappmvp.utils.ICON_BASE_URL
+import com.chilik1020.weatherappmvp.utils.timeFromStamp
 
 class WeatherForecastAdapter :
     RecyclerView.Adapter<WeatherForecastAdapter.WeatherAtTimeStampViewHolder>() {
@@ -43,7 +44,7 @@ class WeatherForecastAdapter :
                     .load(ICON_BASE_URL.format(data.weatherList[0].icon))
                     .into(ivWeatherIcon)
 
-                tvTimeStamp.text = data.dt.toString()
+                tvTimeStamp.text = timeFromStamp(data.dt)
                 tvTemperature.text = data.temp
                 tvWeatherDescription.text = data.weatherList[0].description
             }
