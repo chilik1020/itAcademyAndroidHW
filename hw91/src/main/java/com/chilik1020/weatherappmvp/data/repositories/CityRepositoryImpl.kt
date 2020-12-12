@@ -1,5 +1,6 @@
 package com.chilik1020.weatherappmvp.data.repositories
 
+import android.util.Log
 import com.chilik1020.weatherappmvp.data.entities.CityDomainToDataMapper
 import com.chilik1020.weatherappmvp.data.local.AppDatabase
 import com.chilik1020.weatherappmvp.data.local.CityDao
@@ -10,6 +11,7 @@ import com.chilik1020.weatherappmvp.domain.CityListUseCase
 import com.chilik1020.weatherappmvp.domain.Result
 import com.chilik1020.weatherappmvp.domain.models.CityDomainModel
 import com.chilik1020.weatherappmvp.domain.models.CityToDomainMapper
+import com.chilik1020.weatherappmvp.utils.LOG_TAG
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -75,30 +77,21 @@ class CityRepositoryImpl(
     }
 
     override fun setCityAsActive(city: CityDomainModel, listener: CityAsActiveUseCase.OnFinished) {
-//        val subs = cityDao.clearIsActiveCityField()
-//            .concatWith { cityDao.updateCityStatusByName(city.name) }
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe(
-//                {
-//                    listener.onResponse(Result.Success(it))
-//                },
-//                {
-//                    listener.onResponse(Result.Failure(it))
-//                }
-//            )
-
-        val subs = cityDao.updateCityStatusByName(city.name)
+        val subs = cityDao.clearIsActiveCityField()
+            .flatMap { cityDao.updateCityStatusByName(city.name) }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
+                    Log.d(LOG_TAG, "clear completed")
                     listener.onResponse(Result.Success(it))
                 },
                 {
+                    Log.d(LOG_TAG, "clear error")
                     listener.onResponse(Result.Failure(it))
                 }
             )
+
         disposables.add(subs)
     }
 }

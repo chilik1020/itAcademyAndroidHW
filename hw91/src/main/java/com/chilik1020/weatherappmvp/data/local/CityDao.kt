@@ -21,9 +21,6 @@ interface CityDao {
     @Insert
     fun addCity(city: City): Maybe<Long>
 
-    @Update
-    fun update(city: City): Single<Int>
-
     @Query("UPDATE cities SET isCurrentCity = 0 WHERE isCurrentCity = 1")
     fun clearIsActiveCityField(): Single<Int>
 
