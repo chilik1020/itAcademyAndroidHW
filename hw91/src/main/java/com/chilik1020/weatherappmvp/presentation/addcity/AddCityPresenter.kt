@@ -1,15 +1,14 @@
 package com.chilik1020.weatherappmvp.presentation.addcity
 
+import android.util.Log
+import com.chilik1020.weatherappmvp.domain.CheckCurrentWeatherForCityUseCase
 import com.chilik1020.weatherappmvp.domain.CityAddUseCase
-import com.chilik1020.weatherappmvp.domain.CurrentWeatherUseCase
 import com.chilik1020.weatherappmvp.domain.Result
-import com.chilik1020.weatherappmvp.presentation.models.CityUiModel
-import com.chilik1020.weatherappmvp.presentation.models.CityUiToDomainMapper
+import com.chilik1020.weatherappmvp.utils.LOG_TAG
 
 class AddCityPresenter(
     private val cityAddUseCase: CityAddUseCase,
-    private val currentWeatherUseCase: CurrentWeatherUseCase,
-    private val cityUiToDomainMapper: CityUiToDomainMapper
+    private val currentWeatherUseCase: CheckCurrentWeatherForCityUseCase
 ) : AddCityContract.Presenter {
 
     private var view: AddCityContract.View? = null
@@ -17,25 +16,24 @@ class AddCityPresenter(
     private val addCityListener = CityAddUseCase.OnFinished { result ->
         when (result) {
             is Result.Success -> {
-
+                view?.render(AddCityViewState.Loaded)
             }
             is Result.Failure -> {
-
+                view?.render(AddCityViewState.Error("Error while saving city"))
+                Log.d(LOG_TAG, result.error.toString())
             }
         }
     }
 
-    private val currentWeatherListener = CurrentWeatherUseCase.OnFinished { result ->
+    private val currentWeatherListener = CheckCurrentWeatherForCityUseCase.OnFinished { result ->
         when (result) {
             is Result.Success -> {
+                cityAddUseCase.addCity(result.data, addCityListener)
             }
             is Result.Failure -> {
+                view?.render(AddCityViewState.Error("City not found"))
             }
         }
-    }
-
-    override fun addCity(city: CityUiModel) {
-        cityAddUseCase.addCity(cityUiToDomainMapper.map(city), addCityListener)
     }
 
     override fun fetchWeatherForCityName(name: String) {

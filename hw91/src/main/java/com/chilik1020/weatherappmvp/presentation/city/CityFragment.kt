@@ -1,22 +1,29 @@
 package com.chilik1020.weatherappmvp.presentation.city
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.chilik1020.weatherappmvp.R
 import com.chilik1020.weatherappmvp.databinding.FragmentCityBinding
 import com.chilik1020.weatherappmvp.presentation.addcity.AddCityDialogFragment
+import com.chilik1020.weatherappmvp.utils.LOG_TAG
+import com.google.android.material.snackbar.Snackbar
 import org.koin.android.ext.android.inject
 
 class CityFragment : Fragment(), CityContract.View {
 
     private lateinit var binding: FragmentCityBinding
     private val presenter: CityContract.Presenter by inject()
-    private val cityAdapter = CityAdapter()
+
+    private val onCityItemClickListener = OnCityItemClickListener {
+        Log.d(LOG_TAG, it.toString())
+        presenter.setCityAsActive(it)
+    }
+    private val cityAdapter = CityAdapter(onCityItemClickListener)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,20 +58,19 @@ class CityFragment : Fragment(), CityContract.View {
     override fun render(state: CityViewState) {
         when (state) {
             is CityViewState.Loading -> {
+
             }
             is CityViewState.Loaded -> {
                 cityAdapter.setData(state.data)
             }
             is CityViewState.Error -> {
-
+                Snackbar.make(binding.root, state.error, Snackbar.LENGTH_SHORT).show()
             }
         }
     }
 
     private fun navigateToAddCityDialogFragment() {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, AddCityDialogFragment())
-            .addToBackStack(null)
-            .commit()
+        val dialogFragment = AddCityDialogFragment()
+        dialogFragment.show(requireActivity().supportFragmentManager, null)
     }
 }

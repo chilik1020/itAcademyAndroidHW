@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.chilik1020.weatherappmvp.databinding.FragmentDialogAddCityBinding
+import com.google.android.material.snackbar.Snackbar
 import org.koin.android.ext.android.inject
 
 class AddCityDialogFragment : DialogFragment(), AddCityContract.View {
@@ -39,14 +40,13 @@ class AddCityDialogFragment : DialogFragment(), AddCityContract.View {
 
             }
             AddCityViewState.Loaded -> {
-
+                dismiss()
             }
             is AddCityViewState.Error -> {
-
+                Snackbar.make(binding.root, state.error, Snackbar.LENGTH_SHORT).show()
             }
         }
     }
-
 
     private fun initViews() {
         binding.btnDone.setOnClickListener {

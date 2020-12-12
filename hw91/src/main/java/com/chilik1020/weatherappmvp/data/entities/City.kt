@@ -5,10 +5,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "cities")
 data class City(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val id: Long,
     val name: String,
     val lat: String,
     val lon: String,
-    val isCurrentCity: Boolean
+    var isCurrentCity: Boolean
 )

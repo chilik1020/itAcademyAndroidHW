@@ -11,7 +11,6 @@ interface AddCityContract {
     }
 
     interface Presenter : MvpPresenter<View> {
-        fun addCity(city: CityUiModel)
         fun fetchWeatherForCityName(name: String)
     }
 }

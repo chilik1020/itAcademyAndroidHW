@@ -17,6 +17,7 @@ import com.chilik1020.weatherappmvp.presentation.city.CityFragment
 import com.chilik1020.weatherappmvp.presentation.models.WeatherForecastUiModel
 import com.chilik1020.weatherappmvp.presentation.settings.SettingsFragment
 import com.chilik1020.weatherappmvp.utils.ICON_BASE_URL
+import com.google.android.material.snackbar.Snackbar
 import org.koin.android.ext.android.inject
 
 class WeatherFragment : Fragment(), WeatherContract.View {
@@ -69,9 +70,11 @@ class WeatherFragment : Fragment(), WeatherContract.View {
             is WeatherForecastViewState.Loading -> {
             }
             is WeatherForecastViewState.Loaded -> {
+                binding.tvCityName.text = state.city.name
                 setFields(state.data)
             }
             is WeatherForecastViewState.Error -> {
+                Snackbar.make(binding.root, state.error.toString(), Snackbar.LENGTH_SHORT).show()
             }
         }
     }
@@ -91,8 +94,8 @@ class WeatherFragment : Fragment(), WeatherContract.View {
 
     private fun setFields(data: WeatherForecastUiModel) {
         with(binding) {
-            tvCityName.text = "${data.lat} ${data.lon}"
-            tvTempCurrent.text = data.current.temp
+            val temp = data.current.temp + "°C"
+            tvTempCurrent.text = temp
             tvWeatherDescription.text = data.current.weatherList[0].description
             Glide.with(root)
                 .load(ICON_BASE_URL.format(data.current.weatherList[0].icon))

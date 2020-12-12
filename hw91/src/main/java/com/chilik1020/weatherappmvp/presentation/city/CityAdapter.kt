@@ -7,14 +7,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chilik1020.weatherappmvp.databinding.ItemCityBinding
 import com.chilik1020.weatherappmvp.presentation.models.CityUiModel
 
-class CityAdapter : RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
+class CityAdapter(private val listener: OnCityItemClickListener) :
+    RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
 
     private val list = mutableListOf<CityUiModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemCityBinding.inflate(inflater, parent, false)
-        return CityViewHolder(binding)
+        return CityViewHolder(binding, listener)
     }
 
     override fun onBindViewHolder(holder: CityViewHolder, position: Int) {
@@ -29,7 +30,10 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
         notifyDataSetChanged()
     }
 
-    class CityViewHolder(private val binding: ItemCityBinding) :
+    class CityViewHolder(
+        private val binding: ItemCityBinding,
+        private val listener: OnCityItemClickListener
+    ) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(city: CityUiModel) {
@@ -39,6 +43,8 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
             } else {
                 View.GONE
             }
+
+            binding.root.setOnClickListener { listener.onClick(city) }
         }
     }
 }
