@@ -6,7 +6,7 @@ import com.chilik1020.weatherappmvp.presentation.models.WeatherForecastDomainToU
 
 class WeatherPresenter(
     private val useCase: ForecastWeatherUseCase,
-    private val forecastToUiMapper: WeatherForecastDomainToUiMapper
+    private val forecastDomainToUiMapper: WeatherForecastDomainToUiMapper
 ) :
     WeatherContract.Presenter {
 
@@ -15,7 +15,7 @@ class WeatherPresenter(
     private val listener = ForecastWeatherUseCase.OnFinished {
         when (it) {
             is Result.Success -> {
-                view?.render(WeatherForecastViewState.Loaded(forecastToUiMapper.map(it.data)))
+                view?.render(WeatherForecastViewState.Loaded(forecastDomainToUiMapper.map(it.data)))
             }
             is Result.Failure -> {
                 view?.render(WeatherForecastViewState.Error("Error"))

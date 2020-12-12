@@ -1,6 +1,6 @@
 package com.chilik1020.weatherappmvp.data.entities
 
-data class WeatherCurrentTopObject(
+class WeatherCurrentTopObject(
     val id: Int,
     val name: String,
     val coord: Coord,
@@ -8,31 +8,31 @@ data class WeatherCurrentTopObject(
     val main: Main
 )
 
-data class WeatherForecastTopObject(
+class WeatherForecastTopObject(
     val lat: String,
     val lon: String,
     val current: WeatherAtTimeStamp,
     val hourlyList: List<WeatherAtTimeStamp>
 )
 
-data class WeatherAtTimeStamp(
+class WeatherAtTimeStamp(
     val dt: Long,
     val temp: String,
     val weatherList: List<Weather>
 )
 
-data class Weather(
+class Weather(
     val id: Int,
     val main: String,
     val description: String,
     val icon: String
 )
 
-data class Main(
+class Main(
     val temp: String
 )
 
-data class Coord(
+class Coord(
     val lon: String,
     val lat: String
 )
