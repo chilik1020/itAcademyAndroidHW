@@ -14,14 +14,14 @@ import com.chilik1020.weatherappmvvm.utils.LOG_TAG
 import com.google.android.material.snackbar.Snackbar
 import org.koin.android.ext.android.inject
 
-class CityFragment : Fragment(), CityContract.View {
+class CityFragment : Fragment() {
 
     private lateinit var binding: FragmentCityBinding
-    private val presenter: CityContract.Presenter by inject()
+    private val viewModel: CityViewModel by inject()
 
     private val onCityItemClickListener = OnCityItemClickListener {
         Log.d(LOG_TAG, it.toString())
-        presenter.setCityAsActive(it)
+        viewModel.setCityAsActive(it)
     }
     private val cityAdapter = CityAdapter(onCityItemClickListener)
 
@@ -36,26 +36,22 @@ class CityFragment : Fragment(), CityContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.attachView(this)
         binding.rvCityList.apply {
             adapter = cityAdapter
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         }
 
         binding.fabAddCityDialog.setOnClickListener { navigateToAddCityDialogFragment() }
+
+        viewModel.viewState.observe(viewLifecycleOwner) { render(it) }
     }
 
     override fun onResume() {
         super.onResume()
-        presenter.loadCities()
+        viewModel.loadCities()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.detachView()
-    }
-
-    override fun render(state: CityViewState) {
+    private fun render(state: CityViewState) {
         when (state) {
             is CityViewState.Loading -> {
                 binding.pbCitiesLoading.visibility = View.VISIBLE

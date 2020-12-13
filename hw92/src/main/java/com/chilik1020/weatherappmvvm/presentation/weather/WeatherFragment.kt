@@ -20,10 +20,10 @@ import com.chilik1020.weatherappmvvm.utils.ICON_BASE_URL
 import com.google.android.material.snackbar.Snackbar
 import org.koin.android.ext.android.inject
 
-class WeatherFragment : Fragment(), WeatherContract.View {
+class WeatherFragment : Fragment() {
 
     private lateinit var binding: FragmentWeatherBinding
-    private val presenter: WeatherContract.Presenter by inject()
+    private val viewModel: WeatherViewModel by inject()
 
     private val adapterWeatherForecast = WeatherForecastAdapter()
 
@@ -38,7 +38,6 @@ class WeatherFragment : Fragment(), WeatherContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.attachView(this)
         initViews()
     }
 
@@ -57,15 +56,10 @@ class WeatherFragment : Fragment(), WeatherContract.View {
 
     override fun onResume() {
         super.onResume()
-        presenter.loadData()
+        viewModel.loadData()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.detachView()
-    }
-
-    override fun render(state: WeatherForecastViewState) {
+    private fun render(state: WeatherForecastViewState) {
         when (state) {
             is WeatherForecastViewState.Loading -> {
                 binding.pbWeatherLoading.visibility = View.VISIBLE
@@ -85,6 +79,8 @@ class WeatherFragment : Fragment(), WeatherContract.View {
     private fun initViews() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarWeatherFrag)
         setHasOptionsMenu(true)
+
+        viewModel.viewState.observe(viewLifecycleOwner) { render(it) }
 
         binding.rvWeatherForecast.apply {
             adapter = adapterWeatherForecast

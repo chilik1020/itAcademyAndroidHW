@@ -9,10 +9,10 @@ import com.chilik1020.weatherappmvvm.databinding.FragmentDialogAddCityBinding
 import com.google.android.material.snackbar.Snackbar
 import org.koin.android.ext.android.inject
 
-class AddCityDialogFragment : DialogFragment(), AddCityContract.View {
+class AddCityDialogFragment : DialogFragment() {
 
     private lateinit var binding: FragmentDialogAddCityBinding
-    private val presenter: AddCityContract.Presenter by inject()
+    private val viewModel: AddCityViewModel by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,16 +25,10 @@ class AddCityDialogFragment : DialogFragment(), AddCityContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.attachView(this)
         initViews()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.detachView()
-    }
-
-    override fun render(state: AddCityViewState) {
+    private fun render(state: AddCityViewState) {
         when (state) {
             AddCityViewState.Loading -> {
                 binding.pbCityLoading.visibility = View.VISIBLE
@@ -53,10 +47,12 @@ class AddCityDialogFragment : DialogFragment(), AddCityContract.View {
     private fun initViews() {
         binding.btnDone.setOnClickListener {
             if (binding.etCityName.text.isNotEmpty()) {
-                presenter.fetchWeatherForCityName(binding.etCityName.text.toString())
+                viewModel.fetchWeatherForCityName(binding.etCityName.text.toString())
             }
         }
 
         binding.btnCancel.setOnClickListener { dismiss() }
+
+        viewModel.viewState.observe(viewLifecycleOwner) { render(it) }
     }
 }

@@ -37,8 +37,10 @@ import com.chilik1020.weatherappmvvm.domain.models.CityToDomainMapper
 import com.chilik1020.weatherappmvvm.domain.models.WeatherForecastToDomainMapper
 import com.chilik1020.weatherappmvvm.presentation.addcity.AddCityContract
 import com.chilik1020.weatherappmvvm.presentation.addcity.AddCityPresenter
+import com.chilik1020.weatherappmvvm.presentation.addcity.AddCityViewModel
 import com.chilik1020.weatherappmvvm.presentation.city.CityContract
 import com.chilik1020.weatherappmvvm.presentation.city.CityPresenter
+import com.chilik1020.weatherappmvvm.presentation.city.CityViewModel
 import com.chilik1020.weatherappmvvm.presentation.models.CityDomainToUiMapper
 import com.chilik1020.weatherappmvvm.presentation.models.CityDomainToUiMapperImpl
 import com.chilik1020.weatherappmvvm.presentation.models.CityUiToDomainMapper
@@ -47,10 +49,12 @@ import com.chilik1020.weatherappmvvm.presentation.models.WeatherForecastDomainTo
 import com.chilik1020.weatherappmvvm.presentation.models.WeatherForecastDomainToUiMapperImpl
 import com.chilik1020.weatherappmvvm.presentation.weather.WeatherContract
 import com.chilik1020.weatherappmvvm.presentation.weather.WeatherPresenter
+import com.chilik1020.weatherappmvvm.presentation.weather.WeatherViewModel
 import com.chilik1020.weatherappmvvm.utils.DATABASE_NAME
 import com.chilik1020.weatherappmvvm.utils.SHARED_PREF_NAME
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidApplication
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
@@ -138,6 +142,15 @@ val presentationModule = module {
             forecastDomainToUiMapper = get()
         )
     }
+    viewModel {
+        WeatherViewModel(
+            useCase = get(),
+            cityActiveUseCase = get(),
+            cityDomainToUiMapper = get(),
+            forecastDomainToUiMapper = get()
+        )
+    }
+
     single<CityContract.Presenter> {
         CityPresenter(
             cityListUseCase = get(),
@@ -147,8 +160,24 @@ val presentationModule = module {
         )
     }
 
+    viewModel {
+        CityViewModel(
+            cityListUseCase = get(),
+            cityAsActiveUseCase = get(),
+            cityUiToDomainMapper = get(),
+            cityDomainToUiMapper = get()
+        )
+    }
+
     single<AddCityContract.Presenter> {
         AddCityPresenter(
+            cityAddUseCase = get(),
+            currentWeatherUseCase = get()
+        )
+    }
+
+    viewModel {
+        AddCityViewModel(
             cityAddUseCase = get(),
             currentWeatherUseCase = get()
         )
