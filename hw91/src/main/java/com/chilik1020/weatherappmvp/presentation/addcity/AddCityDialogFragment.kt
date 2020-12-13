@@ -37,12 +37,14 @@ class AddCityDialogFragment : DialogFragment(), AddCityContract.View {
     override fun render(state: AddCityViewState) {
         when (state) {
             AddCityViewState.Loading -> {
-
+                binding.pbCityLoading.visibility = View.VISIBLE
             }
             AddCityViewState.Loaded -> {
+                binding.pbCityLoading.visibility = View.GONE
                 dismiss()
             }
             is AddCityViewState.Error -> {
+                binding.pbCityLoading.visibility = View.GONE
                 Snackbar.make(binding.root, state.error, Snackbar.LENGTH_SHORT).show()
             }
         }

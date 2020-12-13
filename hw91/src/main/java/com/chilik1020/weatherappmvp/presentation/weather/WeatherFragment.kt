@@ -68,12 +68,15 @@ class WeatherFragment : Fragment(), WeatherContract.View {
     override fun render(state: WeatherForecastViewState) {
         when (state) {
             is WeatherForecastViewState.Loading -> {
+                binding.pbWeatherLoading.visibility = View.VISIBLE
             }
             is WeatherForecastViewState.Loaded -> {
+                binding.pbWeatherLoading.visibility = View.GONE
                 binding.tvCityName.text = state.city.name
                 setFields(state.data)
             }
             is WeatherForecastViewState.Error -> {
+                binding.pbWeatherLoading.visibility = View.GONE
                 Snackbar.make(binding.root, state.error.toString(), Snackbar.LENGTH_SHORT).show()
             }
         }

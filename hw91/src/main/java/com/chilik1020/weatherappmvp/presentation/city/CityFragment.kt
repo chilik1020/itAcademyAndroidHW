@@ -58,12 +58,14 @@ class CityFragment : Fragment(), CityContract.View {
     override fun render(state: CityViewState) {
         when (state) {
             is CityViewState.Loading -> {
-
+                binding.pbCitiesLoading.visibility = View.VISIBLE
             }
             is CityViewState.Loaded -> {
+                binding.pbCitiesLoading.visibility = View.GONE
                 cityAdapter.setData(state.data)
             }
             is CityViewState.Error -> {
+                binding.pbCitiesLoading.visibility = View.GONE
                 Snackbar.make(binding.root, state.error, Snackbar.LENGTH_SHORT).show()
             }
         }
