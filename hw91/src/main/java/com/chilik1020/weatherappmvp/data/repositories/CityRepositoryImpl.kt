@@ -17,7 +17,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 class CityRepositoryImpl(
-    private val appDatabase: AppDatabase,
     private val cityDao: CityDao,
     private val cityDomainToDataMapper: CityDomainToDataMapper,
     private val cityToDomainMapper: CityToDomainMapper
@@ -93,5 +92,9 @@ class CityRepositoryImpl(
             )
 
         disposables.add(subs)
+    }
+
+    override fun close() {
+        disposables.dispose()
     }
 }

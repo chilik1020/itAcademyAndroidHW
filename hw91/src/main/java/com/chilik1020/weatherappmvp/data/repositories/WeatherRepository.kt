@@ -15,4 +15,6 @@ interface WeatherRepository {
         lon: String,
         listener: ForecastWeatherUseCase.OnFinished
     )
+
+    fun close()
 }

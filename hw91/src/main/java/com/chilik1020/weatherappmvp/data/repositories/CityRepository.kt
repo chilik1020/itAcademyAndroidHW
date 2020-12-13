@@ -12,4 +12,5 @@ interface CityRepository {
     fun getCities(listener: CityListUseCase.OnFinished)
     fun addCity(city: CityDomainModel, listener: CityAddUseCase.OnFinished)
     fun setCityAsActive(city: CityDomainModel, listener: CityAsActiveUseCase.OnFinished)
+    fun close()
 }

@@ -52,4 +52,8 @@ class WeatherRepositoryImpl(
             )
         disposables.add(subs)
     }
+
+    override fun close() {
+        disposables.dispose()
+    }
 }

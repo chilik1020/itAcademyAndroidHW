@@ -104,7 +104,6 @@ val dataModule = module {
 
     factory<CityRepository> {
         CityRepositoryImpl(
-            appDatabase = get(),
             cityDao = get(),
             cityDomainToDataMapper = get(),
             cityToDomainMapper = get()
