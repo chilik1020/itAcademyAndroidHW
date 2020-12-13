@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glVerticalStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/default_margin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glVerticalEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarWeatherFrag"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/toolbar_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="@string/weather"
+        app:titleTextColor="@color/dark_gray" />
+
+    <ImageView
+        android:id="@+id/ivWeatherIcon"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="@dimen/default_margin"
+        android:contentDescription="@string/current_weather_icon_description"
+        app:layout_constraintBottom_toTopOf="@id/ivWeatherIcon"
+        app:layout_constraintStart_toEndOf="@id/tvCityName"
+        app:layout_constraintTop_toBottomOf="@id/toolbarWeatherFrag"
+        tools:src="@drawable/ic_default_icon" />
+
+    <TextView
+        android:id="@+id/tvCityName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="50sp"
+        app:layout_constraintEnd_toEndOf="@id/glVerticalEnd"
+        app:layout_constraintStart_toStartOf="@id/glVerticalStart"
+        app:layout_constraintTop_toBottomOf="@id/ivWeatherIcon"
+        tools:text="Minsk" />
+
+    <TextView
+        android:id="@+id/tvTempCurrent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="50sp"
+        app:layout_constraintEnd_toEndOf="@id/glVerticalEnd"
+        app:layout_constraintStart_toStartOf="@id/glVerticalStart"
+        app:layout_constraintTop_toBottomOf="@id/tvCityName"
+        tools:text="-20°C" />
+
+    <TextView
+        android:id="@+id/tvWeatherDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@id/glVerticalEnd"
+        app:layout_constraintStart_toStartOf="@id/glVerticalStart"
+        app:layout_constraintTop_toBottomOf="@id/tvTempCurrent"
+        tools:text="now snowing" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvWeatherForecast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvWeatherDescription" />
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/pbWeatherLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/glVerticalEnd"
+        app:layout_constraintStart_toStartOf="@id/glVerticalStart"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabNavigateToCityFrag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:contentDescription="@string/add_city_image_description"
+        android:src="@drawable/ic_location"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
