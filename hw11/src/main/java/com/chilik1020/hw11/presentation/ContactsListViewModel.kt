@@ -1,14 +1,12 @@
 package com.chilik1020.hw11.presentation
 
 import android.util.Log
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.chilik1020.hw11.data.Contact
-import com.chilik1020.hw11.data.ContactRepository
-import com.chilik1020.hw11.data.Result
+import com.chilik1020.hw11.data.entities.Contact
+import com.chilik1020.hw11.data.entities.Result
+import com.chilik1020.hw11.data.repositories.ContactRepository
 import com.chilik1020.hw11.domain.FetchContactsInteractor
 import com.chilik1020.hw11.utils.LOG_TAG_APP
 import java.util.*
@@ -30,6 +28,7 @@ class ContactsListViewModel(
         FetchContactsInteractor.OnFetchContactsListener { result ->
             when (result) {
                 is Result.Success -> {
+                    Log.d(LOG_TAG_APP, "FetchContactsInteractor.OnSuccess ${result.data}")
                     contacts.value = result.data
                     updateFilteredData()
                 }

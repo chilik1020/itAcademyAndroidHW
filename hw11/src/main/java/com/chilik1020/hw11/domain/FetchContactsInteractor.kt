@@ -1,8 +1,8 @@
 package com.chilik1020.hw11.domain
 
-import com.chilik1020.hw11.data.Contact
-import com.chilik1020.hw11.data.ContactRepository
-import com.chilik1020.hw11.data.Result
+import com.chilik1020.hw11.data.entities.Contact
+import com.chilik1020.hw11.data.repositories.ContactRepository
+import com.chilik1020.hw11.data.entities.Result
 
 interface FetchContactsInteractor {
 

@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.chilik1020.hw11.R
-import com.chilik1020.hw11.data.Contact
-import com.chilik1020.hw11.data.ContactType
+import com.chilik1020.hw11.data.entities.Contact
+import com.chilik1020.hw11.data.entities.ContactType
 import kotlinx.android.synthetic.main.item_contact.view.*
 
 class ContactsRecyclerViewAdapter :

@@ -1,6 +1,6 @@
 package com.chilik1020.hw11.domain
 
-import com.chilik1020.hw11.data.ContactRepository
+import com.chilik1020.hw11.data.repositories.ContactRepository
 
 class FetchContactsInteractorImpl : FetchContactsInteractor {
 

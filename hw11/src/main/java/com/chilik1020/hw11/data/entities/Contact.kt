@@ -1,4 +1,4 @@
-package com.chilik1020.hw11.data
+package com.chilik1020.hw11.data.entities
 
 import java.util.*
 
@@ -15,4 +15,12 @@ data class Contact(
 enum class ContactType(val string: String) {
     EMAIL(TYPE_EMAIL),
     PHONENUMBER(TYPE_PHONENUMBER)
+}
+
+object ContactTypeConverter {
+    fun fromContactType(type: ContactType) = type.string
+    fun toContactType(value: String) = when (value) {
+        TYPE_EMAIL -> ContactType.EMAIL
+        else -> ContactType.PHONENUMBER
+    }
 }
