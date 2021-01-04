@@ -17,9 +17,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.add.ContactAddActivity"/>
-        <activity android:name=".views.edit.ContactEditActivity"/>
-        <activity android:name=".views.settings.SettingsActivity"/>
+        <activity android:name=".views.add.ContactAddActivity" />
+        <activity android:name=".views.edit.ContactEditActivity" />
+        <activity android:name=".views.settings.SettingsActivity" />
+
+        <provider
+            android:name=".provider.ContactProvider"
+            android:authorities="com.chilik1020.provider.contact"
+            android:exported="true" />
     </application>
 
 </manifest>
