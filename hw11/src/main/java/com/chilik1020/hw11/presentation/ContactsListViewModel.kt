@@ -17,7 +17,7 @@ class ContactsListViewModel(
     private val interactor: FetchContactsInteractor
 ) : ViewModel() {
 
-    private val contacts = MutableLiveData<List<Contact>>(emptyList<Contact>())
+    private val contacts = MutableLiveData(emptyList<Contact>())
     private val contactsFilteredMutable = MutableLiveData<List<Contact>>()
     val contactsFiltered: LiveData<List<Contact>>
         get() = contactsFilteredMutable
@@ -28,7 +28,6 @@ class ContactsListViewModel(
         FetchContactsInteractor.OnFetchContactsListener { result ->
             when (result) {
                 is Result.Success -> {
-                    Log.d(LOG_TAG_APP, "FetchContactsInteractor.OnSuccess ${result.data}")
                     contacts.value = result.data
                     updateFilteredData()
                 }

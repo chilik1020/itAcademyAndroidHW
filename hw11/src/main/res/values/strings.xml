@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ContactsResolver</string>
+    <string name="act_list_no_contacts">No contacts. Please add</string>
     <string name="act_list_search">Search contacts</string>
 </resources>

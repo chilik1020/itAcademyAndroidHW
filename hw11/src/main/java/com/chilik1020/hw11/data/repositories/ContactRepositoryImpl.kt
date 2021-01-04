@@ -3,11 +3,9 @@ package com.chilik1020.hw11.data.repositories
 import android.os.Handler
 import android.os.HandlerThread
 import android.os.Looper
-import android.util.Log
-import com.chilik1020.hw11.data.sources.ContactsSource
 import com.chilik1020.hw11.data.entities.Result
+import com.chilik1020.hw11.data.sources.ContactsSource
 import com.chilik1020.hw11.domain.FetchContactsInteractor
-import com.chilik1020.hw11.utils.LOG_TAG_APP
 
 
 class ContactRepositoryImpl(private val source: ContactsSource) :
@@ -20,7 +18,6 @@ class ContactRepositoryImpl(private val source: ContactsSource) :
     }
 
     override fun getAllContacts(listener: FetchContactsInteractor.OnFetchContactsListener) {
-        Log.d(LOG_TAG_APP, "Handler: getAllContacts")
         workerThread.postTask(Runnable {
             val taskToMainThread = try {
                 val data = source.getContacts()

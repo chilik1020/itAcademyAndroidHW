@@ -2,10 +2,8 @@ package com.chilik1020.hw11.data.sources
 
 import android.content.ContentResolver
 import android.net.Uri
-import android.util.Log
 import com.chilik1020.hw11.data.entities.Contact
 import com.chilik1020.hw11.data.entities.ContactTypeConverter
-import com.chilik1020.hw11.utils.LOG_TAG_APP
 import com.chilik1020.hw11.utils.URI_CONTACTS
 
 const val COLUMN_ID = "id"
