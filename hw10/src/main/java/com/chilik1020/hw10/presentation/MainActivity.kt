@@ -150,7 +150,7 @@ class MainActivity : AppCompatActivity() {
                 val thisId: Long = musicCursor.getLong(idColumn)
                 val thisTitle: String = musicCursor.getString(titleColumn)
                 val thisArtist: String = musicCursor.getString(artistColumn)
-                songList.add(Song(thisId, thisTitle, thisArtist))
+                songList.add(Song(thisId, thisTitle, thisArtist, false))
             } while (musicCursor.moveToNext())
         }
         songList.forEach {
