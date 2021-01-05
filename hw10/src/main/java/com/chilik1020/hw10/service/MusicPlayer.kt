@@ -3,8 +3,9 @@ package com.chilik1020.hw10.service
 interface MusicPlayer {
     fun init()
     fun destroy()
+    fun setSong(path: String)
     fun play()
-    fun isPlaying():Boolean
+    fun isPlaying(): Boolean
     fun pause()
     fun next()
     fun previous()

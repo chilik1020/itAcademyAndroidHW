@@ -6,11 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.content.pm.PackageManager
-import android.database.Cursor
-import android.net.Uri
 import android.os.Bundle
 import android.os.IBinder
-import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +15,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chilik1020.hw10.data.Song
+import com.chilik1020.hw10.data.SongProvider
 import com.chilik1020.hw10.databinding.ActivityMainBinding
 import com.chilik1020.hw10.service.MusicPlayer
 import com.chilik1020.hw10.service.MusicService
@@ -32,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var path: String
     private val onSongClickListener: (Song) -> Unit = {
         Log.d(BASE_LOG, "CLICKED $it")
+        musicPlayer.setSong(it.path)
     }
     private val songAdapter = SongAdapter(onSongClickListener)
 
@@ -59,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initViews()
-        getSongListFromStorage()
+        songAdapter.setData(SongProvider.getAllDeviceSongs(applicationContext))
     }
 
     override fun onStart() {
@@ -131,31 +130,5 @@ class MainActivity : AppCompatActivity() {
                 ), 1
             )
         }
-    }
-
-    fun getSongListFromStorage() {
-        val songList = mutableListOf<Song>()
-        //retrieve song info
-        val musicResolver = contentResolver
-        val musicUri: Uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
-        val musicCursor: Cursor? = musicResolver.query(musicUri, null, null, null, null)
-        if (musicCursor != null && musicCursor.moveToFirst()) {
-            //get columns
-            val titleColumn: Int = musicCursor.getColumnIndex(MediaStore.Audio.Media.TITLE)
-            val idColumn: Int = musicCursor.getColumnIndex(MediaStore.Audio.Media._ID)
-            val artistColumn: Int = musicCursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)
-
-            //add songs to list
-            do {
-                val thisId: Long = musicCursor.getLong(idColumn)
-                val thisTitle: String = musicCursor.getString(titleColumn)
-                val thisArtist: String = musicCursor.getString(artistColumn)
-                songList.add(Song(thisId, thisTitle, thisArtist, false))
-            } while (musicCursor.moveToNext())
-        }
-        songList.forEach {
-            Log.d(BASE_LOG, it.toString())
-        }
-        songAdapter.setData(songList)
     }
 }
