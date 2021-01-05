@@ -29,7 +29,6 @@ class MusicPlayerImpl(private val context: Context) : MusicPlayer {
             mediaPlayer.prepare()
             mediaPlayer.setVolume(1f, 1f)
             mediaPlayer.isLooping = false
-
         } catch (e: Exception) {
             e.printStackTrace()
         }
