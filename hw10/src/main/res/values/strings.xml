@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">MusicPlayer</string>
+    <string name="skip_previous">Previous</string>
+    <string name="play">Play/Pause</string>
+    <string name="skip_next">Next</string>
     <string name="empty_folder">Empty folder</string>
     <string name="add_new_file">Add new file</string>
     <string name="directory">Directory</string>
