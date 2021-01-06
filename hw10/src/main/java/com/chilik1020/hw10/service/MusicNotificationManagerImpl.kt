@@ -6,13 +6,14 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.util.Log
 import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.chilik1020.hw10.R
+import com.chilik1020.hw10.data.NotificationPlayerAction
 import com.chilik1020.hw10.data.Song
-import com.chilik1020.hw10.utils.*
+import com.chilik1020.hw10.utils.CHANNEL_ID
+import com.chilik1020.hw10.utils.PLAYER_NOTIFICATION_ID
 
 class MusicNotificationManagerImpl(private val musicService: MusicService) :
     MusicNotificationManager {
@@ -22,19 +23,17 @@ class MusicNotificationManagerImpl(private val musicService: MusicService) :
     private var context: Context = musicService.baseContext
 
     override fun createNotification(isPlaying: Boolean, song: Song) {
-        Log.d(BASE_LOG, "MusicService:createNotification")
-
         val view = RemoteViews(context.packageName, R.layout.notification_player)
         view.setTextViewText(R.id.tvNotificationTrackArtist, song.artistName)
         view.setTextViewText(R.id.tvNotificationTrackTitle, song.title)
 
         view.setOnClickPendingIntent(
             R.id.ivNotificationNext,
-            createPendingIntentWithAction(ACTION_NEXT)
+            createPendingIntentWithAction(NotificationPlayerAction.NEXT)
         )
         view.setOnClickPendingIntent(
             R.id.ivNotificationPrevious,
-            createPendingIntentWithAction(ACTION_PREVIOUS)
+            createPendingIntentWithAction(NotificationPlayerAction.PREVIOUS)
         )
 
         when (isPlaying) {
@@ -44,7 +43,7 @@ class MusicNotificationManagerImpl(private val musicService: MusicService) :
 
         view.setOnClickPendingIntent(
             R.id.ivNotificationPlayPause,
-            createPendingIntentWithAction(ACTION_PLAY_PAUSE)
+            createPendingIntentWithAction(NotificationPlayerAction.PLAY_PAUSE)
         )
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -64,9 +63,9 @@ class MusicNotificationManagerImpl(private val musicService: MusicService) :
         notificationManager.cancel(PLAYER_NOTIFICATION_ID)
     }
 
-    private fun createPendingIntentWithAction(playerAction: String): PendingIntent? {
+    private fun createPendingIntentWithAction(playerAction: NotificationPlayerAction): PendingIntent? {
         val intent = Intent(context, MusicService::class.java).apply {
-            action = playerAction
+            action = playerAction.name
         }
         return PendingIntent.getService(context, 0, intent, 0)
     }

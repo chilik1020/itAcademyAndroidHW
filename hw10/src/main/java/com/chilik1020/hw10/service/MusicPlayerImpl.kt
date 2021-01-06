@@ -8,10 +8,8 @@ import android.media.MediaPlayer.OnCompletionListener
 import android.media.MediaPlayer.OnPreparedListener
 import android.os.PowerManager
 import android.provider.MediaStore
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.chilik1020.hw10.data.Song
-import com.chilik1020.hw10.utils.BASE_LOG
 
 class MusicPlayerImpl(
     private val context: Context,
@@ -31,7 +29,6 @@ class MusicPlayerImpl(
     override val playerStatus: MutableLiveData<Boolean> = MutableLiveData()
 
     override fun init() {
-        Log.d(BASE_LOG, "MusicPlayer:init")
         mediaPlayer.apply {
             setWakeMode(context, PowerManager.PARTIAL_WAKE_LOCK)
             setOnPreparedListener(this@MusicPlayerImpl)
@@ -43,13 +40,11 @@ class MusicPlayerImpl(
     }
 
     override fun destroy() {
-        Log.d(BASE_LOG, "MusicPlayer:destroy")
         mediaPlayer.stop()
         mediaPlayer.release()
     }
 
     override fun setSong(song: Song) {
-        Log.d(BASE_LOG, "MusicPlayer:setSong")
         mediaPlayer.reset()
         currentSong = song
         currentSongPosition = playlist.indexOf(currentSong)
@@ -63,7 +58,6 @@ class MusicPlayerImpl(
     }
 
     override fun setPlayList(list: List<Song>) {
-        Log.d(BASE_LOG, "MusicPlayer:setPlayList")
         playlist.apply {
             clear()
             addAll(list)
@@ -73,7 +67,6 @@ class MusicPlayerImpl(
     }
 
     override fun play() {
-        Log.d(BASE_LOG, "MusicPlayer:play")
         mediaPlayer.start()
         showNotification()
         playerStatus.value = true
@@ -84,14 +77,12 @@ class MusicPlayerImpl(
     }
 
     override fun pause() {
-        Log.d(BASE_LOG, "MusicPlayer:pause")
         mediaPlayer.pause()
         showNotification()
         playerStatus.value = false
     }
 
     override fun next() {
-        Log.d(BASE_LOG, "MusicPlayer:next")
         currentSongPosition++
         if (currentSongPosition >= playlist.size) {
             currentSongPosition = 0
@@ -100,7 +91,6 @@ class MusicPlayerImpl(
     }
 
     override fun previous() {
-        Log.d(BASE_LOG, "MusicPlayer:previous")
         currentSongPosition--
         if (currentSongPosition < 0) {
             currentSongPosition = playlist.size - 1
@@ -109,26 +99,21 @@ class MusicPlayerImpl(
     }
 
     override fun onPrepared(mp: MediaPlayer?) {
-        Log.d(BASE_LOG, "MusicPlayer:onPrepared")
         mediaPlayer.start()
         showNotification()
         playerStatus.value = true
     }
 
     override fun onCompletion(mp: MediaPlayer?) {
-        Log.d(BASE_LOG, "MusicPlayer:onCompletion")
-//        mediaPlayer.pause()
         next()
     }
 
     override fun onError(mp: MediaPlayer?, what: Int, extra: Int): Boolean {
-        Log.d(BASE_LOG, "MusicPlayer:onError")
         mediaPlayer.reset()
         return false
     }
 
     override fun onAudioFocusChange(focusChange: Int) {
-        Log.d(BASE_LOG, "MusicPlayer:onAudioFocusChange")
         mediaPlayer.pause()
     }
 
