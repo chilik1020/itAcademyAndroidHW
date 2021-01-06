@@ -12,7 +12,6 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.chilik1020.hw10.R
 import com.chilik1020.hw10.data.Song
-import com.chilik1020.hw10.presentation.MainActivity
 import com.chilik1020.hw10.utils.*
 
 class MusicNotificationManagerImpl(private val musicService: MusicService) :
@@ -48,11 +47,6 @@ class MusicNotificationManagerImpl(private val musicService: MusicService) :
             createPendingIntentWithAction(ACTION_PLAY_PAUSE)
         )
 
-        val intent = Intent(context, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-        val contentPendingIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel()
         }
@@ -60,7 +54,6 @@ class MusicNotificationManagerImpl(private val musicService: MusicService) :
             .setShowWhen(false)
             .setSmallIcon(R.drawable.ic_music_note)
             .setContent(view)
-            .setContentIntent(contentPendingIntent)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             .build()
 

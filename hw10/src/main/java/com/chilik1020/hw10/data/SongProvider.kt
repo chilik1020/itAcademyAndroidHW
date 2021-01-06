@@ -11,20 +11,18 @@ object SongProvider {
     private val TRACK = 1
     private val YEAR = 2
     private val DURATION = 3
-    private val PATH = 4
-    private val ALBUM = 5
-    private val ARTIST_ID = 6
-    private val ARTIST = 7
-    private val ID = 8
+    private val ALBUM = 4
+    private val ARTIST_ID = 5
+    private val ARTIST = 6
+    private val ID = 7
 
     private val BASE_PROJECTION = arrayOf(
-        MediaStore.Audio.AudioColumns.TITLE, // 0
-        MediaStore.Audio.AudioColumns.TRACK, // 1
-        MediaStore.Audio.AudioColumns.YEAR, // 2
-        MediaStore.Audio.AudioColumns.DURATION, // 3
-        MediaStore.Audio.AudioColumns.DATA, // 4
-        MediaStore.Audio.AudioColumns.ALBUM, // 5
-        MediaStore.Audio.AudioColumns.ARTIST_ID, // 6
+        MediaStore.Audio.AudioColumns.TITLE,
+        MediaStore.Audio.AudioColumns.TRACK,
+        MediaStore.Audio.AudioColumns.YEAR,
+        MediaStore.Audio.AudioColumns.DURATION,
+        MediaStore.Audio.AudioColumns.ALBUM,
+        MediaStore.Audio.AudioColumns.ARTIST_ID,
         MediaStore.Audio.AudioColumns.ARTIST,
         MediaStore.Audio.AudioColumns._ID
     )// 7
@@ -58,7 +56,6 @@ object SongProvider {
         val trackNumber = cursor.getInt(TRACK)
         val year = cursor.getInt(YEAR)
         val duration = cursor.getInt(DURATION)
-        val uri = cursor.getString(PATH)
         val albumName = cursor.getString(ALBUM)
         val artistId = cursor.getInt(ARTIST_ID)
         val artistName = cursor.getString(ARTIST)
@@ -70,7 +67,6 @@ object SongProvider {
             trackNumber,
             year,
             duration,
-            uri,
             albumName,
             artistId,
             artistName,

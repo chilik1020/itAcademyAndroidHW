@@ -12,20 +12,11 @@ class SongAdapter(
 ) : RecyclerView.Adapter<SongAdapter.SongViewHolder>() {
 
     private val songList = mutableListOf<Song>()
-    private var currentPlaying: Song? = null
-    private val innerListener: (Song) -> Unit = { newCurrentPlaying ->
-//        currentPlaying?.isPlayingNow = false
-//        newCurrentPlaying.isPlayingNow = true
-//        notifyItemChanged(songList.indexOf(currentPlaying))
-//        notifyItemChanged(songList.indexOf(newCurrentPlaying))
-//        currentPlaying = newCurrentPlaying
-        listener(newCurrentPlaying)
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemSongBinding.inflate(inflater, parent, false)
-        return SongViewHolder(binding, innerListener)
+        return SongViewHolder(binding, listener)
     }
 
     override fun onBindViewHolder(holder: SongViewHolder, position: Int) {
@@ -49,10 +40,7 @@ class SongAdapter(
             with(binding) {
                 ivIsCurrentSong.visibility = if (song.isPlayingNow) View.VISIBLE else View.GONE
                 tvFileName.text = song.title
-                root.setOnClickListener {
-                    listener(song)
-                    ivIsCurrentSong.visibility = View.VISIBLE
-                }
+                root.setOnClickListener { listener(song) }
             }
         }
     }

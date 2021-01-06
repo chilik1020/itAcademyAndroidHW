@@ -5,6 +5,7 @@ import com.chilik1020.hw10.data.Song
 
 interface MusicPlayer {
     val currentSongLiveData: MutableLiveData<Song>
+    val playerStatus: MutableLiveData<Boolean>
 
     fun init()
     fun destroy()

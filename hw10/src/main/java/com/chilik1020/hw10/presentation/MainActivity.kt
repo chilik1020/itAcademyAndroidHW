@@ -8,7 +8,6 @@ import android.content.ServiceConnection
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.IBinder
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -20,7 +19,6 @@ import com.chilik1020.hw10.data.SongProvider
 import com.chilik1020.hw10.databinding.ActivityMainBinding
 import com.chilik1020.hw10.service.MusicPlayer
 import com.chilik1020.hw10.service.MusicService
-import com.chilik1020.hw10.utils.BASE_LOG
 
 
 class MainActivity : AppCompatActivity() {
@@ -28,11 +26,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private val onSongClickListener: (Song) -> Unit = {
-        Log.d(BASE_LOG, "CLICKED IN PLAYLIST $it")
-        currentSong = it
         musicPlayer.setSong(it)
-        changeBtnIconDrawable()
+        updateCurrentSong(it)
     }
+
     private val songAdapter = SongAdapter(onSongClickListener)
 
     private var songList: List<Song> = listOf()
@@ -49,21 +46,8 @@ class MainActivity : AppCompatActivity() {
             isBound = true
             musicPlayer = musicService.musicPlayer
             musicPlayer.setPlayList(songList)
-            musicPlayer.currentSongLiveData.observe(this@MainActivity) {
-                Log.d(BASE_LOG, "SONG CHANGED IN PLAYER $it")
-//                currentSong?.isPlayingNow = false
-//                songList[songList.indexOf(currentSong)].apply {
-//                    isPlayingNow = false
-//                }
-//                val newCurrentIndex = songList.indexOf(it)
-//                currentSong = songList[newCurrentIndex].apply {
-//                    isPlayingNow = true
-//                }
-//
-//                songAdapter.setData(songList)
-                currentSong = it
-                changeBtnIconDrawable()
-            }
+            musicPlayer.currentSongLiveData.observe(this@MainActivity) { updateCurrentSong(it) }
+            musicPlayer.playerStatus.observe(this@MainActivity) { changeBtnIconDrawable() }
             checkReadStoragePermissions()
         }
 
@@ -97,23 +81,32 @@ class MainActivity : AppCompatActivity() {
             }
 
             btnPlay.setOnClickListener {
-                if (musicPlayer.isPlaying()) musicPlayer.pause() else musicPlayer.play()
-                changeBtnIconDrawable()
+                if (musicPlayer.isPlaying()) {
+                    musicPlayer.pause()
+                } else {
+                    musicPlayer.play()
+                }
             }
-            btnPrevious.setOnClickListener {
-                musicPlayer.previous()
-                changeBtnIconDrawable()
-            }
-            btnNext.setOnClickListener {
-                musicPlayer.next()
-                changeBtnIconDrawable()
-            }
+            btnPrevious.setOnClickListener { musicPlayer.previous() }
+            btnNext.setOnClickListener { musicPlayer.next() }
         }
     }
 
+    private fun updateCurrentSong(newSong: Song) {
+        currentSong?.isPlayingNow = false
+        newSong.isPlayingNow = true
+        songAdapter.apply {
+            notifyItemChanged(songList.indexOf(currentSong))
+            notifyItemChanged(songList.indexOf(newSong))
+        }
+        currentSong = newSong
+    }
+
     private fun changeBtnIconDrawable() {
-        val playBtnIconId =
-            if (musicPlayer.isPlaying()) R.drawable.ic_pause else R.drawable.ic_play
+        val playBtnIconId = when (musicPlayer.isPlaying()) {
+            false -> R.drawable.ic_play
+            true -> R.drawable.ic_pause
+        }
         binding.btnPlay.background = ContextCompat.getDrawable(applicationContext, playBtnIconId)
     }
 

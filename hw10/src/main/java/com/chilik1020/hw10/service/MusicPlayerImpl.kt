@@ -28,6 +28,7 @@ class MusicPlayerImpl(
     private var currentSongPosition = 0
 
     override val currentSongLiveData: MutableLiveData<Song> = MutableLiveData()
+    override val playerStatus: MutableLiveData<Boolean> = MutableLiveData()
 
     override fun init() {
         Log.d(BASE_LOG, "MusicPlayer:init")
@@ -75,6 +76,7 @@ class MusicPlayerImpl(
         Log.d(BASE_LOG, "MusicPlayer:play")
         mediaPlayer.start()
         showNotification()
+        playerStatus.value = true
     }
 
     override fun isPlaying(): Boolean {
@@ -85,6 +87,7 @@ class MusicPlayerImpl(
         Log.d(BASE_LOG, "MusicPlayer:pause")
         mediaPlayer.pause()
         showNotification()
+        playerStatus.value = false
     }
 
     override fun next() {
@@ -109,12 +112,13 @@ class MusicPlayerImpl(
         Log.d(BASE_LOG, "MusicPlayer:onPrepared")
         mediaPlayer.start()
         showNotification()
+        playerStatus.value = true
     }
 
     override fun onCompletion(mp: MediaPlayer?) {
         Log.d(BASE_LOG, "MusicPlayer:onCompletion")
-        mediaPlayer.pause()
-//        next()
+//        mediaPlayer.pause()
+        next()
     }
 
     override fun onError(mp: MediaPlayer?, what: Int, extra: Int): Boolean {
