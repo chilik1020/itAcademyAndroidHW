@@ -3,6 +3,8 @@ package com.chilik1020.hw10.data
 import android.content.Context
 import android.database.Cursor
 import android.provider.MediaStore
+import android.util.Log
+import com.chilik1020.hw10.utils.BASE_LOG
 
 object SongProvider {
     private val TITLE = 0
@@ -13,6 +15,7 @@ object SongProvider {
     private val ALBUM = 5
     private val ARTIST_ID = 6
     private val ARTIST = 7
+    private val ID = 8
 
     private val BASE_PROJECTION = arrayOf(
         MediaStore.Audio.AudioColumns.TITLE, // 0
@@ -22,7 +25,8 @@ object SongProvider {
         MediaStore.Audio.AudioColumns.DATA, // 4
         MediaStore.Audio.AudioColumns.ALBUM, // 5
         MediaStore.Audio.AudioColumns.ARTIST_ID, // 6
-        MediaStore.Audio.AudioColumns.ARTIST
+        MediaStore.Audio.AudioColumns.ARTIST,
+        MediaStore.Audio.AudioColumns._ID
     )// 7
 
     private val mAllDeviceSongs = ArrayList<Song>()
@@ -38,15 +42,13 @@ object SongProvider {
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 val song = getSongFromCursorImpl(cursor)
-                if (song.duration >= 30000) {
+                if (song.duration in 30000..499999) {
                     songs.add(song)
                     mAllDeviceSongs.add(song)
                 }
             } while (cursor.moveToNext())
         }
-
         cursor?.close()
-
         return songs
     }
 
@@ -60,18 +62,31 @@ object SongProvider {
         val albumName = cursor.getString(ALBUM)
         val artistId = cursor.getInt(ARTIST_ID)
         val artistName = cursor.getString(ARTIST)
+        val id = cursor.getLong(ID)
 
-        return Song(title, trackNumber, year, duration, uri, albumName, artistId, artistName, false)
+        return Song(
+            id,
+            title,
+            trackNumber,
+            year,
+            duration,
+            uri,
+            albumName,
+            artistId,
+            artistName,
+            false
+        )
     }
 
-    internal fun makeSongCursor(context: Context): Cursor? {
-        try {
-            return context.contentResolver.query(
+    private fun makeSongCursor(context: Context): Cursor? {
+        return try {
+            context.contentResolver.query(
                 MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                 BASE_PROJECTION, null, null, null
             )
         } catch (e: SecurityException) {
-            return null
+            Log.d(BASE_LOG, "Error ContentResolver Query")
+            null
         }
 
     }

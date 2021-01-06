@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start|bottom"
         android:layout_margin="@dimen/default_margin"
-        android:src="@drawable/ic_skip_previous" />
+        android:background="@drawable/ic_skip_previous" />
 
     <ImageButton
         android:id="@+id/btnPlay"
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"
         android:layout_margin="@dimen/default_margin"
-        android:src="@drawable/ic_play" />
+        android:background="@drawable/ic_play"/>
 
     <ImageButton
         android:id="@+id/btnNext"
@@ -70,6 +70,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/default_margin"
-        android:src="@drawable/ic_skip_next" />
+        android:background="@drawable/ic_skip_next" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -15,7 +15,6 @@ import com.chilik1020.hw10.utils.BASE_LOG
 class NotificationUtil(private val musicService: MusicService) {
 
     private val CHANNEL_ID = "action.CHANNEL_ID"
-    private val REQUEST_CODE = 100
     private lateinit var notificationBuilder: NotificationCompat.Builder
     private var notificationManager =
         musicService.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -58,11 +57,9 @@ class NotificationUtil(private val musicService: MusicService) {
             )
 
             notificationChannel.description = context.getString(R.string.app_name)
-
             notificationChannel.enableLights(false)
             notificationChannel.enableVibration(false)
             notificationChannel.setShowBadge(false)
-
             notificationManager.createNotificationChannel(notificationChannel)
         }
     }
