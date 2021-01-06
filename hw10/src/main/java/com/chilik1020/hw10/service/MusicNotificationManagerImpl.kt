@@ -28,12 +28,18 @@ class MusicNotificationManagerImpl(private val musicService: MusicService) :
         view.setTextViewText(R.id.tvNotificationTrackTitle, song.title)
 
         view.setOnClickPendingIntent(
+            R.id.ivNotificationPrevious,
+            createPendingIntentWithAction(NotificationPlayerAction.PREVIOUS)
+        )
+
+        view.setOnClickPendingIntent(
             R.id.ivNotificationNext,
             createPendingIntentWithAction(NotificationPlayerAction.NEXT)
         )
+
         view.setOnClickPendingIntent(
-            R.id.ivNotificationPrevious,
-            createPendingIntentWithAction(NotificationPlayerAction.PREVIOUS)
+            R.id.ivNotificationDestroy,
+            createPendingIntentWithAction(NotificationPlayerAction.DESTROY)
         )
 
         when (isPlaying) {

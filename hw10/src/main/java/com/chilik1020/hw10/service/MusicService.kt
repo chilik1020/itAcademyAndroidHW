@@ -29,13 +29,12 @@ class MusicService : Service() {
     }
 
     override fun onUnbind(intent: Intent?): Boolean {
-        musicPlayer.destroy()
         return false
     }
 
     override fun onDestroy() {
         musicNotificationManager.removeNotification()
-        stopForeground(true)
+        musicPlayer.destroy()
         super.onDestroy()
     }
 
@@ -46,6 +45,9 @@ class MusicService : Service() {
                 NotificationPlayerAction.NEXT.name -> musicPlayer.next()
                 NotificationPlayerAction.PLAY_PAUSE.name -> {
                     if (musicPlayer.isPlaying()) musicPlayer.pause() else musicPlayer.play()
+                }
+                NotificationPlayerAction.DESTROY.name -> {
+                    this.stopForeground(true)
                 }
             }
         }

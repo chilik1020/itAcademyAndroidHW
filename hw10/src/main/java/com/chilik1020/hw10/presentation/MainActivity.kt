@@ -117,12 +117,11 @@ class MainActivity : AppCompatActivity() {
             serviceConnection,
             Context.BIND_AUTO_CREATE
         )
-        startService(musicServiceIntent)
+        startForegroundService(musicServiceIntent)
     }
 
     private fun unBindMusicService() {
         unbindService(serviceConnection)
-        musicService.stopService(musicServiceIntent)
         isBound = false
     }
 
