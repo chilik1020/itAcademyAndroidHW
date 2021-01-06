@@ -54,13 +54,14 @@ class MusicPlayerImpl(
         )
         currentSongLiveData.value = song
         mediaPlayer.setDataSource(context, trackUri)
-        mediaPlayer.prepare()
+        mediaPlayer.prepareAsync()
     }
 
     override fun setPlayList(list: List<Song>) {
         playlist.apply {
             clear()
             addAll(list)
+
         }
         currentSong = list.first()
         currentSongPosition = 0

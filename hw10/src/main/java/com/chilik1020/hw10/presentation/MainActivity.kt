@@ -8,6 +8,7 @@ import android.content.ServiceConnection
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.IBinder
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -19,6 +20,10 @@ import com.chilik1020.hw10.data.SongProvider
 import com.chilik1020.hw10.databinding.ActivityMainBinding
 import com.chilik1020.hw10.service.MusicPlayer
 import com.chilik1020.hw10.service.MusicService
+import com.chilik1020.hw10.utils.BASE_LOG
+import com.chilik1020.hw10.utils.CLOSE_ACT_REQUEST
+import com.chilik1020.hw10.utils.CLOSE_ACT_RESULT
+import com.chilik1020.hw10.utils.PENDING_INTENT
 
 
 class MainActivity : AppCompatActivity() {
@@ -48,7 +53,6 @@ class MainActivity : AppCompatActivity() {
             musicPlayer.setPlayList(songList)
             musicPlayer.currentSongLiveData.observe(this@MainActivity) { updateCurrentSong(it) }
             musicPlayer.playerStatus.observe(this@MainActivity) { changeBtnIconDrawable() }
-            checkReadStoragePermissions()
         }
 
         override fun onServiceDisconnected(name: ComponentName?) {
@@ -61,7 +65,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initViews()
+        checkReadStoragePermissions()
         songList = SongProvider.getAllDeviceSongs(applicationContext)
+        Log.d(BASE_LOG, songList.toString())
         songAdapter.setData(songList)
         bindMusicService()
     }
@@ -111,18 +117,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun bindMusicService() {
-        musicServiceIntent = Intent(this, MusicService::class.java)
+
+        val pendingIntent = createPendingResult(CLOSE_ACT_REQUEST, Intent(), 0)
+        musicServiceIntent =
+            Intent(this, MusicService::class.java).putExtra(PENDING_INTENT, pendingIntent)
         bindService(
             musicServiceIntent,
             serviceConnection,
             Context.BIND_AUTO_CREATE
         )
-        startForegroundService(musicServiceIntent)
+        startService(musicServiceIntent)
     }
 
     private fun unBindMusicService() {
         unbindService(serviceConnection)
         isBound = false
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == CLOSE_ACT_RESULT) {
+            finish()
+        }
     }
 
     override fun onRequestPermissionsResult(

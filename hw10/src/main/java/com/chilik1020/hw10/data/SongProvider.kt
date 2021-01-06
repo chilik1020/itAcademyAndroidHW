@@ -25,7 +25,7 @@ object SongProvider {
         MediaStore.Audio.AudioColumns.ARTIST_ID,
         MediaStore.Audio.AudioColumns.ARTIST,
         MediaStore.Audio.AudioColumns._ID
-    )// 7
+    )
 
     private val mAllDeviceSongs = ArrayList<Song>()
 
@@ -80,8 +80,8 @@ object SongProvider {
                 MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                 BASE_PROJECTION, null, null, null
             )
-        } catch (e: SecurityException) {
-            Log.d(BASE_LOG, "Error ContentResolver Query")
+        } catch (ex: Exception) {
+            Log.d(BASE_LOG, "Error ContentResolver Query: ${ex.toString()}")
             null
         }
 
