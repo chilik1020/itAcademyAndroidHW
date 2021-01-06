@@ -20,7 +20,6 @@ import com.chilik1020.hw10.data.SongProvider
 import com.chilik1020.hw10.databinding.ActivityMainBinding
 import com.chilik1020.hw10.service.MusicPlayer
 import com.chilik1020.hw10.service.MusicService
-import com.chilik1020.hw10.service.MusicNotificationManager
 import com.chilik1020.hw10.utils.BASE_LOG
 
 
@@ -42,14 +41,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var musicServiceIntent: Intent
     private lateinit var musicService: MusicService
     private var isBound: Boolean = false
-    private lateinit var musicNotificationManager: MusicNotificationManager
     private lateinit var musicPlayer: MusicPlayer
 
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName, service: IBinder) {
             musicService = (service as MusicService.MusicBinder).getMusicService()
             isBound = true
-            musicNotificationManager = musicService.musicNotificationManager
             musicPlayer = musicService.musicPlayer
             musicPlayer.setPlayList(songList)
             musicPlayer.currentSongLiveData.observe(this@MainActivity) {
@@ -64,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 //                }
 //
 //                songAdapter.setData(songList)
-//                currentSong = it
+                currentSong = it
                 changeBtnIconDrawable()
             }
             checkReadStoragePermissions()

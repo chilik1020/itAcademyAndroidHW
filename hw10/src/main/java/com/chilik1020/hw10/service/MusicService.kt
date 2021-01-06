@@ -5,7 +5,10 @@ import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
 import android.util.Log
-import com.chilik1020.hw10.utils.*
+import com.chilik1020.hw10.utils.ACTION_NEXT
+import com.chilik1020.hw10.utils.ACTION_PLAY_PAUSE
+import com.chilik1020.hw10.utils.ACTION_PREVIOUS
+import com.chilik1020.hw10.utils.BASE_LOG
 
 
 class MusicService : Service() {
@@ -17,7 +20,7 @@ class MusicService : Service() {
     override fun onCreate() {
         super.onCreate()
         Log.d(BASE_LOG, "MusicService:onCreate")
-        musicNotificationManager = MusicNotificationManager(this)
+        musicNotificationManager = MusicNotificationManagerImpl(this)
         musicPlayer = MusicPlayerImpl(applicationContext, musicNotificationManager)
         musicPlayer.init()
     }
@@ -38,7 +41,7 @@ class MusicService : Service() {
     }
 
     override fun onDestroy() {
-        musicNotificationManager.removeNotification(PLAYER_NOTIFICATION_ID)
+        musicNotificationManager.removeNotification()
         stopForeground(true)
         super.onDestroy()
     }
