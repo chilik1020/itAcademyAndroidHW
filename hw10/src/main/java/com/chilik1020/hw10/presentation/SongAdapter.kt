@@ -14,11 +14,11 @@ class SongAdapter(
     private val songList = mutableListOf<Song>()
     private var currentPlaying: Song? = null
     private val innerListener: (Song) -> Unit = { newCurrentPlaying ->
-        currentPlaying?.isPlayingNow = false
-        newCurrentPlaying.isPlayingNow = true
-        notifyItemChanged(songList.indexOf(currentPlaying))
-        notifyItemChanged(songList.indexOf(newCurrentPlaying))
-        currentPlaying = newCurrentPlaying
+//        currentPlaying?.isPlayingNow = false
+//        newCurrentPlaying.isPlayingNow = true
+//        notifyItemChanged(songList.indexOf(currentPlaying))
+//        notifyItemChanged(songList.indexOf(newCurrentPlaying))
+//        currentPlaying = newCurrentPlaying
         listener(newCurrentPlaying)
     }
 
