@@ -1,13 +1,10 @@
 package com.chilik1020.weatherappmvp.presentation.weather
 
-import android.util.Log
 import com.chilik1020.weatherappmvp.domain.CityActiveUseCase
 import com.chilik1020.weatherappmvp.domain.ForecastWeatherUseCase
-import com.chilik1020.weatherappmvp.domain.Result
 import com.chilik1020.weatherappmvp.presentation.models.CityDomainToUiMapper
 import com.chilik1020.weatherappmvp.presentation.models.CityUiModel
 import com.chilik1020.weatherappmvp.presentation.models.WeatherForecastDomainToUiMapper
-import com.chilik1020.weatherappmvp.utils.LOG_TAG
 
 class WeatherPresenter(
     private val useCase: ForecastWeatherUseCase,
@@ -20,43 +17,35 @@ class WeatherPresenter(
     private var view: WeatherContract.View? = null
     private lateinit var activeCity: CityUiModel
 
-    private val getActiveCityListener = CityActiveUseCase.OnFinished { result ->
-        when (result) {
-            is Result.Success -> {
-                Log.d(LOG_TAG, result.data.toString())
-                activeCity = cityDomainToUiMapper.map(result.data)
-                useCase.getHourlyForecast(
-                    lat = result.data.lat,
-                    lon = result.data.lon,
-                    listener = loadCitiesListener
-                )
-            }
-            is Result.Failure -> {
-                view?.render(WeatherForecastViewState.Error("Choose city"))
-                Log.d(LOG_TAG, result.error.toString())
-            }
-        }
-    }
-
-    private val loadCitiesListener = ForecastWeatherUseCase.OnFinished {
-        when (it) {
-            is Result.Success -> {
-                view?.render(
-                    WeatherForecastViewState.Loaded(
-                        forecastDomainToUiMapper.map(it.data),
-                        activeCity
-                    )
-                )
-            }
-            is Result.Failure -> {
-                view?.render(WeatherForecastViewState.Error("Error"))
-            }
-        }
-    }
-
     override fun loadData() {
         view?.render(WeatherForecastViewState.Loading)
-        cityActiveUseCase.getActiveCity(getActiveCityListener)
+        val subscribe = cityActiveUseCase.getActiveCity()
+            .subscribe(
+                {
+                    activeCity = cityDomainToUiMapper.map(it)
+                    loadForecast(it.lat, it.lon)
+                },
+                {
+                    view?.render(WeatherForecastViewState.Error("Choose city"))
+                }
+            )
+    }
+
+    private fun loadForecast(lat: String, lon: String) {
+        val subscribe = useCase.getHourlyForecast(lat = lat, lon = lon)
+            .subscribe(
+                {
+                    view?.render(
+                        WeatherForecastViewState.Loaded(
+                            forecastDomainToUiMapper.map(it),
+                            activeCity
+                        )
+                    )
+                },
+                {
+                    view?.render(WeatherForecastViewState.Error(it.message.toString()))
+                }
+            )
     }
 
     override fun attachView(view: WeatherContract.View) {

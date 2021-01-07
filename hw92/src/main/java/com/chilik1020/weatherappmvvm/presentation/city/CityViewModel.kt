@@ -20,7 +20,7 @@ class CityViewModel(
         MutableLiveData(CityViewState.Loading)
     val viewState: LiveData<CityViewState>
         get() = mutableViewState
-    
+
     fun loadCities() {
         mutableViewState.value = CityViewState.Loading
         val subscribe = cityListUseCase.getCities()

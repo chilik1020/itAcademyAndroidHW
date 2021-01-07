@@ -105,14 +105,14 @@ class WeatherFragment : Fragment() {
     }
 
     private fun navigateToSettingsFragment() {
-        requireActivity().supportFragmentManager.beginTransaction()
+        childFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, SettingsFragment())
             .addToBackStack(null)
             .commit()
     }
 
     private fun navigateToCityFragment() {
-        requireActivity().supportFragmentManager.beginTransaction()
+        childFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, CityFragment())
             .addToBackStack(null)
             .commit()

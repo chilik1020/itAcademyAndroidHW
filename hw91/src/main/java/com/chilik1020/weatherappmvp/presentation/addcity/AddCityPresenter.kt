@@ -2,7 +2,6 @@ package com.chilik1020.weatherappmvp.presentation.addcity
 
 import com.chilik1020.weatherappmvp.domain.CheckCurrentWeatherForCityUseCase
 import com.chilik1020.weatherappmvp.domain.CityAddUseCase
-import com.chilik1020.weatherappmvp.domain.Result
 import com.chilik1020.weatherappmvp.domain.models.CityDomainModel
 
 class AddCityPresenter(
@@ -12,19 +11,12 @@ class AddCityPresenter(
 
     private var view: AddCityContract.View? = null
 
-    private val currentWeatherListener = CheckCurrentWeatherForCityUseCase.OnFinished { result ->
-        when (result) {
-            is Result.Success -> {
-                addCity(result.data)
-            }
-            is Result.Failure -> {
-                view?.render(AddCityViewState.Error("City not found"))
-            }
-        }
-    }
-
     override fun fetchWeatherForCityName(name: String) {
-        currentWeatherUseCase.getCurrentWeather(name, currentWeatherListener)
+        val subscribe = currentWeatherUseCase.getCityIfCurrentWeatherPresented(name)
+            .subscribe(
+                { addCity(it) },
+                { view?.render(AddCityViewState.Error("City not found")) }
+            )
     }
 
     private fun addCity(city: CityDomainModel) {
