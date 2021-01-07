@@ -73,6 +73,6 @@ class CityFragment : Fragment(), CityContract.View {
 
     private fun navigateToAddCityDialogFragment() {
         val dialogFragment = AddCityDialogFragment()
-        dialogFragment.show(requireActivity().supportFragmentManager, null)
+        dialogFragment.show(childFragmentManager, null)
     }
 }
