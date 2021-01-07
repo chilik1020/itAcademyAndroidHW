@@ -3,7 +3,7 @@ package com.chilik1020.weatherappmvvm.utils
 import java.time.Instant
 import java.time.format.DateTimeFormatter
 
-fun timeFromStamp(stamp: Long): String {
+fun Long.timeFromStamp(): String {
     return DateTimeFormatter.ISO_INSTANT
-        .format(Instant.ofEpochSecond(stamp)).substring(11, 16)
+        .format(Instant.ofEpochSecond(this)).substring(11, 16)
 }

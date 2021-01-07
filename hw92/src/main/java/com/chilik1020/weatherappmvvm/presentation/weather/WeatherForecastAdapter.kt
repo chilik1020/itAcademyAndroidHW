@@ -44,7 +44,7 @@ class WeatherForecastAdapter :
                     .load(ICON_BASE_URL.format(data.weatherList[0].icon))
                     .into(ivWeatherIcon)
 
-                tvTimeStamp.text = timeFromStamp(data.dt)
+                tvTimeStamp.text = data.dt.timeFromStamp()
                 tvTemperature.text = data.temp
                 tvWeatherDescription.text = data.weatherList[0].description
             }
