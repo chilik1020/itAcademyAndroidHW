@@ -1,11 +1,8 @@
 package com.chilik1020.weatherappmvvm.domain
 
 import com.chilik1020.weatherappmvvm.domain.models.CityDomainModel
+import io.reactivex.Maybe
 
 interface CityActiveUseCase {
-    fun interface OnFinished {
-        fun onResponse(result: Result<CityDomainModel>)
-    }
-
-    fun getActiveCity(listener: OnFinished)
+    fun getActiveCity(): Maybe<CityDomainModel>
 }

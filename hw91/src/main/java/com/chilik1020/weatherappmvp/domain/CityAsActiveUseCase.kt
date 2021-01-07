@@ -1,12 +1,8 @@
 package com.chilik1020.weatherappmvp.domain
 
 import com.chilik1020.weatherappmvp.domain.models.CityDomainModel
+import io.reactivex.Single
 
 interface CityAsActiveUseCase {
-
-    fun interface OnFinished {
-        fun onResponse(result: Result<Int>)
-    }
-
-    fun setCityAsActive(city: CityDomainModel, listener: CityAsActiveUseCase.OnFinished)
+    fun setCityAsActive(city: CityDomainModel) : Single<Int>
 }

@@ -1,16 +1,14 @@
 package com.chilik1020.weatherappmvvm.data.repositories
 
-import com.chilik1020.weatherappmvvm.domain.CityActiveUseCase
-import com.chilik1020.weatherappmvvm.domain.CityAddUseCase
-import com.chilik1020.weatherappmvvm.domain.CityAsActiveUseCase
-import com.chilik1020.weatherappmvvm.domain.CityListUseCase
 import com.chilik1020.weatherappmvvm.domain.models.CityDomainModel
+import io.reactivex.Flowable
+import io.reactivex.Maybe
+import io.reactivex.Single
 
 interface CityRepository {
 
-    fun getActiveCity(listener: CityActiveUseCase.OnFinished)
-    fun getCities(listener: CityListUseCase.OnFinished)
-    fun addCity(city: CityDomainModel, listener: CityAddUseCase.OnFinished)
-    fun setCityAsActive(city: CityDomainModel, listener: CityAsActiveUseCase.OnFinished)
-    fun close()
+    fun getActiveCity(): Maybe<CityDomainModel>
+    fun getCities(): Flowable<List<CityDomainModel>>
+    fun addCity(city: CityDomainModel): Maybe<Long>
+    fun setCityAsActive(city: CityDomainModel): Single<Int>
 }
