@@ -2,9 +2,9 @@ package com.chilik1020.weatherappmvvm.data.remote
 
 import android.util.Log
 import com.chilik1020.weatherappmvvm.data.entities.JsonToWeatherCurrentMapper
-import com.chilik1020.weatherappmvvm.data.entities.WeatherCurrentTopObject
 import com.chilik1020.weatherappmvvm.data.entities.JsonToWeatherForecastMapper
-import com.chilik1020.weatherappmvvm.data.entities.WeatherForecastTopObject
+import com.chilik1020.weatherappmvvm.data.entities.WeatherCurrentTop
+import com.chilik1020.weatherappmvvm.data.entities.WeatherForecastTop
 import com.chilik1020.weatherappmvvm.utils.LOG_TAG
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -20,10 +20,9 @@ class WeatherApiImpl(
 
     override fun getCurrentWeather(
         location: String,
-        apiKey: String,
         units: String
-    ): Single<WeatherCurrentTopObject> {
-        val request = requestFactory.getCurrentWeatherRequest(location, apiKey, units)
+    ): Single<WeatherCurrentTop> {
+        val request = requestFactory.getCurrentWeatherRequest(location, units)
         return Single.create<String> { emitter ->
             val response = okHttpClient.newCall(request).execute()
             if (response.isSuccessful) {
@@ -45,10 +44,9 @@ class WeatherApiImpl(
     override fun getHourlyForecastWeather(
         lat: String,
         lon: String,
-        apiKey: String,
         units: String
-    ): Single<WeatherForecastTopObject> {
-        val request = requestFactory.getHourlyWeatherForecastRequest(lat, lon, apiKey, units)
+    ): Single<WeatherForecastTop> {
+        val request = requestFactory.getHourlyWeatherForecastRequest(lat, lon, units)
         return Single.create<String> { emitter ->
             val response = okHttpClient.newCall(request).execute()
             if (response.isSuccessful) {

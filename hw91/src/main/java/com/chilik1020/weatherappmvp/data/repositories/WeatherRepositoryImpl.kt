@@ -8,7 +8,6 @@ import com.chilik1020.weatherappmvp.domain.ForecastWeatherUseCase
 import com.chilik1020.weatherappmvp.domain.Result
 import com.chilik1020.weatherappmvp.domain.models.CityDomainFromWeatherCurrentMapper
 import com.chilik1020.weatherappmvp.domain.models.WeatherForecastToDomainMapper
-import com.chilik1020.weatherappmvp.utils.API_KEY
 import com.chilik1020.weatherappmvp.utils.UNITS_SYSTEM
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -27,7 +26,7 @@ class WeatherRepositoryImpl(
         listener: CheckCurrentWeatherForCityUseCase.OnFinished
     ) {
         val units = pref.getString(UNITS_SYSTEM, Units.METRIC.value) ?: Units.METRIC.value
-        val subs = weatherApi.getCurrentWeather(location, API_KEY, units)
+        val subs = weatherApi.getCurrentWeather(location, units)
             .observeOn(AndroidSchedulers.mainThread())
             .map { cityDomainFromWeatherCurrentMapper.map(it) }
             .subscribe(
@@ -43,7 +42,7 @@ class WeatherRepositoryImpl(
         listener: ForecastWeatherUseCase.OnFinished
     ) {
         val units = pref.getString(UNITS_SYSTEM, Units.METRIC.value) ?: Units.METRIC.value
-        val subs = weatherApi.getHourlyForecastWeather(lat, lon, API_KEY, units)
+        val subs = weatherApi.getHourlyForecastWeather(lat, lon, units)
             .map { it -> forecastMapper.map(it) }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(

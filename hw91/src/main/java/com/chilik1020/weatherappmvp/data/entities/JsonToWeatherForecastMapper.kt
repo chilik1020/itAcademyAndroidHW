@@ -2,8 +2,8 @@ package com.chilik1020.weatherappmvp.data.entities
 
 import org.json.JSONObject
 
-class JsonToWeatherForecastMapper : (String) -> WeatherForecastTopObject {
-    override fun invoke(json: String): WeatherForecastTopObject {
+class JsonToWeatherForecastMapper : (String) -> WeatherForecastTop {
+    override fun invoke(json: String): WeatherForecastTop {
         val jsonMainObject = JSONObject(json)
 
         val lat = jsonMainObject.getString("lat")
@@ -19,7 +19,7 @@ class JsonToWeatherForecastMapper : (String) -> WeatherForecastTopObject {
                 getWeatherAtTimeStampFromJsonObject(jsonHourly.getJSONObject(i))
             weatherHourlyList.add(weatherAtTimeStamp)
         }
-        return WeatherForecastTopObject(
+        return WeatherForecastTop(
             lat = lat,
             lon = lon,
             current = current,

@@ -4,12 +4,10 @@ import com.chilik1020.weatherappmvvm.domain.models.CityDomainFromWeatherCurrentM
 import com.chilik1020.weatherappmvvm.domain.models.CityDomainModel
 
 class CityDomainFromWeatherCurrentMapperImpl : CityDomainFromWeatherCurrentMapper {
-    override fun map(weatherCurrent: WeatherCurrentTopObject): CityDomainModel {
-        return CityDomainModel(
-            name = weatherCurrent.name,
-            lat = weatherCurrent.coord.lat,
-            lon = weatherCurrent.coord.lon,
-            isCurrentCity = false
-        )
-    }
+    override fun map(weatherCurrent: WeatherCurrentTop) = CityDomainModel(
+        name = weatherCurrent.name,
+        lat = weatherCurrent.coord.lat,
+        lon = weatherCurrent.coord.lon,
+        isCurrentCity = false
+    )
 }

@@ -12,6 +12,8 @@ import com.chilik1020.weatherappmvp.data.entities.JsonToWeatherCurrentMapper
 import com.chilik1020.weatherappmvp.data.entities.JsonToWeatherForecastMapper
 import com.chilik1020.weatherappmvp.data.entities.WeatherForecastToDomainMapperImpl
 import com.chilik1020.weatherappmvp.data.local.AppDatabase
+import com.chilik1020.weatherappmvp.data.remote.ApiKeyProvider
+import com.chilik1020.weatherappmvp.data.remote.ApiKeyProviderImpl
 import com.chilik1020.weatherappmvp.data.remote.RequestFactory
 import com.chilik1020.weatherappmvp.data.remote.RequestFactoryImpl
 import com.chilik1020.weatherappmvp.data.remote.WeatherApi
@@ -76,7 +78,8 @@ val roomModule = module {
 
 
 val dataModule = module {
-    factory<RequestFactory> { RequestFactoryImpl() }
+    factory<ApiKeyProvider> { ApiKeyProviderImpl() }
+    factory<RequestFactory> { RequestFactoryImpl(get()) }
     factory<OkHttpClient> { OkHttpClient() }
     factory { JsonToWeatherCurrentMapper() }
     factory { JsonToWeatherForecastMapper() }

@@ -1,7 +1,7 @@
 package com.chilik1020.weatherappmvvm.domain.models
 
-import com.chilik1020.weatherappmvvm.data.entities.WeatherCurrentTopObject
+import com.chilik1020.weatherappmvvm.data.entities.WeatherCurrentTop
 
 fun interface CityDomainFromWeatherCurrentMapper {
-    fun map(weatherCurrent: WeatherCurrentTopObject): CityDomainModel
+    fun map(weatherCurrent: WeatherCurrentTop): CityDomainModel
 }
