@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private val onSongClickListener: (Song) -> Unit = {
-        musicPlayer.setSong(it)
+        musicPlayer?.setSong(it)
         updateCurrentSong(it)
     }
 
@@ -41,21 +41,27 @@ class MainActivity : AppCompatActivity() {
     private var currentSong: Song? = null
 
     private lateinit var musicServiceIntent: Intent
-    private lateinit var musicService: MusicService
+    private var musicService: MusicService? = null
     private var isBound: Boolean = false
-    private lateinit var musicPlayer: MusicPlayer
+    private var musicPlayer: MusicPlayer? = null
 
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName, service: IBinder) {
             musicService = (service as MusicService.MusicBinder).getMusicService()
             isBound = true
-            musicPlayer = musicService.musicPlayer
-            musicPlayer.setPlayList(songList)
-            musicPlayer.currentSongLiveData.observe(this@MainActivity) { updateCurrentSong(it) }
-            musicPlayer.playerStatus.observe(this@MainActivity) { changeBtnIconDrawable() }
+            musicService?.let {
+                musicPlayer = it.musicPlayer.apply {
+                    setPlayList(songList)
+                }
+                musicPlayer?.let { player ->
+                    player.currentSongLiveData.observe(this@MainActivity) { updateCurrentSong(it) }
+                    player.playerStatus.observe(this@MainActivity) { changeBtnIconDrawable() }
+                }
+            }
         }
 
         override fun onServiceDisconnected(name: ComponentName?) {
+            musicService = null
             isBound = false
         }
     }
@@ -87,14 +93,16 @@ class MainActivity : AppCompatActivity() {
             }
 
             btnPlay.setOnClickListener {
-                if (musicPlayer.isPlaying()) {
-                    musicPlayer.pause()
-                } else {
-                    musicPlayer.play()
+                musicPlayer?.let {
+                    if (it.isPlaying()) {
+                        it.pause()
+                    } else {
+                        it.play()
+                    }
                 }
             }
-            btnPrevious.setOnClickListener { musicPlayer.previous() }
-            btnNext.setOnClickListener { musicPlayer.next() }
+            btnPrevious.setOnClickListener { musicPlayer?.previous() }
+            btnNext.setOnClickListener { musicPlayer?.next() }
         }
     }
 
@@ -109,11 +117,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun changeBtnIconDrawable() {
-        val playBtnIconId = when (musicPlayer.isPlaying()) {
-            false -> R.drawable.ic_play
-            true -> R.drawable.ic_pause
+        musicPlayer?.let {
+            val playBtnIconId = when (it.isPlaying()) {
+                false -> R.drawable.ic_play
+                true -> R.drawable.ic_pause
+            }
+            binding.btnPlay.background =
+                ContextCompat.getDrawable(applicationContext, playBtnIconId)
         }
-        binding.btnPlay.background = ContextCompat.getDrawable(applicationContext, playBtnIconId)
     }
 
     private fun bindMusicService() {
@@ -126,7 +137,6 @@ class MainActivity : AppCompatActivity() {
             serviceConnection,
             Context.BIND_AUTO_CREATE
         )
-        startService(musicServiceIntent)
     }
 
     private fun unBindMusicService() {
