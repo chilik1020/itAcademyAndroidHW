@@ -1,10 +1,7 @@
 package com.chilik1020.hw8.model.local
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Update
+import android.database.Cursor
+import androidx.room.*
 import com.chilik1020.hw8.model.entities.Contact
 import io.reactivex.Flowable
 import io.reactivex.Maybe
@@ -12,6 +9,9 @@ import io.reactivex.Single
 
 @Dao
 interface ContactDao {
+
+    @Query("SELECT * FROM contacts")
+    fun getCursor(): Cursor
 
     @Query("SELECT * FROM contacts")
     fun getAll(): List<Contact>
