@@ -3,5 +3,10 @@
 /local.properties
 /.idea/*
 /build/*
-/hw41/build
-/hw3/build
+hw3/build
+hw41/build
+hw42/build
+hw6/build
+hw7/build
+hw8/build
+hw10/build
