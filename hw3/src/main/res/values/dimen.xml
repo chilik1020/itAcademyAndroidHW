@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="dm_task1_text_size">24sp</dimen>
+    <dimen name="dm_task1_margin">16dp</dimen>
+    <dimen name="dm_task1_padding">16dp</dimen>
+
+    <dimen name="dm_task2_text_size">24sp</dimen>
+    <dimen name="dm_task2_padding">16dp</dimen>
+    <dimen name="dm_task2_h_margin">16dp</dimen>
+    <dimen name="dm_task2_v_margin">20dp</dimen>
+
+    <dimen name="dm_task3_text_size_h1">24sp</dimen>
+    <dimen name="dm_task3_text_size_h2">18sp</dimen>
+    <dimen name="dm_task3_h_margin">16dp</dimen>
+    <dimen name="dm_task3_v_margin">20dp</dimen>
+    <dimen name="dm_task3_v_double_margin">40dp</dimen>
+    <dimen name="dm_task3_padding">8dp</dimen>
+    <dimen name="dm_task3_btn_sign_in_height">75dp</dimen>
+
+    <dimen name="dm_task4_text_size_h1">30sp</dimen>
+    <dimen name="dm_task4_text_size_h2">24sp</dimen>
+    <dimen name="dm_task4_text_size_h3">18sp</dimen>
+    <dimen name="dm_task4_h_margin">16dp</dimen>
+    <dimen name="dm_task4_h_half_margin">8dp</dimen>
+    <dimen name="dm_task4_v_margin">20dp</dimen>
+    <dimen name="dm_task4_v_double_margin">40dp</dimen>
+    <dimen name="dm_task4_padding">8dp</dimen>
+
+    <dimen name="dm_task5_h_margin">16dp</dimen>
+    <dimen name="dm_task5_v_margin">16dp</dimen>
+    <dimen name="dm_task5_v_double_margin">32dp</dimen>
+    <dimen name="dm_task5_padding">16dp</dimen>
+    <dimen name="dm_task5_text_size_h3">18sp</dimen>
+
+</resources>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginHorizontal="@dimen/dm_task3_h_margin"
+    android:baselineAligned="false"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tvSignIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/dm_task3_v_double_margin"
+        android:text="@string/task3_sign_in"
+        android:textSize="@dimen/dm_task3_text_size_h1"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvSignIn"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/dm_task3_v_double_margin"
+        android:background="@drawable/dr_rounded_rectangle"
+        android:hint="@string/task3_email"
+        android:padding="@dimen/dm_task3_padding"
+        android:textSize="@dimen/dm_task3_text_size_h1" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etEmail"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/dm_task3_v_margin"
+        android:background="@drawable/dr_rounded_rectangle"
+        android:hint="@string/task3_password"
+        android:inputType="textPassword"
+        android:padding="@dimen/dm_task3_padding"
+        android:textSize="@dimen/dm_task3_text_size_h1" />
+
+    <CheckBox
+        android:id="@+id/cbRemember"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etPassword"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="@dimen/dm_task3_v_double_margin"
+        android:checked="true"
+        android:padding="@dimen/dm_task3_padding"
+        android:text="@string/task3_remember"
+        android:textSize="@dimen/dm_task3_text_size_h2"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvForgotPassword"
+        android:layout_width="243dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etPassword"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/dm_task3_v_double_margin"
+        android:gravity="end"
+        android:padding="@dimen/dm_task3_padding"
+        android:text="@string/task3_forgot_password"
+        android:textSize="@dimen/dm_task3_text_size_h2"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="137dp"
+        tools:layout_editor_absoluteY="268dp" />
+
+    <Space
+        android:id="@+id/emptySpace"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:layout_below="@id/cbRemember" />
+
+    <Button
+        android:id="@+id/btnSignIn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dm_task3_btn_sign_in_height"
+        android:layout_below="@id/emptySpace"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/dr_rounded_black_rectangle"
+        android:text="@string/task3_sign_in"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/dm_task3_text_size_h1" />
+
+    <TextView
+        android:id="@+id/tvJustSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dm_task3_v_margin"
+        android:text="@string/task3_just_sign_in"
+        android:textSize="@dimen/dm_task3_text_size_h1" />
+</RelativeLayout>

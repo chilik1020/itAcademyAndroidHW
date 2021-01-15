@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#100E13</color>
+    <color name="colorPrimaryDark">#1B3BAF</color>
+    <color name="colorAccent">#570360</color>
+
+    <color name="colorSecondary">#100E13</color>
+    <color name="colorSecondaryDark">#1B3BAF</color>
+    <color name="colorSecondaryAccent">#570360</color>
+
+    <color name="color_toolbar">#1F4FC0</color>
+
+    <color name="color_white_bg">#EDF4F4</color>
+    <color name="color_radio_button">#52AEF8</color>
+    <color name="color_fab">#EF2063</color>
+    <color name="color_fab_inner">#FFFFFF</color>
+    <color name="color_btn_remove">#F44336</color>
+
+    <color name="color_fullname">#212323</color>
+    <color name="color_number">#A4AAA9</color>
+</resources>

@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Layouts</string>
+    
+    <string name="task1_attractions">Attractions</string>
+    <string name="task1_dining">Dining</string>
+    <string name="task1_education">Education</string>
+    <string name="task1_family">Family</string>
+    <string name="task1_health">Health</string>
+    <string name="task1_office">Office</string>
+    <string name="task1_promotions">Promotions</string>
+    <string name="task1_radio">Radio</string>
+    <string name="task1_recipes">Recipes</string>
+    <string name="task1_sports">Sports</string>
+
+    <string name="task2_photo">PHOTO</string>
+    <string name="task2_title">Title</string>
+    <string name="task2_price">Price</string>
+    <string name="task2_location">Location</string>
+    <string name="task2_description">Description</string>
+    <string name="task2_inventory">Inventory</string>
+    <string name="task2_weight">Weight</string>
+    
+    <string name="task3_sign_in">Sign in</string>
+    <string name="task3_email">Email</string>
+    <string name="task3_password">Password</string>
+    <string name="task3_remember">Remember</string>
+    <string name="task3_forgot_password">Forgot password?</string>
+    <string name="task3_just_sign_in">* Just sign in</string>
+    
+    <string name="task4_android">Android</string>
+    <string name="task4_username">Username</string>
+    <string name="task4_address">Address Description</string>
+    <string name="task4_posts">125 Posts</string>
+    <string name="task4_followers">20k Followers</string>
+    <string name="task4_following">22 Following</string>
+    <string name="task4_directions">DIRECTIONS</string>
+    <string name="task4_call">CALL</string>
+    <string name="task4_save">SAVE</string>
+    <string name="task4_website">WEBSITE</string>
+    
+    <string name="task5_certificated">Certificated</string>
+    <string name="task5_layouts">Layouts</string>
+    <string name="task5_views">Views</string>
+
+</resources>

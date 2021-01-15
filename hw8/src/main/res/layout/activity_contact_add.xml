@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="contactType"
+            type="com.chilik1020.hw8.model.entities.ContactType" />
+
+        <variable
+            name="viewModel"
+            type="com.chilik1020.hw8.views.add.ContactAddViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".views.add.ContactAddActivity">
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glVerticalStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glVerticalEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp" />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/color_toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:title="@string/act_add_toolbar_title"
+            app:titleTextColor="@color/color_white_bg" />
+
+        <RadioGroup
+            android:id="@+id/rgContactType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            app:layout_constraintEnd_toStartOf="@+id/glVerticalEnd"
+            app:layout_constraintStart_toStartOf="@+id/glVerticalStart"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+            <RadioButton
+                android:id="@+id/rbPhoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/color_radio_button"
+                android:checked="true"
+                android:onClick="@{() -> viewModel.setContactType(contactType.PHONENUMBER)}"
+                android:text="@string/act_add_rb_phone_number" />
+
+            <RadioButton
+                android:id="@+id/rbEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/color_radio_button"
+                android:checked="false"
+                android:onClick="@{() -> viewModel.setContactType(contactType.EMAIL)}"
+                android:text="@string/act_add_rb_email" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:hint="@string/act_add_et_name"
+            android:text="@={viewModel.contact.fullname}"
+            android:textSize="@dimen/size_hint"
+            app:layout_constraintEnd_toEndOf="@id/glVerticalEnd"
+            app:layout_constraintStart_toStartOf="@id/glVerticalStart"
+            app:layout_constraintTop_toBottomOf="@id/rgContactType" />
+
+        <EditText
+            android:id="@+id/etContact"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:hint="@{viewModel.contactInfoHint}"
+            android:text="@={viewModel.contact.contactInfo}"
+            android:textSize="@dimen/size_hint"
+            app:layout_constraintEnd_toEndOf="@id/glVerticalEnd"
+            app:layout_constraintStart_toStartOf="@id/glVerticalStart"
+            app:layout_constraintTop_toBottomOf="@id/etName" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
